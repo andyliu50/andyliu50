@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"andyliu50.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="概述对于企业而言，广域网的重要性是不言而喻的，通俗来讲，广域网是企业自己投资组建的一张专用网络，主要采用ATM, Fram Relay, MPLS等技术，与互联网不同的是，企业广域网一般只用于承载该企业自己的内网数据，并完全与互联网隔离，其特点在于”专网专用“，而互联网是共享型网络，由多家运营商组建和维护，全球的用户都在利用互联网分享和交流信息。 因此，企业之所以组建广域网，主要根据以下几个方面考">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈广域网加速技术">
+<meta property="og:url" content="https://andyliu50.github.io/2016/03/19/za-qi-za-ba/qian-tan-guang-yu-wang-jia-su-ji-zhu/index.html">
+<meta property="og:site_name" content="Andy&#39;s Blog">
+<meta property="og:description" content="概述对于企业而言，广域网的重要性是不言而喻的，通俗来讲，广域网是企业自己投资组建的一张专用网络，主要采用ATM, Fram Relay, MPLS等技术，与互联网不同的是，企业广域网一般只用于承载该企业自己的内网数据，并完全与互联网隔离，其特点在于”专网专用“，而互联网是共享型网络，由多家运营商组建和维护，全球的用户都在利用互联网分享和交流信息。 因此，企业之所以组建广域网，主要根据以下几个方面考">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2016-03-19T22:01:00.000Z">
+<meta property="article:modified_time" content="2016-03-19T22:01:00.000Z">
+<meta property="article:author" content="Andy">
+<meta property="article:tag" content="广域网">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://andyliu50.github.io/2016/03/19/za-qi-za-ba/qian-tan-guang-yu-wang-jia-su-ji-zhu/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://andyliu50.github.io/2016/03/19/za-qi-za-ba/qian-tan-guang-yu-wang-jia-su-ji-zhu/","path":"2016/03/19/za-qi-za-ba/qian-tan-guang-yu-wang-jia-su-ji-zhu/","title":"浅谈广域网加速技术"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>浅谈广域网加速技术 | Andy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Andy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">正念阁</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">10</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">21</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%B9%BF%E5%9F%9F%E7%BD%91%E5%8A%A0%E9%80%9F%E6%8A%80%E6%9C%AF"><span class="nav-number">2.</span> <span class="nav-text">广域网加速技术</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%95%B0%E6%8D%AE%E6%B6%88%E9%87%8D"><span class="nav-number">2.1.</span> <span class="nav-text">数据消重</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E4%BC%98%E5%8C%96"><span class="nav-number">2.2.</span> <span class="nav-text">传输协议优化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BA%94%E7%94%A8%E5%8D%8F%E8%AE%AE%E4%BC%98%E5%8C%96"><span class="nav-number">2.3.</span> <span class="nav-text">应用协议优化</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Andy</p>
+  <div class="site-description" itemprop="description">正念日做自己的主人活在当下</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">21</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">10</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2016/03/19/za-qi-za-ba/qian-tan-guang-yu-wang-jia-su-ji-zhu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="浅谈广域网加速技术 | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          浅谈广域网加速技术
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2016-03-19 22:01:00" itemprop="dateCreated datePublished" datetime="2016-03-19T22:01:00+00:00">2016-03-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%9D%82%E4%B8%83%E6%9D%82%E5%85%AB/" itemprop="url" rel="index"><span itemprop="name">杂七杂八</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>对于企业而言，广域网的重要性是不言而喻的，通俗来讲，广域网是企业自己投资组建的一张专用网络，主要采用ATM, Fram Relay, MPLS等技术，与互联网不同的是，企业广域网一般只用于承载该企业自己的内网数据，并完全与互联网隔离，其特点在于”专网专用“，而互联网是共享型网络，由多家运营商组建和维护，全球的用户都在利用互联网分享和交流信息。</p>
+<p>因此，企业之所以组建广域网，主要根据以下几个方面考虑：</p>
+<p>安全    - 广域网可以保证数据的机密性，并且不会受到黑客攻击</p>
+<p>稳定    - 广域网的传输非常稳定，可以保证数据、语音和视频的传输速度和质量</p>
+<p>管理    - 广域网只承载企业内部应用的数据，便于管理和统计，且易于排查故障</p>
+<span id="more"></span>
+
+<p>虽然广域网为企业解决了很多的重要问题，例如安全性、稳定性、可管理性等，但还是存在一些其它不足之处：</p>
+<p><strong>带宽低</strong>    - 与宽带动辄百兆相比，广域网接入通常只有2M, 4M, 10M等带宽，大数据传输时，速度比较慢，带宽低的最主要的原因，还是因为专线的费用太高。</p>
+<p><strong>延时高</strong>    - 很多跨国企业通常会在全球建设许多分支机构或者办事处，由于物理距离的关系，数据传输的时延通常很高，因此，这会影响一些应用的用户体验，例如语音、视频、Web等等。</p>
+<p><strong>通讯协议效率低下</strong>    - “协议”指的是网络传输协议，例如，TCP&#x2F;UDP, HTTP, CIFS, FTP等等，由于网络传输协议设计之初，并没有太多考虑到带宽、延时、丢包等情况，因此，导致传输效率低下。</p>
+<h2 id="广域网加速技术"><a href="#广域网加速技术" class="headerlink" title="广域网加速技术"></a>广域网加速技术</h2><p>广域网加速是一个相对比较小众的市场，该领域的厂商包括Riverbed, SilverPeak, Cisco, BlueCoat等等，到目前为止，广域网加速技术已经趋于成熟，且受到企业的广泛认可和接受。对企业而言，广域网加速技术可以为企业带来以下两大益处：</p>
+<ul>
+<li><p>加速应用，提高效率</p>
+</li>
+<li><p>节省带宽，降低成本</p>
+</li>
+</ul>
+<p>从技术角度，广域网加速技术主要包含以下技术特性：</p>
+<h3 id="数据消重"><a href="#数据消重" class="headerlink" title="数据消重"></a>数据消重</h3><p>数据消重是广域网加速的基础核心功能，其功效主要是减少重复数据传输，即相同的数据可以用指针或者索引值代替，由于指针数据远远小于原始数据，因此可以有效节省带宽。</p>
+<p>需要注意的是，数据消重和缓存（代理服务）的概念稍微有些差异，数据消重包含缓存的功能，但数据是以二进制的形式存在本地硬盘，并且相同的数据需要通过指针的形式传送给对端设备。</p>
+<p>而代理服务的缓存技术，通常是将图片、文件、音频等对象直接缓存在本地磁盘，并且重复数据不会以指针形式发送。</p>
+<p>数据消重技术作为广域网加速的核心功能，不仅可以节省专线带宽，还可以提高数据传输速度。</p>
+<h3 id="传输协议优化"><a href="#传输协议优化" class="headerlink" title="传输协议优化"></a>传输协议优化</h3><p>传输协议，即TCP协议的传输效率本身比较低，每次建立连接，都需要进行三次握手，并且，需要通过确认和重传机制保证传输的可靠性。因此，当遇到网络丢包率比较高，或者延时比较大的时候，TCP的传输速率相对就很低。</p>
+<p>广域网加速技术通过HS-TCP, Selective Acknowledgment等技术，可以解决在带宽大、延时高、丢包率高的情况下，TCP协议效率低的问题，提高数据的传输速度。</p>
+<h3 id="应用协议优化"><a href="#应用协议优化" class="headerlink" title="应用协议优化"></a>应用协议优化</h3><p>对企业而言，比较常用的应用有HTTP，CIFS, FTP，邮件等，许多应用协议开发之初，都是基于局域网的环境设计，并没有考虑高延时，低带宽的广域网环境，因此，当这些应用在广域网上传输时，应用的效率非常低，用户体验很差。</p>
+<p>广域网加速技术通过对特定应用协议的优化，大大提高了应用的传输速度，但是，应用协议本身也在不断演化和更新，因此，这对加速技术提出了比较高的要求，即加速技术需要不断适应和兼容各种应用协议及其更新的版本。</p>
+<p>当然，广域网加速技术在不断地发展，除了以上几种加速手段以外，还有UDP优化，存储协议优化，视频优化等，随着产品的不断成熟，广域网加速产品已成为许多企业组建网络的必选解决方案，不仅为企业节省了大量的专线投入成本，并且提高了应用的传输速度，提高了员工的办公效率，具有极高的投资回报率。</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%B9%BF%E5%9F%9F%E7%BD%91/" rel="tag"># 广域网</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/03/10/zhi-neng-jia-ju/irobot-sao-di-ji-qi-ren-shi-yong-ti-yan/" rel="prev" title="iRobot扫地机器人使用体验">
+                  <i class="fa fa-chevron-left"></i> iRobot扫地机器人使用体验
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2018/11/07/blog/ge-ren-bo-ke-hexo-an-zhuang-pian/" rel="next" title="个人博客 — Hexo安装篇">
+                  个人博客 — Hexo安装篇 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
