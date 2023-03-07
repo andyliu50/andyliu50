@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"andyliu50.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="平时，家中的路由器很少会受到关注，除非无法上网或者网速变慢，才会想到去检查路由器。因此，可以说，家用路由器的存在感是比较弱的。但是，最近帮朋友解决了一个家中的网络问题后，改变了我对路由器的看法。 朋友是一个比较注重个人隐私和数据安全的人，因此，总是把一些重要文件、照片等存放在家中的电脑上面。但是，如果他不在家中，就无法访问家里的电脑了。因此，朋友向我咨询是否有什么办法，可以让他即使在外面，也可以访">
+<meta property="og:type" content="article">
+<meta property="og:title" content="华硕路由器VPN功能">
+<meta property="og:url" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/index.html">
+<meta property="og:site_name" content="Andy&#39;s Blog">
+<meta property="og:description" content="平时，家中的路由器很少会受到关注，除非无法上网或者网速变慢，才会想到去检查路由器。因此，可以说，家用路由器的存在感是比较弱的。但是，最近帮朋友解决了一个家中的网络问题后，改变了我对路由器的看法。 朋友是一个比较注重个人隐私和数据安全的人，因此，总是把一些重要文件、照片等存放在家中的电脑上面。但是，如果他不在家中，就无法访问家里的电脑了。因此，朋友向我咨询是否有什么办法，可以让他即使在外面，也可以访">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/2021-10-02094926.jpg">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3185.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3187.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3186.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3188.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3189.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3190.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3191.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3192.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3193.png">
+<meta property="article:published_time" content="2021-10-02T01:01:00.000Z">
+<meta property="article:modified_time" content="2023-03-07T07:26:19.197Z">
+<meta property="article:author" content="Andy">
+<meta property="article:tag" content="raspberrypi">
+<meta property="article:tag" content="vpn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/2021-10-02094926.jpg">
+
+
+<link rel="canonical" href="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/","path":"2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/","title":"华硕路由器VPN功能"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>华硕路由器VPN功能 | Andy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Andy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">正念阁</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">15</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">34</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#VPN%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="nav-number">1.</span> <span class="nav-text">VPN服务器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#iOS%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">2.</span> <span class="nav-text">iOS客户端</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%91%E8%8E%93%E6%B4%BE%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-number">3.</span> <span class="nav-text">树莓派客户端</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Andy</p>
+  <div class="site-description" itemprop="description">正念日做自己的主人活在当下</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="华硕路由器VPN功能 | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          华硕路由器VPN功能
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-02 01:01:00" itemprop="dateCreated datePublished" datetime="2021-10-02T01:01:00+00:00">2021-10-02</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-07 07:26:19" itemprop="dateModified" datetime="2023-03-07T07:26:19+00:00">2023-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>平时，家中的路由器很少会受到关注，除非无法上网或者网速变慢，才会想到去检查路由器。因此，可以说，家用路由器的存在感是比较弱的。但是，最近帮朋友解决了一个家中的网络问题后，改变了我对路由器的看法。</p>
+<p>朋友是一个比较注重个人隐私和数据安全的人，因此，总是把一些重要文件、照片等存放在家中的电脑上面。但是，如果他不在家中，就无法访问家里的电脑了。因此，朋友向我咨询是否有什么办法，可以让他即使在外面，也可以访问家中电脑上的数据。于是，我建议他使用网盘同步文件，但是朋友比较担心文件的安全性，不想使用网盘。</p>
+<p>我想了想，那只能使用<strong>虚拟私人专用网络(VPN)</strong> 了，但是，这项功能一般只会在企业级的设备上使用，家用路由器通常不支持这项功能。跟朋友解释了以后，朋友说他买的路由器功能比较多，也许支持这项功能。</p>
+<span id="more"></span>
+
+<h2 id="VPN服务器"><a href="#VPN服务器" class="headerlink" title="VPN服务器"></a>VPN服务器</h2><p>于是，抱着试试的心态，我在朋友家中打开了路由器的管理界面，在左侧菜单果然看到了<strong>VPN</strong>的选项。并且， 支持三种类型的VPN: PPTP, OpenVPN和IPSec VPN，我决定采用IPSec VPN。开启IPSec VPN的功能以后，以下配置信息需要记录下来，因为配置VPN客户端的时候会用到：</p>
+<ul>
+<li><strong>服务器IP地址：vpn.asuscomm.com</strong></li>
+<li><strong>预共享密钥：123456</strong></li>
+<li><strong>用户名称与密码：test&#x2F;123456</strong></li>
+</ul>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/2021-10-02094926.jpg"></p>
+<h2 id="iOS客户端"><a href="#iOS客户端" class="headerlink" title="iOS客户端"></a>iOS客户端</h2><p>路由器上的配置完成以后，接下来需要在手机端配置VPN功能，下面以苹果手机为例。</p>
+<p>在手机上打开<strong>设置 - 通用 - VPN与设备管理 - VPN</strong>，然后点击**添加VPN配置…**。</p>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3185.png"></p>
+<p>以下是具体配置信息：</p>
+<ul>
+<li><strong>类型：IPSec</strong></li>
+<li><strong>描述：MyVPN</strong></li>
+<li><strong>服务器：vpn.asuscomm.com</strong></li>
+<li><strong>账户：test</strong></li>
+<li><strong>密码：123456</strong></li>
+<li><strong>密钥：123456</strong></li>
+</ul>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3187.png"></p>
+<p>配置完成后，点击连接VPN，如果显示为<strong>已连接</strong>，说明配置成功。</p>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3186.png"></p>
+<p>最后，除了iOS客户端以外，还支持<strong>Windows，Android</strong>和<strong>MacOS</strong>。如果想要了解更多关于VPN配置的信息，可以点击关注我。</p>
+<h2 id="树莓派客户端"><a href="#树莓派客户端" class="headerlink" title="树莓派客户端"></a>树莓派客户端</h2><p>1  安装<strong>Network Manager</strong>网络管理工具。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt</span> <span class="token function">install</span> network-manager network-manager-gnome<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>安装完成后，可以在桌面右上角看到该工具的图标。点击该图标，可以看到配置VPN连接的选项。</p>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3188.png"></p>
+<p>2  安装<strong>Network Manager</strong>的插件<strong>network-manager-strongswan</strong>。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> network-manager-strongswan<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>安装成功后，添加VPN类型中，会出现<strong>IPSec&#x2F;IKEv2(strongswan)</strong> 的选项。</p>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3189.png"></p>
+<p>3  安装<strong>Strongswan</strong>的插件<strong>libstrongswan-eap-mschapv2.so</strong>, 由于之前没有安装该插件，导致一直无法连接成功。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> libcharon-extra-plugins<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>安装成功后，可以在<code>/usr/lib/ipsec/plugins</code>目录下，查看<strong>libstrongswan-eap-mschapv2.so</strong>文件。</p>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3190.png"></p>
+<p>4 在VPN的选项下，配置详细的信息：</p>
+<p>   <strong>Address: ivpn.asuscomm.com</strong></p>
+<p>   <strong>Certificate: 华硕路由器导出的根证书，可以在Windows系统上先转换成Base64编码的.cer文件</strong></p>
+<p>   <strong>Authentication: EAP</strong></p>
+<p>   <strong>Username: rpi</strong></p>
+<p>   <strong>Password: 123456</strong></p>
+<p>   <strong>打开选项Request an inner IP address</strong></p>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3191.png"></p>
+<p>5 VPN连接成功后，图标上会出现一个小锁，用命令<code>ip addr</code>查看IP地址信息，发现并没有出现虚拟网卡，但是物理网卡上绑定了一个新的IP地址。</p>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3192.png"></p>
+<p><img src="/2021/10/02/zhi-neng-jia-ju/hua-shuo-lu-you-qi-vpn-gong-neng/IMG_3193.png"></p>
+<p>另外，<strong>Network Manager</strong>除了IPSec VPN以外，还支持OpenVPN, Cisco IPSec VPN, L2TP&#x2F;IPSec VPN，只需要安装相应的插件即可。其中，安装L2TP&#x2F;IPSec VPN插件时，需要使用树莓派默认的软件仓库，国内软件仓库安装过程中会出现缺少dnsmasq包的404报错。</p>
+<p><strong>OpenVPN</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> network-manager-openvpn network-manager-openvpn-gnome<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><strong>Cisco IPsec VPN</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> network-manager-vpnc vpnc network-manager-vpnc-gnome<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<p><strong>L2TP&#x2F;IPSec VPN</strong></p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> <span class="token function">install</span> network-manager-l2tp network-manager-l2tp-gnome<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/raspberrypi/" rel="tag"># raspberrypi</a>
+              <a href="/tags/vpn/" rel="tag"># vpn</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/09/29/shou-ji/windows-he-ios-bei-wang-lu/" rel="prev" title="Windows和iOS（二）：同步备忘录">
+                  <i class="fa fa-chevron-left"></i> Windows和iOS（二）：同步备忘录
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/10/03/shou-ji/windows-he-ios-mi-ma-guan-li-qi/" rel="next" title="Windows和iOS（三）：密码管理器">
+                  Windows和iOS（三）：密码管理器 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
