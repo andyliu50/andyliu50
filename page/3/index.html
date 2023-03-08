@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">15</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">6</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">34</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -152,18 +152,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-count">44</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">19</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -180,6 +180,587 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/10/23/zhi-neng-jia-ju/home-assistant-jian-kong-web-fu-wu-qi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/23/zhi-neng-jia-ju/home-assistant-jian-kong-web-fu-wu-qi/" class="post-title-link" itemprop="url">Home Assistant监控Web服务器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-23 09:15:00" itemprop="dateCreated datePublished" datetime="2021-10-23T09:15:00+00:00">2021-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-06 10:27:44" itemprop="dateModified" datetime="2023-03-06T10:27:44+00:00">2023-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>一般在企业IT运维过程中，都需要对服务器，数据库和存储设备等进行监控，以便在第一时间发现故障，从而能够在最快的时间内作出响应。如果考虑成本，通常有一些开源免费的解决方案供选择，例如Zabbix, Nagios以及Cacti等。</p>
+<p>最近，我在折腾Home Assistant的时候，发现除了管理智能家居设备以外，也可以用来监控Web服务。话不多说，下面以监控公网上的Web服务为例，先简单介绍一下实现的原理，然后描述一下整个的配置过程。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/23/zhi-neng-jia-ju/home-assistant-jian-kong-web-fu-wu-qi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/10/23/zhi-neng-jia-ju/esp32-xie-ru-micropython-gu-jian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/23/zhi-neng-jia-ju/esp32-xie-ru-micropython-gu-jian/" class="post-title-link" itemprop="url">ESP32写入MicroPython固件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-23 04:30:00" itemprop="dateCreated datePublished" datetime="2021-10-23T04:30:00+00:00">2021-10-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-06 08:51:20" itemprop="dateModified" datetime="2023-03-06T08:51:20+00:00">2023-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近，刚入手了一块ESP32开发板。板子比两枚1元硬币略大，相比其它品牌的ESP32产品，价钱稍微贵了些，但是感觉做工还不错。通过这块开发板，我们可以玩比较热门的物联网，可穿戴设备，智能音箱等。</p>
+<p><img src="/2021/10/23/zhi-neng-jia-ju/esp32-xie-ru-micropython-gu-jian/20211023_013244373_iOS.jpg"></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/23/zhi-neng-jia-ju/esp32-xie-ru-micropython-gu-jian/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/10/19/zhi-neng-jia-ju/home-assistant-https/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/19/zhi-neng-jia-ju/home-assistant-https/" class="post-title-link" itemprop="url">Home Assistant配置HTTPS</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-19 07:02:00" itemprop="dateCreated datePublished" datetime="2021-10-19T07:02:00+00:00">2021-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-06 08:40:11" itemprop="dateModified" datetime="2023-03-06T08:40:11+00:00">2023-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>默认情况下，Home Assistant安装完成后，是使用HTTP访问。如果在内网使用，HTTP相对还比较安全。但是，为了能让手机在外网也能访问HA网关，需要将其发布到外网（Internet）。因此，首要任务就是要配置HTTPS，确保数据的安全性。</p>
+<p>为了节约成本，我打算使用自签的SSL证书。虽然官方也推荐了免费的TLS&#x2F;SSL证书提供商：<a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/ecosystem/certificates/lets_encrypt/">Let’s Encrypt</a>和<a target="_blank" rel="noopener" href="https://www.home-assistant.io/integrations/duckdns/">Duck DNS integrating Let’s Encrypt</a>，但是考虑到自己环境的复杂性，决定暂时先用自签的证书。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/19/zhi-neng-jia-ju/home-assistant-https/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/10/19/zhi-neng-jia-ju/home-assistant-ke-hu-duan-pei-zhi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/19/zhi-neng-jia-ju/home-assistant-ke-hu-duan-pei-zhi/" class="post-title-link" itemprop="url">Home Assistant客户端配置</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-19 07:02:00" itemprop="dateCreated datePublished" datetime="2021-10-19T07:02:00+00:00">2021-10-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-06 10:18:40" itemprop="dateModified" datetime="2023-03-06T10:18:40+00:00">2023-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>Home Assistant支持各种客户端平台的访问，包括<strong>Windows</strong>, <strong>iOS</strong>和<strong>Android</strong>。</p>
+<p>由于之前使用的是自签的SSL证书，详细内容，请参考以前的文章<a target="_blank" rel="noopener" href="http://pi/home-assistant-pei-zhi-httpsfang-wen.html">Home Assistant: 配置HTTPS访问</a>，所以，配置客户端之前，需要先安装SSL根证书。</p>
+<p>如果是自己购买的TLS&#x2F;SSL证书，或者使用的是Let’s Encrytp提供的免费证书，不需要安装根证书。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/19/zhi-neng-jia-ju/home-assistant-ke-hu-duan-pei-zhi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/10/17/zhi-neng-jia-ju/home-assistant-an-zhuang/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/17/zhi-neng-jia-ju/home-assistant-an-zhuang/" class="post-title-link" itemprop="url">Home Assistant安装</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-17 07:02:00" itemprop="dateCreated datePublished" datetime="2021-10-17T07:02:00+00:00">2021-10-17</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-06 08:59:28" itemprop="dateModified" datetime="2023-03-06T08:59:28+00:00">2023-03-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h2><p>1 更新树莓派的系统。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> upgrade<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>2 下载脚本，然后安装Docker。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> -fsSL https://get.docker.com -o get-docker.sh
+<span class="token function">sudo</span> <span class="token function">sh</span> get-docker.sh --mirror Aliyun<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>需要注意的是，–mirror Aliyun可以指定通过阿里云镜像安装Docker，提高安装速度。如果用默认的安装源，很慢，甚至无法安装成功。</strong></p>
+<p>3 默认情况下，只有拥有管理员权限账号才可以运行Docker，如果登录的账号是普通用户，可以通过sudo来运行docker。或者，也可以将普通用户账号添加到Docker用户组，这样也可以允许该用户运行docker的命令。</p>
+<p>以下命令可以将Pi用户添加到Docker用户组中。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">usermod</span> -aG <span class="token function">docker</span> Pi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>4 查看Docker的版本信息和运行信息。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> version
+<span class="token function">docker</span> info<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/17/zhi-neng-jia-ju/home-assistant-an-zhuang/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/10/03/shou-ji/windows-he-ios-mi-ma-guan-li-qi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/10/03/shou-ji/windows-he-ios-mi-ma-guan-li-qi/" class="post-title-link" itemprop="url">Windows和iOS（三）：密码管理器</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-10-03 02:25:00" itemprop="dateCreated datePublished" datetime="2021-10-03T02:25:00+00:00">2021-10-03</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-07 06:36:26" itemprop="dateModified" datetime="2023-03-07T06:36:26+00:00">2023-03-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%89%8B%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">手机</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>如果同时拥有苹果电脑和手机的用户，应该使用过苹果设备的<strong>钥匙串</strong>功能。<strong>简单来说，这项功能可以帮助用户存储、同步和自动填充账号和密码</strong>。</p>
+<p>例如，如果用户在很多的网站上注册了账号，那么每次登录网站的时候，既要记住这些账号信息，并且每次还要手工输入，非常麻烦。通过<strong>钥匙串</strong>功能，就不需要记忆账号和密码，并且还能帮用户自动填充账号信息。</p>
+<p>那么，在Windows系统上，是否也有与钥匙串功能相同的应用呢？答案就是<strong>Microsoft Edge</strong>内置的密码管理器。简单归纳，这项功能可以为我们提供以下特性：</p>
+<ul>
+<li><strong>推荐强密码</strong></li>
+<li><strong>储存</strong></li>
+<li><strong>同步</strong></li>
+<li><strong>自动填充</strong></li>
+</ul>
+<h3 id="推荐强密码"><a href="#推荐强密码" class="headerlink" title="推荐强密码"></a>推荐强密码</h3><p> 当我们在网站上新注册账号的时候，往往每次都要冥思苦想一个复杂的密码，或者为了简单起见，干脆所有的网站都用相同的密码。这样所带来的问题就是，要么想不出既好记又复杂的密码，或者如果使用相同密码，就会存在极大的安全隐患。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/10/03/shou-ji/windows-he-ios-mi-ma-guan-li-qi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -464,7 +1045,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/09/24/shou-ji/windows-he-ios-wen-jian-gong-xiang/">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/09/24/zhi-neng-jia-ju/ji-zhu-xiao-tie-shi/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.png">
@@ -482,7 +1063,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/24/shou-ji/windows-he-ios-wen-jian-gong-xiang/" class="post-title-link" itemprop="url">Windows和iOS（一）：文件共享</a>
+          <a href="/2021/09/24/zhi-neng-jia-ju/ji-zhu-xiao-tie-shi/" class="post-title-link" itemprop="url">技术小贴士</a>
         </h2>
 
         <div class="post-meta-container">
@@ -493,14 +1074,14 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2021-09-24 01:01:00" itemprop="dateCreated datePublished" datetime="2021-09-24T01:01:00+00:00">2021-09-24</time>
+      <time title="创建时间：2021-09-24 20:35:00" itemprop="dateCreated datePublished" datetime="2021-09-24T20:35:00+00:00">2021-09-24</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-03 01:33:03" itemprop="dateModified" datetime="2023-03-03T01:33:03+00:00">2023-03-03</time>
+      <time title="修改时间：2023-03-08 11:37:24" itemprop="dateModified" datetime="2023-03-08T11:37:24+00:00">2023-03-08</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -508,7 +1089,7 @@
       </span>
       <span class="post-meta-item-text">分类于</span>
         <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%89%8B%E6%9C%BA/" itemprop="url" rel="index"><span itemprop="name">手机</span></a>
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
         </span>
     </span>
 
@@ -522,640 +1103,22 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>以前一直在苹果的生态中使用各种苹果的服务，例如AirDrop, iCloud文件, iCloud照片等，但是，后来由于MacBook Air出现电池故障以后，就更换成了一台Windows PC。于是，使用过程中，出现了各种不方便，归根结底，就是数据无法在手机和PC之间方便地同步和共享。</p>
-<p>起初，我曾经尝试下载并安装了Windows版本的iCloud。虽然软件的版本已经很久没有更新，但是我只需要使用文件和照片的同步功能，想着应该问题不大，但是在实际使用过程中，遇到的以下一系列问题让我果断卸载了该软件：</p>
-<ul>
-<li><p>程序在后台运行导致CPU占用率很高，风扇会持续转动并发出噪音</p>
-</li>
-<li><p>Windows上的照片删除后，被删除的照片仍然会保留在手机上</p>
-</li>
-<li><p>iPhone上的部分照片无法成功下载到Windows上</p>
-</li>
-<li><p>使用一段时间后，程序会挂起，导致无法同步</p>
+          <h2 id="如何让SSH-Tunnel保持长连接"><a href="#如何让SSH-Tunnel保持长连接" class="headerlink" title="如何让SSH Tunnel保持长连接"></a>如何让SSH Tunnel保持长连接</h2><p>autossh可以用来监控SSH连接，并且当SSH连接中断后，自动重连。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">autossh -f -M <span class="token number">0</span> -NR <span class="token number">0.0</span>.0.0:50022:localhost:22 root@remoteserver -p <span class="token number">12345</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>-f    autossh运行在后台。即使不用-f参数，autossh也会运行在后台，但是，如果用帐号登录，会提示输入密码。  </p>
+<p>-M    如果设置为0，就会关闭autossh监控SSH隧道通断的状态。并且，autossh文档也建议使用OpenSSH自身的KeepAlive监控功能。即在sshd_config中设置以下参数：</p>
+<pre class="line-numbers language-none"><code class="language-none">ClientAliveInterval 30 
+ClientAliveCountMax 3
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>另外，如何才能让系统自动重启后，让autossh自动连接。运行命令crontab -e，添加计划任务：</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">@reboot autossh -f -M 0 -NR 0.0.0.0:123456:localhost:22 root@remoteserver -p 65000 &amp;
+@reboot autossh -f -M 0 -NR 0.0.0.0:123456:localhost:22 pi@remoteserver -p 65000 &amp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<hr>
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2021/09/24/shou-ji/windows-he-ios-wen-jian-gong-xiang/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/09/21/blog/ding-qi-bei-fen-bo-ke/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Andy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Blog">
-      <meta itemprop="description" content="正念日做自己的主人活在当下">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/21/blog/ding-qi-bei-fen-bo-ke/" class="post-title-link" itemprop="url">定期备份博客</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-21 13:05:00" itemprop="dateCreated datePublished" datetime="2021-09-21T13:05:00+00:00">2021-09-21</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>为了避免数据丢失，决定使用Python脚本来实现定期备份博客的内容。</p>
-<p>以下是需要实现的具体内容：</p>
-<ul>
-<li><strong>每周日晚上11点30开始自动备份</strong></li>
-<li><strong>将Blog目录下面的所有文件打包压缩后，复制到指定的备份目录下方</strong></li>
-<li><strong>备份的文件名格式为: <code>backup-timestamps.tar.gz</code>，例如：<code>backup-2021-09-21_132517.tar.gz</code></strong></li>
-</ul>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/21/blog/ding-qi-bei-fen-bo-ke/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/09/20/blog/pelican-xiao-tie-shi/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Andy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Blog">
-      <meta itemprop="description" content="正念日做自己的主人活在当下">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/20/blog/pelican-xiao-tie-shi/" class="post-title-link" itemprop="url">Pelican小贴士</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-20 08:21:00" itemprop="dateCreated datePublished" datetime="2021-09-20T08:21:00+00:00">2021-09-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-03 01:33:03" itemprop="dateModified" datetime="2023-03-03T01:33:03+00:00">2023-03-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h2 id="如何修改每篇博文的作者、分类、日期等信息"><a href="#如何修改每篇博文的作者、分类、日期等信息" class="headerlink" title="如何修改每篇博文的作者、分类、日期等信息"></a>如何修改每篇博文的作者、分类、日期等信息</h2><p>修改文件<code>article_infos.html</code>，文件位置：<code>~/blog/venv/lib/python3.7/site-packages/pelican/themes/notmyidea/templates</code></p>
-<p>以下内容中，已将<code>author</code>和<code>category</code>的相关代码注释，所以博文中将不会出现作者和分类的信息。</p>
-<pre class="line-numbers language-html" data-language="html"><code class="language-html"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>footer</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>post-info<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>abbr</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>published<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>&#123;&#123; article.date.isoformat() &#125;&#125;<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-                日期: &#123;&#123; article.locale_date &#125;&#125;
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>abbr</span><span class="token punctuation">></span></span>
-        &#123;% if article.modified %&#125;
-        <span class="token comment">&lt;!--            &lt;br /> --></span>
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>abbr</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>modified<span class="token punctuation">"</span></span> <span class="token attr-name">title</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">"</span>&#123;&#123; article.modified.isoformat() &#125;&#125;<span class="token punctuation">"</span></span><span class="token punctuation">></span></span>
-                更新: &#123;&#123; article.locale_modified &#125;&#125;
-        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>abbr</span><span class="token punctuation">></span></span>
-        &#123;% endif %&#125;
-
-<span class="token comment">&lt;!--        &#123;% if article.authors %&#125;
-        &lt;address class="vcard author">
-                作者: &#123;% for author in article.authors %&#125;
-                        &lt;a class="url fn" href="&#123;&#123; SITEURL &#125;&#125;/&#123;&#123; author.url &#125;&#125;">&#123;&#123; author &#125;&#125;&lt;/a>
-                &#123;% endfor %&#125;
-        &lt;/address>
-        &#123;% endif %&#125;
-        &lt;p>分类: &lt;a href="&#123;&#123; SITEURL &#125;&#125;/&#123;&#123; article.category.url &#125;&#125;">&#123;&#123; article.category &#125;&#125;&lt;/a>.&lt;/p> --></span>
-&#123;% include 'taglist.html' %&#125;
-&#123;% import 'translations.html' as translations with context %&#125;
-&#123;&#123; translations.translations_for(article) &#125;&#125;
-<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>footer</span><span class="token punctuation">></span></span><span class="token comment">&lt;!-- /.post-info --></span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<p>修改文件<code>main.css</code>，找到<code>.post-info</code>，修改以下内容后，字体大小和颜色，以及位置都会发生变化。</p>
-<pre class="line-numbers language-css" data-language="css"><code class="language-css"><span class="token selector">.post-info</span> <span class="token punctuation">&#123;</span>
-    <span class="token property">font-size</span><span class="token punctuation">:</span>0.5em<span class="token punctuation">;</span>
-    <span class="token property">color</span><span class="token punctuation">:</span>#808080<span class="token punctuation">;</span>
-    <span class="token property">float</span><span class="token punctuation">:</span>top<span class="token punctuation">;</span>
-    <span class="token property">margin</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
-    <span class="token property">padding</span><span class="token punctuation">:</span>0<span class="token punctuation">;</span>
-<span class="token punctuation">&#125;</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/20/blog/pelican-xiao-tie-shi/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/09/16/blog/bo-ke-zhu-ti/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Andy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Blog">
-      <meta itemprop="description" content="正念日做自己的主人活在当下">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/16/blog/bo-ke-zhu-ti/" class="post-title-link" itemprop="url">博客主题</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-16 08:42:00" itemprop="dateCreated datePublished" datetime="2021-09-16T08:42:00+00:00">2021-09-16</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-03 01:33:03" itemprop="dateModified" datetime="2023-03-03T01:33:03+00:00">2023-03-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>经过几天的学习和摸索，总算把博客的主题调整为自己喜欢的风格了。由于不是程序员，所以对于HTML和CSS的语法不太了解，但是幸好找到了一个专门介绍Web开发的网站<a target="_blank" rel="noopener" href="https://www.w3school.com.cn/">W3School</a>，学到很多关于网页开发的知识。</p>
-<p>简单总结一下，主要是调整了以下内容：</p>
-<ul>
-<li>博客网页的标题和文章标题的字体，将其调整为微软雅黑</li>
-<li>导航栏的颜色，文章标题的颜色</li>
-<li>所有字体的大小</li>
-<li>文章中发布的日期、作者、分类等信息的位置，字体大小</li>
-<li><strong>图片在文章中的自适应缩放</strong></li>
-<li><strong>网站适配手机屏幕</strong></li>
-</ul>
-<p>为了调整最后两项功能，花费了很多时间学习和修改代码。</p>
-<p>以下是PC上的显示效果：</p>
-<img src="/2021/09/16/blog/bo-ke-zhu-ti/blog_pc.JPG" class="" width="600">
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/16/blog/bo-ke-zhu-ti/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/09/13/blog/wo-de-bo-ke/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Andy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Blog">
-      <meta itemprop="description" content="正念日做自己的主人活在当下">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/09/13/blog/wo-de-bo-ke/" class="post-title-link" itemprop="url">我的博客</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2021-09-13 11:16:00" itemprop="dateCreated datePublished" datetime="2021-09-13T11:16:00+00:00">2021-09-13</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-07 07:21:46" itemprop="dateModified" datetime="2023-03-07T07:21:46+00:00">2023-03-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>最近，很想静下心来写点东西，于是，就想到了创建自己的博客。其实，以前也写过一段时间的博客，采用了HEXO的博客框架。但是，很遗憾，没能坚持下来。后来，在学习Python的过程中，无意中浏览到一位博主的博客使用的是<a target="_blank" rel="noopener" href="https://blog.getpelican.com/">Pelican</a> ——一款用Python编写的静态网站生成工具，想到自己原本就一直对Python很感兴趣，于是决定采用Pelican作为自己的博客框架。</p>
-<p>由于家中有一台24小时开机的树莓派，可以被随时访问，所以我决定将博客部署在树莓派上。Pelican的初始安装和部署非常简单，通过执行几条简单的命令，就可以完成安装。但是，由于Pelican是用Python编写，所以部署的时候，必须先确保已经安装了Python。</p>
-<p>安装Pelican之前，在&#x2F;home&#x2F;pi目录下，先新建blog目录，然后进入该目录。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">mkdir</span> /home/pi/blog
-<span class="token builtin class-name">cd</span> /home/pi/blog<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>为了能为Pelican创建一个独立的虚拟Python环境，需要先安装[virtualenv](<a target="_blank" rel="noopener" href="https://virtualenv.pypa.io/en/latest/">Virtualenv — virtualenv 20.7.3.dev3+g19cd823 documentation (pypa.io)</a>)，然后再创建和激活虚拟环境。</p>
-<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">pipx <span class="token function">install</span> virtualenv
-virtualenv venv
-<span class="token builtin class-name">source</span> venv/bin/activate<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/09/13/blog/wo-de-bo-ke/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Andy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Blog">
-      <meta itemprop="description" content="正念日做自己的主人活在当下">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/" class="post-title-link" itemprop="url">个人博客 — Hexo多终端同步篇</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-01-01 01:45:38" itemprop="dateCreated datePublished" datetime="2019-01-01T01:45:38+00:00">2019-01-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-03 01:33:03" itemprop="dateModified" datetime="2023-03-03T01:33:03+00:00">2023-03-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如果需要在多台终端设备上发布博客，那么就需要将Hexo源代码发布到GitHub，并且在多台终端设备之间同步。</p>
-<h1 id="配置远程仓库"><a href="#配置远程仓库" class="headerlink" title="配置远程仓库"></a>配置远程仓库</h1><ol>
-<li><p>在GitHub上创建一个新的分支，例如，分支名称为Hexo<br><img src="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/21.png"></p>
-</li>
-<li><p>将Hexo分支设置成默认分支<br><img src="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/22.png"></p>
-</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2018/11/09/blog/ge-ren-bo-ke-hexo-biao-qian-he-fen-lei-pian/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Andy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Blog">
-      <meta itemprop="description" content="正念日做自己的主人活在当下">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/09/blog/ge-ren-bo-ke-hexo-biao-qian-he-fen-lei-pian/" class="post-title-link" itemprop="url">个人博客 — Hexo标签和分类篇</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-11-09 05:16:18" itemprop="dateCreated datePublished" datetime="2018-11-09T05:16:18+00:00">2018-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-03 01:33:03" itemprop="dateModified" datetime="2023-03-03T01:33:03+00:00">2023-03-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><h2 id="新建标签页面"><a href="#新建标签页面" class="headerlink" title="新建标签页面"></a>新建标签页面</h2><ol>
-<li>在站点目录下，打开Git Bash命令窗口</li>
-<li>输入以下命令，新建标签页面，该命令将在.\source\tags目录下创建文件index.md  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new page tags<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ol>
-<h2 id="设置页面类型"><a href="#设置页面类型" class="headerlink" title="设置页面类型"></a>设置页面类型</h2><ol>
-<li>访问目录.\source\tags，并用记事本打开文件index.md</li>
-<li>添加 type: “tags”, 将页面类型设置为tags<pre class="line-numbers language-none"><code class="language-none">---
-title: 标签
-date: 2018-11-08 12:02:31
-type: &quot;tags&quot;
----<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/09/blog/ge-ren-bo-ke-hexo-biao-qian-he-fen-lei-pian/#more" rel="contents">
+              <a class="btn" href="/2021/09/24/zhi-neng-jia-ju/ji-zhu-xiao-tie-shi/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -1179,7 +1142,7 @@ type: &quot;tags&quot;
 
 
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>

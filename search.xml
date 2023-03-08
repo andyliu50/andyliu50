@@ -3442,4 +3442,680 @@ Jack <span class="token keyword">is</span> <span class="token number">3</span> y
         <tag>vpn</tag>
       </tags>
   </entry>
+  <entry>
+    <title>Tkinter相邻两行之间间隔太大</title>
+    <url>/2021/12/31/tkinter-xiang-lin-liang-xing-zhi-jian-jian-ge-tai-da/</url>
+    <content><![CDATA[<p><img src="/python.png" alt="Python"> 本文主要介绍使用Tkinter时，如果没有正确配置调整大小的参数(grid_rowconfigure)，就会出现行与行之间距离过远的问题。</p>
+<p>通过运行以下代码，可以在界面的左侧显示一个选择列表框，因为列表框内容设置为空(template_names &#x3D; ‘’)，所以列表框中没有任何可选项。在右侧显示两行文字，第一行文字内容为Incident Office1，第二行文字内容为Incident Office2。但是，第一行和第二行之间的文字距离很远。</p>
+<pre class="line-numbers language-none"><code class="language-none">from tkinter import *
+from tkinter import ttk
+
+root &#x3D; Tk()
+c&#x3D;ttk.Frame(root, padding&#x3D;(5, 5, 12, 12))
+root.grid_columnconfigure(0, weight&#x3D;1)
+root.grid_rowconfigure(0,weight&#x3D;1)
+c.grid(column&#x3D;0, row&#x3D;0, sticky&#x3D;(N,W,E,S))
+c.grid_columnconfigure(0, weight&#x3D;1)
+c.grid_rowconfigure(0, weight&#x3D;1)
+
+template_names &#x3D; &#39;&#39;
+cnames &#x3D; StringVar(value&#x3D;template_names)
+lbox &#x3D; Listbox(c, listvariable&#x3D;cnames,height&#x3D;10, width&#x3D;50)
+
+lbox.grid(column&#x3D;0, row&#x3D;0, rowspan&#x3D;12, sticky&#x3D;(N,S,E,W))
+
+for i in range(1,4):
+    lbl_incident_office &#x3D; ttk.Label(c, text&#x3D;&quot;Incident Office%s&quot; % i )
+    lbl_incident_office.grid(column&#x3D;1, row&#x3D;i-1, sticky&#x3D;NW)
+    print(lbl_incident_office.grid_info())
+
+root.mainloop()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>导致出现以下问题的主要原因是没有正确配置grid中的设置项(grid_rowconfigure)。当前的设置如下，该设置第1行的元素会随着Frame的大小变化扩展空间，但是其它行的元素则保持不变。</p>
+<pre class="line-numbers language-none"><code class="language-none">c.grid_rowconfigure(0, weight&#x3D;1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2021-12-31_132348.jpg" alt="Tkinter"></p>
+<p>通过修改配置，将其设置为第6行的元素随着Frame的大小变化扩展空间，这时候第1-6行之间就会连续排列，第6行和第7行之间间距就会变大。</p>
+<pre class="line-numbers language-none"><code class="language-none">c.grid_rowconfigure(5, weight&#x3D;1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2021-12-31_133746.jpg" alt="Tkinter"></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>tkinter</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>搜索功能Tipue_Search插件</title>
+    <url>/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/</url>
+    <content><![CDATA[<p>本文主要介绍如何为Pelican博客添加搜索功能，详细介绍了Tipue_Search插件的安装和使用过程。由于Tipue Search插件的开发者已经从2018年起不再维护该插件，因此，相关的参考资料比较少。</p>
+<p>随着博客文章数量的增加，搜索功能显得越来越重要。在Pelican官方插件库里面查询了一番，只有Tipue Search插件支持搜索功能。但是，该插件的开发者已经于2018年起不再维护该插件，所以相关参考资料非常少。但是，目前Pelican的志愿开发者正在接手维护工作。<br><img src="/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/2021-11-06095804.jpg" alt="查找页面"></p>
+<span id="more"></span>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Tipue Search依赖于BeautifulSoup，因此首先需要安装BeautifulSoup。</p>
+<pre class="line-numbers language-none"><code class="language-none">pip install beautifulsoup4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>到目前为止，Tipue Search还不支持通过Pip安装，所以，只能从Github上下载<a href="https://github.com/pelican-plugins">插件</a>，然后将文件复制到Pelican所在的目录。</p>
+<p>需要注意的是，下载下来的插件，目录结构如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">tipue-search-main
+	|-pelican
+		|-plugins
+			|-tipue_search
+				|-__init__.py
+				|-tipue_search.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>把<strong>tipue_search目录复制到&#x2F;blog&#x2F;plugins</strong>目录下，plugins目录需要手动创建。</p>
+<h2 id="配置Pelicanconf-py"><a href="#配置Pelicanconf-py" class="headerlink" title="配置Pelicanconf.py"></a>配置Pelicanconf.py</h2><p>修改Pelicanconf.py的配置文件，添加以下内容：</p>
+<pre class="line-numbers language-none"><code class="language-none">PLUGIN_PATHS &#x3D; [&quot;plugins&quot;, &quot;.&#x2F;plugins&quot;]                                                                                         PLUGINS &#x3D; [&quot;tipue_search&quot;]                                                                                                       DIRECT_TEMPLATES &#x3D; [&#39;index&#39;, &#39;authors&#39;, &#39;categories&#39;, &#39;tags&#39;, &#39;archives&#39;, &#39;search&#39;]                                             MENUITEMS &#x3D; [(&#39;首页&#39;, &#39;&#x2F;index.html&#39;), (&#39;标签&#39;, &#39;&#x2F;tags.html&#39;), (&#39;归档&#39;, &#39;&#x2F;archives.html&#39;), (&#39;查找&#39;, &#39;&#x2F;search.html&#39;)]   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>由于无法通过Pip方式安装Tipue Search插件，所以，只能使用传统的方式来加载插件。首先，需要通过参数<strong>PLUGIN_PATHS</strong>，指定插件的所在目录。之前，插件已经复制到&#x2F;blog&#x2F;plugins目录下，所以，这里可以配置成”.&#x2F;plugins”。</p>
+<pre class="line-numbers language-none"><code class="language-none">PLUGIN_PATHS &#x3D; [&quot;plugins&quot;, &quot;.&#x2F;plugins&quot;]  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后，指定需要加载的插件名称，通过<strong>PLUGINS</strong>参数，指定tipue_search目录名。</p>
+<pre class="line-numbers language-none"><code class="language-none">PLUGINS &#x3D; [&quot;tipue_search&quot;] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>Direct_TEMPLATES</strong>参数用于指定需要生成.html文件的模板，因此，需要把search添加到该参数中（后面会介绍如何写search.html模板）。</p>
+<pre class="line-numbers language-none"><code class="language-none">DIRECT_TEMPLATES &#x3D; [&#39;index&#39;, &#39;authors&#39;, &#39;categories&#39;, &#39;tags&#39;, &#39;archives&#39;, &#39;search&#39;]       <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>为了能在首页菜单中显示搜索选项，需要配置参数<strong>MENUITEMS</strong>，添加(‘查找’, ‘&#x2F;search.html’)。</p>
+<pre class="line-numbers language-none"><code class="language-none">MENUITEMS &#x3D; [(&#39;首页&#39;, &#39;&#x2F;index.html&#39;), (&#39;标签&#39;, &#39;&#x2F;tags.html&#39;), (&#39;归档&#39;, &#39;&#x2F;archives.html&#39;), (&#39;查找&#39;, &#39;&#x2F;search.html&#39;)]  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<h2 id="下载JS文件"><a href="#下载JS文件" class="headerlink" title="下载JS文件"></a>下载JS文件</h2><p>Tipue Search插件基于JQuery开发，因此需要用到以下JS文件：</p>
+<ul>
+<li>jquery-3.6.0.min.js</li>
+<li>tipuesearch.js</li>
+<li>tipuesearch.min.js</li>
+<li>tipuesearch_set.js</li>
+</ul>
+<p>其中，文件jquery-3.6.0.min.js可以从JQuery<a href="https://jquery.com/download/">官方网站</a>下载。</p>
+<p>另外三个文件，由于tipue的官方网址已经无法访问，因此，可以从<a href="https://github.com/Pelican-Elegant/elegant/tree/V5.0.0">Elegant主题5.0.0</a>的版本中获取。下载Elegant主题后，js文件的所在路径为elegant-5.0.0\static\tipuesearch。</p>
+<h2 id="编写Search-html"><a href="#编写Search-html" class="headerlink" title="编写Search.html"></a>编写Search.html</h2><p>Search.html的详细内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#123;% extends &quot;base.html&quot; %&#125;
+
+&#123;% block title %&#125;
+  Search &#123;&#123; super() &#125;&#125;
+&#123;% endblock title %&#125;
+
+&#123;% block extra_head %&#125;
+  &lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;&#x2F;theme&#x2F;css&#x2F;main.css&quot;&gt;
+  &lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;jquery-3.6.0.min.js&quot;&gt;&lt;&#x2F;script&gt;
+  &lt;script src&#x3D;&quot;&#x2F;tipuesearch_content.js&quot;&gt;&lt;&#x2F;script&gt;
+  &lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch_set.js&quot;&gt;&lt;&#x2F;script&gt;
+  &lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch.min.js&quot;&gt;&lt;&#x2F;script&gt;
+  &lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch.js&quot;&gt;&lt;&#x2F;script&gt;
+
+  &lt;script&gt;
+		$( document ).ready(function() &#123;
+			$(&#39;#tipue_search_input&#39;).tipuesearch(&#123;
+				&#39;show&#39;: 10,               &#x2F;&#x2F; shows 10 found entries
+			&#125;);
+		&#125;);
+  &lt;&#x2F;script&gt;
+  
+&#123;% endblock %&#125;
+
+&#123;% block content %&#125;
+&lt;aside id&#x3D;&quot;featured&quot; class&#x3D;&quot;body&quot;&gt;
+	&lt;h1&gt;查找&lt;&#x2F;h1&gt;
+	&lt;form action&#x3D;&quot;search.html&quot;&gt;
+		&lt;div class&#x3D;&quot;tipue_search_group&quot;&gt;
+			&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;q&quot; id&#x3D;&quot;tipue_search_input&quot;&gt;
+		&lt;&#x2F;div&gt;
+	&lt;&#x2F;form&gt;
+		&lt;div&gt;
+			&lt;div id&#x3D;&quot;tipue_search_content&quot;&gt;&lt;&#x2F;div&gt;
+		&lt;&#x2F;div&gt;
+&lt;&#x2F;aside&gt;&lt;!-- &#x2F;#featured --&gt;
+&#123;% endblock content %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<p>以下内容用于指定css和js文件的所在位置，其中tipuesearch_content.js是Tipue Search根据博客内容自动生成的文件。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;&#x2F;theme&#x2F;css&#x2F;main.css&quot;&gt;
+&lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;jquery-3.6.0.min.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script src&#x3D;&quot;&#x2F;tipuesearch_content.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch_set.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch.min.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch.js&quot;&gt;&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>在搜索框输入搜索关键词的时候，<strong>关键词必须要用引号包含</strong>，否则无法搜索到任何内容。</p>
+<h2 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h2><p>以下文件中包含了所有的文件，包括Tipue_Search, JS以及Search.html。</p>
+<p>点击下载：<a href="tipue_search.zip">tipue_search.zip</a></p>
+]]></content>
+      <categories>
+        <category>Blog</category>
+      </categories>
+      <tags>
+        <tag>pelican</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>SSH-Tunnel简介</title>
+    <url>/2020/05/27/zhi-neng-jia-ju/ssh-tunnel-jian-jie/</url>
+    <content><![CDATA[<h1 id="什么是SSH-Protocol"><a href="#什么是SSH-Protocol" class="headerlink" title="什么是SSH Protocol?"></a>什么是SSH Protocol?</h1><p><strong>SSH Protocol</strong>（或者称为<strong>Secure Shell</strong>）是一种安全的远程登录计算机的方式。相对于传统的远程登录协议，例如Telnet, rlogin等，SSH采用了对远程连接进行加密的方式，来保证身份认证和数据传输的机密性。  </p>
+<h1 id="什么是SSH-Tunnel"><a href="#什么是SSH-Tunnel" class="headerlink" title="什么是SSH Tunnel?"></a>什么是SSH Tunnel?</h1><p><strong>SSH tunneling</strong>，又称为<strong>SSH port forwarding</strong>，可以将客户端程序发送的数据通过加密的SSH Tunnel，传送给远端的服务器应用。这种方式比较适用于一些传统的应用， 由于这些应用不支持加密传输，并且进行二次开发的成本较高，因此可以采用SSH Tunneling技术，对这些应用传输的数据进行加密。</p>
+<p>SSH Tunnel是由SSH客户端和SSH服务器之间，通过SSH Protocol建立的一条安全通道。应用的客户端程序和服务器程序之间通讯的数据，都会通过SSH Tunnel进行传输。                                           </p>
+<p>App Client &lt;-&gt; SSH Client &lt;————SSH Tunnel————&gt; SSH Server &lt;-&gt; App Server</p>
+<p> <img src="/2020/05/27/zhi-neng-jia-ju/ssh-tunnel-jian-jie/1.png"></p>
+<span id="more"></span>
+<h1 id="SSH-Tunnel的应用场景"><a href="#SSH-Tunnel的应用场景" class="headerlink" title="SSH Tunnel的应用场景"></a>SSH Tunnel的应用场景</h1><ul>
+<li>对于一些传统的应用，由于这些应用不支持加密传输，并且进行二次开发的成本较高，因此可以采用SSH     Tunneling技术，对这些应用传输的数据进行加密。</li>
+<li>由于防火墙的限制，许多服务器只能在内网访问，无法通过Internet远程访问。通过SSH Tunnel，可以远程访问内网的应用和服务器。</li>
+<li>通过SSH Tunnel，可以将SSH Client设置为SOCKS代理服务器，所有上网的流量，都将通过SSH Tunnel发送到远端的SSH服务器，并由SSH服务器转发到Internet。</li>
+</ul>
+<h1 id="SSH-Tunnel的使用方式"><a href="#SSH-Tunnel的使用方式" class="headerlink" title="SSH Tunnel的使用方式"></a>SSH Tunnel的使用方式</h1><h2 id="Local-Port-Forwarding"><a href="#Local-Port-Forwarding" class="headerlink" title="Local Port Forwarding"></a>Local Port Forwarding</h2><p><strong>Local Port Forwarding</strong>需要<strong>SSH Client</strong>在本地的IP地址（127.0.0.1或者0.0.0.0）监听一个TCP端口，客户端程序只需要连接到SSH Client的IP地址和监听的端口，客户端程序(App Client)发送的数据都将通过SSH Client和SSH Server之间建立的SSH Tunnel传输，最后，由SSH Server将数据发送给服务端程序(App Server)。</p>
+<p>逻辑上来讲，相当于将服务端程序的服务端口映射到SSH Client监听的端口。最终目的是将服务端程序的服务端口映射到App Client可以访问的节点。</p>
+<p>这种方式适用于服务器端(App Server)的SSH Server允许被防火墙发布到Internet，这样SSH Client可以远程连接到SSH Server。</p>
+<p>App Client &lt;-&gt; <strong>SSH Client(Listen on a TCP port)</strong> ——SSH Tunnel——&gt; SSH Server &lt;-&gt; App Server</p>
+<p>配置方式： </p>
+<p>在SSH Client上执行以下命令，该命令执行后，会在SSH Client上监听TCP端口8000：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> -L <span class="token number">127.0</span>.0.1:8000:www.intranet.domain:80 root@sshserver.intranet.domain<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p>-L    表示使用Local Port Forwarding</p>
+<p>127.0.0.1      在SSH Client所在计算机的本地127.0.0.1监听TCP服务端口</p>
+<p>8000:      SSH Client监听TCP服务端口8000</p>
+<p><a href="http://www.intranet.domain/">www.intranet.domain</a>          远端内网服务器的主机域名</p>
+<p>80      远端内网服务器的服务端口80</p>
+<p><a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#115;&#115;&#104;&#x73;&#x65;&#114;&#118;&#101;&#x72;&#46;&#105;&#110;&#116;&#114;&#97;&#x6e;&#101;&#x74;&#x2e;&#x64;&#111;&#109;&#97;&#105;&#x6e;">&#114;&#111;&#111;&#116;&#x40;&#115;&#115;&#104;&#x73;&#x65;&#114;&#118;&#101;&#x72;&#46;&#105;&#110;&#116;&#114;&#97;&#x6e;&#101;&#x74;&#x2e;&#x64;&#111;&#109;&#97;&#105;&#x6e;</a>   远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
+<p>注意：由于SSH Client只是在localhost(127.0.0.1)监听服务端口8000，所以App Client必须和SSH Client在同一台计算机上，才能访问远程应用<a href="http://www.intranet.domain./">www.intranet.domain。</a></p>
+<p>如果App Client运行在另外一台计算机上，则需要使用以下命令，让SSH Client在IP地址0.0.0.0上监听服务端口8000，这样，SSH Client就可以接收来自于任何计算机的客户端程序访问。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> -L <span class="token number">0.0</span>.0.0:8000:www.intranet.domain:80 root@sshserver.intranet.domain<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="Remote-Port-Forwarding"><a href="#Remote-Port-Forwarding" class="headerlink" title="Remote Port Forwarding"></a>Remote Port Forwarding</h2><p>在有些场景中，服务器端(App Server)的SSH Server无法被发布到Internet，这时候就只能使用Remote Port Forwadingd的方式，将服务端应用程序的服务端口，映射到客户端应用程式(App Client)这一侧的SSH Server。</p>
+<p>逻辑上来讲，相当于将服务端程序的服务端口映射到SSH Server监听的端口。最终目的是将服务端程序的服务端口映射到App Client可以访问的节点。</p>
+<p>App Client &lt;-&gt; <strong>SSH Server(Listen on a TCP port)</strong> &lt;——SSH Tunnel——- SSH Client &lt;-&gt; App Server</p>
+<p>配置方式：</p>
+<p>在SSH Client上执行以下命令，该命令执行后，会在SSH Server上监听TCP端口8000，绑定的IP地址是127.0.0.1：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> -R :8000:www.intranet.domain:80 root@sshserver.intranet.domain<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>-R         表示使用Remote Port Forwarding</p>
+<p>8000:      SSH Servert监听TCP服务端口8000</p>
+<p><a href="http://www.intranet.domain/">www.intranet.domain</a>  远端内网服务器的主机域名</p>
+<p>80         远端内网服务器的服务端口80</p>
+<p><a href="mailto:&#114;&#x6f;&#x6f;&#x74;&#x40;&#115;&#115;&#104;&#115;&#101;&#x72;&#118;&#x65;&#x72;&#46;&#105;&#110;&#116;&#x72;&#x61;&#x6e;&#101;&#x74;&#46;&#100;&#x6f;&#x6d;&#x61;&#x69;&#x6e;">&#114;&#x6f;&#x6f;&#x74;&#x40;&#115;&#115;&#104;&#115;&#101;&#x72;&#118;&#x65;&#x72;&#46;&#105;&#110;&#116;&#x72;&#x61;&#x6e;&#101;&#x74;&#46;&#100;&#x6f;&#x6d;&#x61;&#x69;&#x6e;</a>  远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
+<p>注意：默认情况下，SSH Server只会绑定IP地址127.0.0.1，如果需要绑定IP地址0.0.0.0，需要修改sshd_config配置文件中的参数<strong>GatewayPorts</strong>。</p>
+<p>以下是关于参数<strong>GatewayPorts</strong>的三种方式：</p>
+<pre class="line-numbers language-none"><code class="language-none">GatewayPorts no<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>该设置只允许SSH Server自己连接监听的服务端口8000，拒绝来自于外部计算机的连接请求。</p>
+<pre class="line-numbers language-none"><code class="language-none">GatewayPorts yes&#96;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>该设置允许任何计算机的连接请求，如果SSH Server在Internet上，任何计算机都可以访问该服务端口8000。</p>
+<p>通过执行以下命令，可以在SSH Server上绑定IP地址0.0.0.0，允许任何计算机访问服务端口8000。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> -R <span class="token number">0.0</span>.0.0:8000:www.intranet.domain:80 root@sshserver.intranet.domain`<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">GatewayPorts clientspecified<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>该设置只允许来自于指定IP地址的连接请求。格式如下：</p>
+<p>通过执行以下命令，可以限制只允许来自于IP地址2.2.2.2的计算机访问服务端口8000。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> -R <span class="token number">2.2</span>.2.2:8000:www.intranet.domain:80 root@sshserver.intranet.domain`<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<h2 id="Dynamic-Port-Forwarding"><a href="#Dynamic-Port-Forwarding" class="headerlink" title="Dynamic Port Forwarding"></a>Dynamic Port Forwarding</h2><p>Dynamic Port Forwarding可以将SSH Client配置为SOCKS代理服务器，所有的浏览通过SSH Tunnel发送到SSH Server，并由SSH Server转发至内网应用，或者Internet。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> -C -D <span class="token number">1080</span> root@sshserver.intranet.domain  //绑定IP地址127.0.0.1
+
+<span class="token function">ssh</span> -C -D <span class="token number">0.0</span>.0.0:1080 root@sshserver.intranet.domain  //绑定IP地址0.0.0.0<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>-C 启用数据压缩</p>
+<p>-D 使用Dynamic Port Forwarding</p>
+<p>App Client -&gt; <strong>SSH Client(Listen on a TCP port)</strong> ———SSH Tunnel———&gt; SSH Server -&gt; Internet&#x2F;Corporate App</p>
+<h2 id="启用和关闭Port-Forwarding"><a href="#启用和关闭Port-Forwarding" class="headerlink" title="启用和关闭Port Forwarding"></a>启用和关闭Port Forwarding</h2><p>通过配置SSH Server的配置文件<strong>sshd_config</strong>中的参数<strong>AllowTcpForwarding</strong>，可以启用和关闭Port Forwarding。</p>
+<blockquote>
+<p><strong>AllowTcpForwarding</strong></p>
+<p>Specifies whether TCP forwarding is permitted. </p>
+<p>The available options are:</p>
+<p><strong>yes</strong> (the default) or all to allow TCP forwarding, </p>
+<p><strong>no</strong> to prevent all TCP forwarding, </p>
+<p><strong>local</strong> to allow local (from the perspective of ssh(1)) forwarding only</p>
+<p><strong>remote</strong> to allow remote forwarding only. </p>
+<p>Note that disabling TCP forwarding does not improve security unless users are also denied shell access, as they can always install their own forwarders.</p>
+</blockquote>
+]]></content>
+      <categories>
+        <category>智能家居</category>
+      </categories>
+      <tags>
+        <tag>raspberrypi</tag>
+        <tag>ssh</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>利用SSH将手机文件上传到树莓派</title>
+    <url>/2021/04/17/zhi-neng-jia-ju/li-yong-ssh-jiang-shou-ji-wen-jian-shang-chuan-dao-shu-mei-pai/</url>
+    <content><![CDATA[<p>在iPhone手机上，可以使用快捷指令中的SSH指令，将文件上传到树莓派。</p>
+<p>首先，利用<strong>“制作归档”</strong>指令，将文件压缩成.tar.gz的压缩文件。</p>
+<p>然后，利用<strong>“通过SSH运行脚本”</strong>指令，将压缩文件上传到树莓派，并且解压缩文件。</p>
+<p>例如以下命令，就是将文件上传并解压缩到树莓派的**&#x2F;home&#x2F;pi**目录：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">cd</span> /home/pi <span class="token operator">&amp;&amp;</span> <span class="token function">tar</span> xzvf - <span class="token operator">></span> /dev/null<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> <img src="/2021/04/17/zhi-neng-jia-ju/li-yong-ssh-jiang-shou-ji-wen-jian-shang-chuan-dao-shu-mei-pai/1.jpeg"></p>
+ <span id="more"></span>
+<p> 此外，还可以查看命令执行后的返回结果，如果是0，说明命令执行成功，否则，就是上传失败。<br>以下命令可以用于查看上一条命令的执行结果。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token builtin class-name">echo</span> <span class="token variable">$?</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p> <img src="/2021/04/17/zhi-neng-jia-ju/li-yong-ssh-jiang-shou-ji-wen-jian-shang-chuan-dao-shu-mei-pai/2.jpeg"></p>
+]]></content>
+      <categories>
+        <category>智能家居</category>
+      </categories>
+      <tags>
+        <tag>raspberrypi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>技术小贴士</title>
+    <url>/2021/09/24/zhi-neng-jia-ju/ji-zhu-xiao-tie-shi/</url>
+    <content><![CDATA[<h2 id="如何让SSH-Tunnel保持长连接"><a href="#如何让SSH-Tunnel保持长连接" class="headerlink" title="如何让SSH Tunnel保持长连接"></a>如何让SSH Tunnel保持长连接</h2><p>autossh可以用来监控SSH连接，并且当SSH连接中断后，自动重连。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">autossh -f -M <span class="token number">0</span> -NR <span class="token number">0.0</span>.0.0:50022:localhost:22 root@remoteserver -p <span class="token number">12345</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>-f    autossh运行在后台。即使不用-f参数，autossh也会运行在后台，但是，如果用帐号登录，会提示输入密码。  </p>
+<p>-M    如果设置为0，就会关闭autossh监控SSH隧道通断的状态。并且，autossh文档也建议使用OpenSSH自身的KeepAlive监控功能。即在sshd_config中设置以下参数：</p>
+<pre class="line-numbers language-none"><code class="language-none">ClientAliveInterval 30 
+ClientAliveCountMax 3
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>另外，如何才能让系统自动重启后，让autossh自动连接。运行命令crontab -e，添加计划任务：</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">@reboot autossh -f -M 0 -NR 0.0.0.0:123456:localhost:22 root@remoteserver -p 65000 &amp;
+@reboot autossh -f -M 0 -NR 0.0.0.0:123456:localhost:22 pi@remoteserver -p 65000 &amp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<hr>
+<span id="more"></span>
+
+<h2 id="如何让SSH保持长连接"><a href="#如何让SSH保持长连接" class="headerlink" title="如何让SSH保持长连接"></a>如何让SSH保持长连接</h2><p>修改配置文件<strong>sshd_config</strong>，设置以下参数：</p>
+<pre class="line-numbers language-none"><code class="language-none">ClientAliveInterval 30
+ClientAliveCountMax 3<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>ClientAliveInterval参数设置为30s，当SSH服务器在30s后没有收到客户端发送的数据，就会向客户端发送一个请求，要求客户端发送一个Keep Alive的消息。</p>
+<p>ClientAliveCountMax参数设置为3，就是当SSH服务器在90s仍然没有接收到客户端发送的Keep Alive消息，就会将SSH连接中断。</p>
+<p>默认情况下，ClientAliveInterval的参数为0，即SSH服务器不会向客户端发送请求。  </p>
+<hr>
+<h2 id="更改树莓派的系统和软件更新源"><a href="#更改树莓派的系统和软件更新源" class="headerlink" title="更改树莓派的系统和软件更新源"></a>更改树莓派的系统和软件更新源</h2><p><strong>修改软件更新源</strong></p>
+<p>修改配置文件&#x2F;etc&#x2F;apt&#x2F;sources.list</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vi</span> /etc/apt/sources.list <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>将原来的更新源用#注释，然后添加新的更新源。</p>
+<pre class="line-numbers language-none"><code class="language-none">deb http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;raspbian&#x2F;raspbian&#x2F; stretch main contrib non-free rpi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<p><strong>修改系统更新源</strong></p>
+<p>修改配置文件 &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;raspi.list </p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vi</span>  /etc/apt/sources.list.d/raspi.list<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>将原来的更新源用#注释，然后添加新的更新源。</p>
+<pre class="line-numbers language-none"><code class="language-none">deb http:&#x2F;&#x2F;mirrors.ustc.edu.cn&#x2F;raspbian&#x2F;raspbian&#x2F; stretch main ui<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>更新源列表</strong></p>
+<p>中国科学技术大学<br><a href="http://mirrors.ustc.edu.cn/raspbian/raspbian/">http://mirrors.ustc.edu.cn/raspbian/raspbian/</a></p>
+<p>阿里云<br><a href="http://mirrors.aliyun.com/raspbian/raspbian/">http://mirrors.aliyun.com/raspbian/raspbian/</a></p>
+<p>清华大学<br><a href="http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/">http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/</a></p>
+<p>华中科技大学<br><a href="http://mirrors.hustunique.com/raspbian/raspbian/">http://mirrors.hustunique.com/raspbian/raspbian/</a> </p>
+<p>Arch Linux ARM<br><a href="http://mirrors.hustunique.com/archlinuxarm/">http://mirrors.hustunique.com/archlinuxarm/</a></p>
+<p>华南农业大学（华南用户）<br><a href="http://mirrors.scau.edu.cn/raspbian/">http://mirrors.scau.edu.cn/raspbian/</a></p>
+<p>大连东软信息学院源（北方用户）<br><a href="http://mirrors.neusoft.edu.cn/raspbian/raspbian/">http://mirrors.neusoft.edu.cn/raspbian/raspbian/</a></p>
+<p>重庆大学源（中西部用户）<br><a href="http://mirrors.cqu.edu.cn/Raspbian/raspbian/">http://mirrors.cqu.edu.cn/Raspbian/raspbian/</a></p>
+<p>新加坡国立大学<br><a href="http://mirror.nus.edu.sg/raspbian/raspbian">http://mirror.nus.edu.sg/raspbian/raspbian</a></p>
+<p>牛津大学<br><a href="http://mirror.ox.ac.uk/sites/archive.raspbian.org/archive/raspbian/">http://mirror.ox.ac.uk/sites/archive.raspbian.org/archive/raspbian/</a></p>
+<p>韩国KAIST大学<br><a href="http://ftp.kaist.ac.kr/raspbian/raspbian/">http://ftp.kaist.ac.kr/raspbian/raspbian/</a></p>
+<hr>
+<h2 id="Transmission下载完成后发送通知"><a href="#Transmission下载完成后发送通知" class="headerlink" title="Transmission下载完成后发送通知"></a>Transmission下载完成后发送通知</h2><p>1.创建脚本文件<em>btfinish.sh</em>：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">touch</span> /home/pi/Documents/btfinish.sh
+<span class="token function">chmod</span> <span class="token number">775</span> /home/pi/Documents/btfinish.sh<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>脚本内容如下：</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token shebang important">#!/bin/bash</span>
+
+/home/pi/Documents/bt_ifttt.py <span class="token string">"<span class="token variable">$TR_TORRENT_NAME</span>"</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>2.创建Python脚本文件<em>bt_ifttt.py</em>，该脚本将会向IFTTT服务发送下载完成的消息。</p>
+<p>3.修改Tranmission-daemon配置文件settings.json。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">vi</span> /etc/transmission-daemon/settings.json<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>修改以下参数：</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"script-torrent-done-enabled"</span><span class="token operator">:</span> <span class="token boolean">true</span><span class="token punctuation">,</span> # 下载完成后，调用并运行脚本
+<span class="token property">"script-torrent-done-filename"</span><span class="token operator">:</span> <span class="token string">"/home/pi/Documents/btfinish.sh"</span><span class="token punctuation">,</span> # 指定脚本的位置<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>参考资料</p>
+<p><a href="https://github.com/transmission/transmission/wiki/Scripts">https://github.com/transmission/transmission/wiki/Scripts</a></p>
+<hr>
+<h2 id="Transmission支持将种子文件放到指定目录下后，就会自动创建下载任务。"><a href="#Transmission支持将种子文件放到指定目录下后，就会自动创建下载任务。" class="headerlink" title="Transmission支持将种子文件放到指定目录下后，就会自动创建下载任务。"></a>Transmission支持将种子文件放到指定目录下后，就会自动创建下载任务。</h2><p>配置文件&#x2F;etc&#x2F;transmission-daemon&#x2F;settings.json的配置参数</p>
+<pre class="line-numbers language-json" data-language="json"><code class="language-json"><span class="token property">"watch-dir"</span><span class="token operator">:</span> <span class="token string">"/home/pi/Downloads/torrents"</span><span class="token punctuation">,</span>
+<span class="token property">"watch-dir-enabled"</span><span class="token operator">:</span> <span class="token boolean">true</span><span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<p>配置参数<em>watch-dir</em>，指定存放种子文件的目录。为了避免权限不足，建议为目录设置775权限。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">chmod</span> <span class="token number">775</span> torrents<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>为了使配置生效，需要重新启动Transmission-daemon服务。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">service</span> transmission-daemon restart<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+<hr>
+<h2 id="树莓派如何启用VNC服务"><a href="#树莓派如何启用VNC服务" class="headerlink" title="树莓派如何启用VNC服务"></a>树莓派如何启用VNC服务</h2><p>输入命令<strong>sudo raspi-config</strong>，选择<strong>Interface Options</strong>  - <strong>P3 VNC</strong>。</p>
+<p>默认情况下，树莓派的分辨率为<strong>720x480</strong>，因此，VNC连上后，无法正常显示桌面。</p>
+<p>输入命令<strong>sudo raspi-config</strong>，选择<strong>Advanced Options</strong> - <strong>Resolution</strong>，将分辨率调整为<strong>1920x1080</strong>。</p>
+<hr>
+<h2 id="树莓派没有显示器如何配置随机启动SSH服务"><a href="#树莓派没有显示器如何配置随机启动SSH服务" class="headerlink" title="树莓派没有显示器如何配置随机启动SSH服务"></a>树莓派没有显示器如何配置随机启动SSH服务</h2><p>将SD卡插到电脑上，打开boot分区，用记事本创建一个新文件，文件名为ssh，<strong>注意需要将后缀.txt删除</strong>。然后将SD卡插入树莓派，通电启动后，SSH服务会随机启动。</p>
+<hr>
+<h2 id="Windows-Terminal如何从Vim中复制内容"><a href="#Windows-Terminal如何从Vim中复制内容" class="headerlink" title="Windows Terminal如何从Vim中复制内容"></a>Windows Terminal如何从Vim中复制内容</h2><p>在Windows Terminal中，通过SSH远程访问Linux系统，用Vim编辑器编辑文本内容时，如果需要将文本内容复制到其它应用，例如，记事本，则需要按照以下方式复制内容：</p>
+<ol>
+<li>按住<strong>SHIFT</strong>键</li>
+<li>按住鼠标<strong>左键</strong>，选择需要复制的内容</li>
+<li>点击鼠标<strong>右键</strong>，完成复制</li>
+<li>将复制的内容粘贴到其它应用中</li>
+</ol>
+<p><img src="/2021/09/24/zhi-neng-jia-ju/ji-zhu-xiao-tie-shi/2021-09-25105158.jpg"></p>
+<p><strong>注意：如果是其它Linux命令执行后的输出结果，例如cat命令，则不需要按住SHIFT键，只需要用鼠标左键选择需要复制的内容，然后点击右键完成复制。</strong></p>
+]]></content>
+      <categories>
+        <category>智能家居</category>
+      </categories>
+      <tags>
+        <tag>raspberrypi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>树莓派｜FreeRDP</title>
+    <url>/2021/11/21/zhi-neng-jia-ju/shu-mei-pai-freerdp/</url>
+    <content><![CDATA[<p><img src="/2021/11/21/zhi-neng-jia-ju/shu-mei-pai-freerdp/20211031_044118441_iOS.jpg" alt="Raspberry Pi4">由于台式机的风扇噪音比较大，因此一直想购买一款低功耗的电脑，放在卧室使用。之前在网上关注到有人将树莓派作为瘦终端来使用，于是购买了一台内存为8G的树莓派4来试用一下。</p>
+<p>一直以来，由于台式机的风扇噪音比较大，所以我比较青睐低功耗的产品。但是，由于性能的问题，一直无法满足实际的使用需求。随着科技的不断发展，树莓派等低功耗产品的性能得到了显著提升。之前在网上关注到有人将树莓派作为瘦终端来使用，于是购买了一台内存为8G的树莓派4来试用一下。<span id="more"></span></p>
+<p><img src="/2021/11/21/zhi-neng-jia-ju/shu-mei-pai-freerdp/20211031_042816577_iOS.jpg" alt="Raspberry Pi4"></p>
+<p>根据网上的资料，适合于树莓派的瘦终端系统有以下几种，并且都是付费产品：</p>
+<ul>
+<li><strong>WTWare</strong></li>
+<li><strong>Stratodesk’s NoTouch OS</strong></li>
+<li><strong>TLXOS</strong></li>
+</ul>
+<p>最后，决定采用开源免费的<a href="https://www.freerdp.com/">FreeRDP</a>软件，该软件可以通过RDP协议远程访问Windows系统的桌面。</p>
+<p>使用了一段时间以后，得到以下结论：</p>
+<ul>
+<li>响应速度比较快，基本感觉不到延时。</li>
+<li>播放音频的声音效果还可以，但是使用蓝牙音箱的时候，声音会有卡顿现象。</li>
+<li>目前只能支持1080p的分辨率，不支持2k, 4k等分辨率。</li>
+<li>鼠标在操作滚动条的时候，感到有延时。</li>
+<li>播放高清视频会出现卡顿，还没有详细研究相关配置参数，不清楚是否可以解决。</li>
+<li>每次都要输入命令以后，才能完成远程连接的操作，比较麻烦。</li>
+<li>总体来说，简单做一些办公应该没有什么问题。</li>
+</ul>
+<p>在树莓派4上，必须要选择Legacy的显示驱动，否则远程桌面的画面会有延时。这个问题和V3D显示驱动有关系，问题的详细描述，可以参考<a href="https://github.com/raspberrypi/linux/issues/4353">这里</a>。</p>
+<pre class="line-numbers language-none"><code class="language-none">sudo raspi-config
+
+- select &quot;7 Advanced Options&quot;
+- select &quot;A7 GL Driver&quot;
+- select &quot;G1 Legacy&quot;
+- then reboot.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>在树莓派上，如果要使用双屏显示远程桌面，需要做以下配置：</p>
+<pre class="line-numbers language-none"><code class="language-none">To enable dual screen, I have created this file &#x2F;usr&#x2F;share&#x2F;X11&#x2F;xorg.conf.d&#x2F;60-dualscreen.conf :
+
+#
+# Configuration double ecran pour Raspberry Pi 4 et les drivers &quot;Legacy&quot;
+# The order of precedence is Display, Screen, Monitor, Device.
+# 
+Section &quot;Device&quot;
+        Identifier      &quot;Rpi4 HDMI1&quot;
+        Driver          &quot;fbturbo&quot;
+        Option          &quot;fbdev&quot; &quot;&#x2F;dev&#x2F;fb0&quot;
+        Option          &quot;ShadowFB&quot; &quot;off&quot;
+        Option          &quot;SwapbuffersWait&quot; &quot;true&quot;
+EndSection
+
+Section &quot;Device&quot;
+        Identifier      &quot;Rpi4 HDMI2&quot;
+        Driver          &quot;fbturbo&quot;
+        Option          &quot;fbdev&quot; &quot;&#x2F;dev&#x2F;fb1&quot;
+        Option          &quot;ShadowFB&quot; &quot;off&quot;
+        Option          &quot;SwapbuffersWait&quot; &quot;true&quot;
+EndSection
+
+Section &quot;Monitor&quot;
+        Identifier      &quot;HDMI1&quot;
+        Option          &quot;Primary&quot; &quot;true&quot;
+EndSection
+
+Section &quot;Monitor&quot;
+        Identifier      &quot;HDMI2&quot;
+        Option          &quot;LeftOf&quot; &quot;HDMI1&quot;
+EndSection
+
+Section &quot;Screen&quot;
+        Identifier      &quot;screen0&quot;
+        Device          &quot;Rpi4 HDMI1&quot;
+        Monitor         &quot;HDMI1&quot;
+EndSection
+
+Section &quot;Screen&quot;
+        Identifier      &quot;screen1&quot;
+        Device          &quot;Rpi4 HDMI2&quot;
+        Monitor         &quot;HDMI2&quot;
+EndSection
+
+Section &quot;ServerLayout&quot;
+        Identifier      &quot;default&quot;
+        Option          &quot;Xinerama&quot; &quot;on&quot;
+        Option          &quot;Clone&quot; &quot;off&quot;
+        Screen 0        &quot;screen0&quot;
+        Screen 1        &quot;screen1&quot; RightOf &quot;screen0&quot;
+EndSection<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>最后，在树莓派上安装并使用freerdp。</p>
+<pre class="line-numbers language-none"><code class="language-none">sudo apt-get install freerdp2-x11
+xfreerdp &#x2F;version  &#x2F;&#x2F; 查看版本
+xfreerdp &#x2F;help 	   &#x2F;&#x2F;查看帮助
+xfreerdp &#x2F;f &#x2F;u:&quot;&quot; &#x2F;p:&quot;&quot; &#x2F;sound:sys:alsa,format:1,quality:high &#x2F;rfx &#x2F;gfx &#x2F;gfx-h264 &#x2F;multitransport &#x2F;network:auto -bitmap-cache -glyph-cache &#x2F;gdi:hw -fonts &#x2F;v:SERVERNAME
+
+&#x2F;u: 用户名
+&#x2F;p: 密码
+&#x2F;v: 远程主机名或IP地址<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>]]></content>
+      <categories>
+        <category>智能家居</category>
+      </categories>
+      <tags>
+        <tag>raspberrypi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何使用Git</title>
+    <url>/2021/12/30/bian-cheng/git/</url>
+    <content><![CDATA[<p> <img src="/2021/12/30/bian-cheng/git/git.jpg" alt="Git"> 本文主要介绍如何使用Git，包括Git客户端，Github以及Gitee。</p>
+<h2 id="Git客户端"><a href="#Git客户端" class="headerlink" title="Git客户端"></a>Git客户端</h2><p>下载地址：<a href="https://git-scm.com/">Git (git-scm.com)</a></p>
+<p>文档：<a href="https://git-scm.com/docs">Git - Reference (git-scm.com)</a></p>
+<h2 id="初始设置"><a href="#初始设置" class="headerlink" title="初始设置"></a>初始设置</h2><p>安装完成后，需要先设置一下用户名称和邮箱：</p>
+<pre class="line-numbers language-none"><code class="language-none">git config --global user.name &quot;Your Name&quot;
+git config --global user.email &quot;email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+<h2 id="创建Git版本库"><a href="#创建Git版本库" class="headerlink" title="创建Git版本库"></a>创建Git版本库</h2><p>使用命令<code>git init</code>，创建一个新的Git版本库，或者重新初始化现有的版本库。创建成功后，会在当前目录创建一个隐藏目录.git。</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git init
+Initialized empty Git repository in C:&#x2F;project&#x2F;.git&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="修改初始化仓库时的默认分支名称-master-gt-main"><a href="#修改初始化仓库时的默认分支名称-master-gt-main" class="headerlink" title="修改初始化仓库时的默认分支名称(master -&gt; main)"></a>修改初始化仓库时的默认分支名称(master -&gt; main)</h2><p>初始化仓库时，Github的默认分支名称已经从master更改为main，但是Git客户端和Gitee的默认分支名称仍然为master。通过以下方式，可以修改Git客户端和Gitee的版本库名称。</p>
+<h3 id="Git客户端-1"><a href="#Git客户端-1" class="headerlink" title="Git客户端"></a>Git客户端</h3><p>使用以下命令，将Git客户端创建的默认分支名称设置为main</p>
+<pre class="line-numbers language-none"><code class="language-none">git config --global init.defaultBranch main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="Gitee"><a href="#Gitee" class="headerlink" title="Gitee"></a>Gitee</h3><p>在Gitee的后台管理界面，选择<strong>设置</strong>-<strong>仓库首选项</strong>，将master修改为main。</p>
+<p><img src="/2021/12/30/bian-cheng/git/2021-12-30_141954.jpg" alt="Gitee"></p>
+<h2 id="修改本地的分支名称-master-gt-main"><a href="#修改本地的分支名称-master-gt-main" class="headerlink" title="修改本地的分支名称(master -&gt; main)"></a>修改本地的分支名称(master -&gt; main)</h2><p>如果初始化完成后，本地分支的名称为master，可以通过命令<code>git branch -m master main</code>修改为main。</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git branch -m master main
+$ git branch
+* main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>然后，通过命令<code>git push -u gitee main</code>将本地分支推送到远程分支。并且，将远程分支设置为与main关联。</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git push -u gitee main
+$ git remote set-head gitee main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="Git客户端配置文件"><a href="#Git客户端配置文件" class="headerlink" title="Git客户端配置文件"></a>Git客户端配置文件</h2><p>Git客户端的配置文件是在用户目录(~)下的<code>.gitconfig</code>文件。</p>
+<p>文件内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">:&gt; Get-Content ~\.gitconfig
+[user]
+        email &#x3D; andyliu50@outlook.com
+        name &#x3D; Andy Liu
+[core]
+        autocrlf &#x3D; true
+[init]
+        defaultBranch &#x3D; main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Git本地和远程同步"><a href="#Git本地和远程同步" class="headerlink" title="Git本地和远程同步"></a>Git本地和远程同步</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>本地已经完成仓库的初始化，在远程Github或者Gitee上创建相同名称的仓库。然后，在本地运行以下命令：</p>
+<pre class="line-numbers language-none"><code class="language-none">git remote add github git@github.com:andyliu50&#x2F;mytool.git
+git push -u github main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>其中，github是远程仓库在本地的名称，默认一般用origin，由于本地要同时和Github和Gitee同步，为了便于区分，因此将远程仓库设置为github。andyliu50是github的账号名称，mytool是远程仓库的实际名称。</p>
+<p>命令<code>git push</code>将本地分支main推送到远程仓库。</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>本地不创建仓库，在远程Github或者Gitee创建仓库，然后，在本地运行以下命令，将远程仓库克隆到本地：</p>
+<pre class="line-numbers language-none"><code class="language-none">git clone git@github.com:andyliu50&#x2F;mytool.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="创建标签并推送到远程"><a href="#创建标签并推送到远程" class="headerlink" title="创建标签并推送到远程"></a>创建标签并推送到远程</h2><p>用<code>git tag</code>可以创建标签</p>
+<pre class="line-numbers language-none"><code class="language-none">git tag v1.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>可以将一个标签推送到远程库</p>
+<pre class="line-numbers language-none"><code class="language-none">git push github v1.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也可以将多个标签推送到远程库</p>
+<pre class="line-numbers language-none"><code class="language-none">git push github --tags<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PowerShell Tips</title>
+    <url>/2021/04/15/bian-cheng/powershell-tips/</url>
+    <content><![CDATA[<p>本文主要介绍关于PowerShell中的一些小技巧，以便于需要时查询。</p>
+<h2 id="如何知道脚本文件所在路径"><a href="#如何知道脚本文件所在路径" class="headerlink" title="如何知道脚本文件所在路径"></a>如何知道脚本文件所在路径</h2><p>有时候为了能访问与脚本在相同目录的文件，需要知道脚本的路径位置。通过变量$MyInvocation可以获取脚本的路径和名称。</p>
+<p>$MyInvocation是一种自动变量（Automatic Variables），自动变量一种用于存储PowerShell状态的特殊变量，由PowerShell创建和维护。关于自动变量的详细介绍，可以通过命令<code>Help about_Automatic_Variables</code>查看。</p>
+<pre class="line-numbers language-none"><code class="language-none">$ScriptPath &#x3D; $MyInvocation.MyCommand.Path
+$ScriptName &#x3D; $MyInvocation.MyCommand.Name
+$ScriptDir &#x3D; Split-Path $ScriptPath<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><code>$MyInvocation.MyCommand.Path</code>返回的是脚本文件的绝对路径，通过命令<code>Split-Path</code>，可以获取脚本文件所在目录的绝对路径。</p>
+<h2 id="批处理文件中-dpn0"><a href="#批处理文件中-dpn0" class="headerlink" title="批处理文件中%~dpn0"></a>批处理文件中%~dpn0</h2><p>当把批处理文件和其它文件(PowerShell脚本)部署到计算机上后，如果无法知道文件所在的目录，就可以使用%~dpn0。</p>
+<p>在批处理文件中，**%n**是一种特殊变量：</p>
+<p><strong>%0</strong>: 批处理文件的完整路径（包括批处理文件的文件名和后缀）<br><strong>%1</strong>: 批处理文件后面的第一个参数<br><strong>%2</strong>: 批处理文件后面的第二个参数<br>… </p>
+<p>另外，以下参数可以和%0结合使用，用于表达文件路径：</p>
+<p><strong>~d</strong>: 驱动器盘符，例如C:, D:\<br><strong>~p</strong>: 路径（不包含驱动器盘符和批处理文件名）<br><strong>~n</strong>: 批处理文件名</p>
+<p>所以，如果结合起来使用就是：</p>
+<p><strong>%0</strong>: 批处理文件的完整路径（<strong>包含批处理文件的后缀</strong>）<br><strong>%dp0</strong>:  批处理文件所在的目录<br><strong>%dpn0</strong>: 批处理文件的完整路径（<strong>不包含批处理文件的后缀</strong>）</p>
+<p>举例：</p>
+<ol>
+<li>如果在同一个目录下，有两个文件：test.bat, test.ps1，由于这两个文件的文件名相同，后缀不同，因此，可以在test.bat中，使用以下代码，通过运行test.bat文件来执行PS脚本。</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">@ECHO OFF
+PowerShell.exe -Command &quot;&amp; &#39;%~dpn0.ps1&#39;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>如果在同一个目录下，有两个文件：test.bat, myscript.ps1，由于这两个文件的文件名不同，因此，在test.bat中，需要使用以下代码。由于~n代表批处理文件的文件名，此处需要删除n，替换成PS脚本的文件名。</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">@ECHO OFF
+PowerShell.exe -Command &quot;&amp; &#39;%~dp0myscript.ps1&#39;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>powershell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建计划任务</title>
+    <url>/2021/12/31/bian-cheng/chuang-jian-ji-hua-ren-wu/</url>
+    <content><![CDATA[<p><img src="/2021/12/31/bian-cheng/chuang-jian-ji-hua-ren-wu/powershell.png" alt="PowerShell"><br>本文主要介绍如何用PowerShell命令创建计划任务。</p>
+<p>通过PowerShell创建计划任务稍微有点复杂，需要通过三条命令来分别设置Settings, Action和Trigger，然后再用命令<code>Register-ScheduledTask</code>创建任务。</p>
+<p><strong>New-ScheduledTaskSettingsSet</strong> - 该命令主要用于设置一些参数，例如网络连接可用时才运行任务，使用交流电源时运行任务等。</p>
+<p><strong>New-ScheduledTaskAction</strong> - 该命令设置需要运行的程序和脚本等。</p>
+<p><strong>New-ScheduledTaskTrigger</strong> - 该命令设置触发任务运行的条件，例如启动时，登录时，某个特定时间运行任务。</p>
+<p><strong>Register-ScheduledTask</strong> - 该命令需要利用以上三条命令的结果，创建任务。</p>
+<span id="more"></span>
+<p>以下的命令可以创建一个名为ResetPassword的计划任务，该任务会在系统启动的时候运行，并且只有**当网络连接可用时(-RunOnlyIfNetworkAvailable)<strong>才会运行。该任务以SYSTEM账号运行，并且使用</strong>最高权限运行(-RunLevel Highest)**。</p>
+<pre class="line-numbers language-none"><code class="language-none">$TaskName &#x3D; &#39;ResetPassword&#39;
+$Setting &#x3D; New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable
+$Action &#x3D; New-ScheduledTaskAction -Execute $BatchFile
+$Trigger &#x3D; New-ScheduledTaskTrigger -AtStartup
+Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Settings $Setting -User &#39;SYSTEM&#39; -RunLevel Highest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>以下的命令可以创建一个名为MonitorInternet的计划任务，该任务创建后，**会在5分钟以后触发运行，并且之后会无限期地每隔五分钟运行一次(-Once -At (Get-Date).Addminutes(5) -RepetitionInterval (New-TimeSpan -Minutes 5))**。并且，该任务设置了条件，即使切换到电池（笔记本电脑），也不要停止运行任务。</p>
+<pre class="line-numbers language-none"><code class="language-none">$TaskName &#x3D; &#39;MonitorInternet&#39;
+$Setting &#x3D; New-ScheduledTaskSettingsSet -DontStopIfGoingOnBatteries
+$Action &#x3D; New-ScheduledTaskAction -Execute $BatchFile
+$Trigger &#x3D; New-ScheduledTaskTrigger -Once -At (Get-Date).Addminutes(5) -RepetitionInterval (New-TimeSpan -Minutes 5)
+Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Settings $Setting -User &#39;SYSTEM&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>powershell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何双击运行PowerShell脚本</title>
+    <url>/2021/11/08/bian-cheng/shuang-ji-yun-xing-powershell-jiao-ben/</url>
+    <content><![CDATA[<p>由于PowerShell脚本双击后，系统默认使用记事本打开脚本，导致脚本无法直接运行。本文主要介绍如何可以通过双击运行的方式，直接运行PowerShell脚本。</p>
+<p>由于Windows系统对PowerShell做了许多安全性的防护措施，导致PowerShell不像以前的批处理文件那样，复制到电脑上就可以直接运行。目前，主要有以下一些原因会导致运行PowerShell出现问题：</p>
+<ul>
+<li><p><strong>默认情况下，PowerShell脚本的.ps1文件与记事本关联。</strong></p>
+<p>Windows系统默认将.ps1文件与记事本关联，因此，如果双击运行脚本，只会打开记事本，并显示脚本的内容，而不会通过PowerShell运行脚本。</p>
+</li>
+<li><p><strong>PowerShell默认阻止运行来自于外部的脚本。</strong></p>
+</li>
+</ul>
+<p>​        默认情况下，PowerShell的ExecutionPolicy阻止运行任何来自于外部的脚本，例如从互        联网下载的脚本，或者来自于网络共享的脚本等。</p>
+<ul>
+<li><strong>有些PowerShell脚本需要管理员权限才能正常运行。</strong></li>
+</ul>
+<p>​        有些命令需要管理员权限才能正常运行，因此需要获取管理员权限并执行脚本。</p>
+<ul>
+<li><strong>有些用户可能有自定义的PowerShell环境</strong>。</li>
+</ul>
+<p>​        有些高级用户，可能会修改系统的PowerShell环境，因此导致脚本运行不成功。</p>
+<span id="more"></span>
+
+<h2 id="双击运行脚本"><a href="#双击运行脚本" class="headerlink" title="双击运行脚本"></a>双击运行脚本</h2><p>虽然双击运行PowerShell脚本，只会打开记事本。但是，我们仍然可以通过.BAT批处理文件来调用PowerShell脚本，从而实现双击运行脚本的目的。</p>
+<p>首先，需要将批处理文件的文件名设置为与PowerShell脚本相同的文件名。例如，PowerShell脚本的文件名为MyScript.ps1，那么批处理文件的文件名为MyScript.bat。然后，将这两个文件放到相同的目录下。</p>
+<p>在批处理文件中，写入以下代码：</p>
+<pre class="line-numbers language-none"><code class="language-none">@ECHO OFF
+PowerShell.exe -Command &quot;&amp; &#39;%~dpn0.ps1&#39;&quot;
+PAUSE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>@ECHO OFF：</strong>阻止命令行提示符以及脚本中的命令显示在屏幕上。</p>
+<p><strong>PowerShell.exe -Command “&amp; ‘%~dpn0.ps1’”：</strong>这条命令用于调用PowerShell.exe，从而可以执行脚本文件。**’%~dpn0.ps1’**就是PS脚本文件的完整路径。</p>
+<p>以下是关于**’%~dpn0.ps1’**的详细说明，详细内容，请参考文档：[PowerShell Tips]({filename}PowerShell Tips.md)</p>
+<blockquote>
+<p>当把批处理文件和其它文件(PowerShell脚本)部署到计算机上后，如果无法知道文件所在的目录，就可以使用%~dpn0。</p>
+<p>在批处理文件中，**%n<strong>是一种特殊变量：</strong>%0**: 批处理文件的完整路径（包括批处理文件的文件名和后缀）<br><strong>%1</strong>: 批处理文件后面的第一个参数<br><strong>%2</strong>: 批处理文件后面的第二个参数<br>… </p>
+<p><strong>~d</strong>: 驱动器盘符，例如C:, D:<br><strong>~p</strong>: 路径（不包含驱动器盘符和批处理文件名）<br><strong>~n</strong>: 批处理文件名</p>
+<p>所以，如果结合起来使用就是：</p>
+<p><strong>%0</strong>: 批处理文件的完整路径（<strong>包含批处理文件的后缀</strong>）<br><strong>%dp0</strong>:  批处理文件所在的目录<br><strong>%dpn0</strong>: 批处理文件的完整路径（<strong>不包含批处理文件的后缀</strong>）</p>
+</blockquote>
+<h2 id="ExecutionPolcy"><a href="#ExecutionPolcy" class="headerlink" title="ExecutionPolcy"></a>ExecutionPolcy</h2><p>默认情况下，Windows系统阻止运行PS脚本。但是，通过批处理文件，我们可以临时-ExecutionPolicy的设置，来达到执行脚本的目的。注意：该ExecutionPolicy的设置只对当前的PowerShell会话有效。</p>
+<pre class="line-numbers language-none"><code class="language-none">PowerShell.exe -ExecutionPolicy Bypass -Command &quot;&amp; &#39;%~dpn0.ps1&#39;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="获取管理员权限"><a href="#获取管理员权限" class="headerlink" title="获取管理员权限"></a>获取管理员权限</h2><p>在执行某些PowerShell命令时，必须有管理员权限，才能正常运行。但是，通过批处理文件或者CMD命令，无法触发UAC来提升权限。但是，我们可以通过PowerShell的Start-Process -Verb RunAS命令，来实现提权。</p>
+<p>以下命令开启了两个PowerShell的进程，一个用来运行Start-Process，另外一个由Start-Process生成。注意%~dpn0.ps1用了两个双引号。</p>
+<pre class="line-numbers language-none"><code class="language-none">PowerShell.exe -Command &quot;&amp; &#123;Start-Process PowerShell.exe -ArgumentList &#39;-ExecutionPolicy Bypass -File &quot;&quot;%~dpn0.ps1&quot;&quot;&#39; -Verb RunAs&#125;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="用户自定义PowerShell配置文件"><a href="#用户自定义PowerShell配置文件" class="headerlink" title="用户自定义PowerShell配置文件"></a>用户自定义PowerShell配置文件</h2><p>有些情况下，用户可能会修改PowerShell配置文件的默认设置，这种情况有可能导致脚本运行失败。为了避免这种情况，我们可以采用-NoProfile参数，这样，执行脚本的时候，就不会去加载用户的配置文件。</p>
+<pre class="line-numbers language-none"><code class="language-none">PowerShell.exe -NoProfile -Command &quot;&amp; &#123;Start-Process PowerShell.exe -ArgumentList &#39;-NoProfile -ExecutionPolicy Bypass -File &quot;&quot;%~dpn0.ps1&quot;&quot;&#39; -Verb RunAs&#125;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>[参考资料]</strong> </p>
+<ul>
+<li><p><a href="https://www.howtogeek.com/204088/how-to-use-a-batch-file-to-make-powershell-scripts-easier-to-run/#:~:text=PowerShell.exe">How to Use a Batch File to Make PowerShell Scripts Easier to Run (howtogeek.com)</a></p>
+</li>
+<li><p><a href="https://devblogs.microsoft.com/scripting/check-for-admin-credentials-in-a-powershell-script/">Check for Admin Credentials in a PowerShell Script - Scripting Blog (microsoft.com)</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>powershell</tag>
+      </tags>
+  </entry>
 </search>

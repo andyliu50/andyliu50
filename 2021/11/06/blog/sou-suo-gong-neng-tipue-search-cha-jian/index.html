@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"andyliu50.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="本文主要介绍如何为Pelican博客添加搜索功能，详细介绍了Tipue_Search插件的安装和使用过程。由于Tipue Search插件的开发者已经从2018年起不再维护该插件，因此，相关的参考资料比较少。 随着博客文章数量的增加，搜索功能显得越来越重要。在Pelican官方插件库里面查询了一番，只有Tipue Search插件支持搜索功能。但是，该插件的开发者已经于2018年起不再维护该插件，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="搜索功能Tipue_Search插件">
+<meta property="og:url" content="https://andyliu50.github.io/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/index.html">
+<meta property="og:site_name" content="Andy&#39;s Blog">
+<meta property="og:description" content="本文主要介绍如何为Pelican博客添加搜索功能，详细介绍了Tipue_Search插件的安装和使用过程。由于Tipue Search插件的开发者已经从2018年起不再维护该插件，因此，相关的参考资料比较少。 随着博客文章数量的增加，搜索功能显得越来越重要。在Pelican官方插件库里面查询了一番，只有Tipue Search插件支持搜索功能。但是，该插件的开发者已经于2018年起不再维护该插件，">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://andyliu50.github.io/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/2021-11-06095804.jpg">
+<meta property="article:published_time" content="2021-11-06T09:54:00.000Z">
+<meta property="article:modified_time" content="2023-03-08T11:37:23.835Z">
+<meta property="article:author" content="Andy">
+<meta property="article:tag" content="pelican">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andyliu50.github.io/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/2021-11-06095804.jpg">
+
+
+<link rel="canonical" href="https://andyliu50.github.io/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://andyliu50.github.io/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/","path":"2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/","title":"搜索功能Tipue_Search插件"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>搜索功能Tipue_Search插件 | Andy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Andy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">正念阁</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%89%E8%A3%85"><span class="nav-number">1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%85%8D%E7%BD%AEPelicanconf-py"><span class="nav-number">2.</span> <span class="nav-text">配置Pelicanconf.py</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BDJS%E6%96%87%E4%BB%B6"><span class="nav-number">3.</span> <span class="nav-text">下载JS文件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BC%96%E5%86%99Search-html"><span class="nav-number">4.</span> <span class="nav-text">编写Search.html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="nav-number">5.</span> <span class="nav-text">注意事项</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6"><span class="nav-number">6.</span> <span class="nav-text">下载文件</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Andy</p>
+  <div class="site-description" itemprop="description">正念日做自己的主人活在当下</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="搜索功能Tipue_Search插件 | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          搜索功能Tipue_Search插件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-11-06 09:54:00" itemprop="dateCreated datePublished" datetime="2021-11-06T09:54:00+00:00">2021-11-06</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-08 11:37:23" itemprop="dateModified" datetime="2023-03-08T11:37:23+00:00">2023-03-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>本文主要介绍如何为Pelican博客添加搜索功能，详细介绍了Tipue_Search插件的安装和使用过程。由于Tipue Search插件的开发者已经从2018年起不再维护该插件，因此，相关的参考资料比较少。</p>
+<p>随着博客文章数量的增加，搜索功能显得越来越重要。在Pelican官方插件库里面查询了一番，只有Tipue Search插件支持搜索功能。但是，该插件的开发者已经于2018年起不再维护该插件，所以相关参考资料非常少。但是，目前Pelican的志愿开发者正在接手维护工作。<br><img src="/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/2021-11-06095804.jpg" alt="查找页面"></p>
+<span id="more"></span>
+
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>Tipue Search依赖于BeautifulSoup，因此首先需要安装BeautifulSoup。</p>
+<pre class="line-numbers language-none"><code class="language-none">pip install beautifulsoup4<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>到目前为止，Tipue Search还不支持通过Pip安装，所以，只能从Github上下载<a target="_blank" rel="noopener" href="https://github.com/pelican-plugins">插件</a>，然后将文件复制到Pelican所在的目录。</p>
+<p>需要注意的是，下载下来的插件，目录结构如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">tipue-search-main
+	|-pelican
+		|-plugins
+			|-tipue_search
+				|-__init__.py
+				|-tipue_search.py<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>把<strong>tipue_search目录复制到&#x2F;blog&#x2F;plugins</strong>目录下，plugins目录需要手动创建。</p>
+<h2 id="配置Pelicanconf-py"><a href="#配置Pelicanconf-py" class="headerlink" title="配置Pelicanconf.py"></a>配置Pelicanconf.py</h2><p>修改Pelicanconf.py的配置文件，添加以下内容：</p>
+<pre class="line-numbers language-none"><code class="language-none">PLUGIN_PATHS &#x3D; [&quot;plugins&quot;, &quot;.&#x2F;plugins&quot;]                                                                                         PLUGINS &#x3D; [&quot;tipue_search&quot;]                                                                                                       DIRECT_TEMPLATES &#x3D; [&#39;index&#39;, &#39;authors&#39;, &#39;categories&#39;, &#39;tags&#39;, &#39;archives&#39;, &#39;search&#39;]                                             MENUITEMS &#x3D; [(&#39;首页&#39;, &#39;&#x2F;index.html&#39;), (&#39;标签&#39;, &#39;&#x2F;tags.html&#39;), (&#39;归档&#39;, &#39;&#x2F;archives.html&#39;), (&#39;查找&#39;, &#39;&#x2F;search.html&#39;)]   <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>由于无法通过Pip方式安装Tipue Search插件，所以，只能使用传统的方式来加载插件。首先，需要通过参数<strong>PLUGIN_PATHS</strong>，指定插件的所在目录。之前，插件已经复制到&#x2F;blog&#x2F;plugins目录下，所以，这里可以配置成”.&#x2F;plugins”。</p>
+<pre class="line-numbers language-none"><code class="language-none">PLUGIN_PATHS &#x3D; [&quot;plugins&quot;, &quot;.&#x2F;plugins&quot;]  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>然后，指定需要加载的插件名称，通过<strong>PLUGINS</strong>参数，指定tipue_search目录名。</p>
+<pre class="line-numbers language-none"><code class="language-none">PLUGINS &#x3D; [&quot;tipue_search&quot;] <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>Direct_TEMPLATES</strong>参数用于指定需要生成.html文件的模板，因此，需要把search添加到该参数中（后面会介绍如何写search.html模板）。</p>
+<pre class="line-numbers language-none"><code class="language-none">DIRECT_TEMPLATES &#x3D; [&#39;index&#39;, &#39;authors&#39;, &#39;categories&#39;, &#39;tags&#39;, &#39;archives&#39;, &#39;search&#39;]       <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>为了能在首页菜单中显示搜索选项，需要配置参数<strong>MENUITEMS</strong>，添加(‘查找’, ‘&#x2F;search.html’)。</p>
+<pre class="line-numbers language-none"><code class="language-none">MENUITEMS &#x3D; [(&#39;首页&#39;, &#39;&#x2F;index.html&#39;), (&#39;标签&#39;, &#39;&#x2F;tags.html&#39;), (&#39;归档&#39;, &#39;&#x2F;archives.html&#39;), (&#39;查找&#39;, &#39;&#x2F;search.html&#39;)]  <span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+<h2 id="下载JS文件"><a href="#下载JS文件" class="headerlink" title="下载JS文件"></a>下载JS文件</h2><p>Tipue Search插件基于JQuery开发，因此需要用到以下JS文件：</p>
+<ul>
+<li>jquery-3.6.0.min.js</li>
+<li>tipuesearch.js</li>
+<li>tipuesearch.min.js</li>
+<li>tipuesearch_set.js</li>
+</ul>
+<p>其中，文件jquery-3.6.0.min.js可以从JQuery<a target="_blank" rel="noopener" href="https://jquery.com/download/">官方网站</a>下载。</p>
+<p>另外三个文件，由于tipue的官方网址已经无法访问，因此，可以从<a target="_blank" rel="noopener" href="https://github.com/Pelican-Elegant/elegant/tree/V5.0.0">Elegant主题5.0.0</a>的版本中获取。下载Elegant主题后，js文件的所在路径为elegant-5.0.0\static\tipuesearch。</p>
+<h2 id="编写Search-html"><a href="#编写Search-html" class="headerlink" title="编写Search.html"></a>编写Search.html</h2><p>Search.html的详细内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">&#123;% extends &quot;base.html&quot; %&#125;
+
+&#123;% block title %&#125;
+  Search &#123;&#123; super() &#125;&#125;
+&#123;% endblock title %&#125;
+
+&#123;% block extra_head %&#125;
+  &lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;&#x2F;theme&#x2F;css&#x2F;main.css&quot;&gt;
+  &lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;jquery-3.6.0.min.js&quot;&gt;&lt;&#x2F;script&gt;
+  &lt;script src&#x3D;&quot;&#x2F;tipuesearch_content.js&quot;&gt;&lt;&#x2F;script&gt;
+  &lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch_set.js&quot;&gt;&lt;&#x2F;script&gt;
+  &lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch.min.js&quot;&gt;&lt;&#x2F;script&gt;
+  &lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch.js&quot;&gt;&lt;&#x2F;script&gt;
+
+  &lt;script&gt;
+		$( document ).ready(function() &#123;
+			$(&#39;#tipue_search_input&#39;).tipuesearch(&#123;
+				&#39;show&#39;: 10,               &#x2F;&#x2F; shows 10 found entries
+			&#125;);
+		&#125;);
+  &lt;&#x2F;script&gt;
+  
+&#123;% endblock %&#125;
+
+&#123;% block content %&#125;
+&lt;aside id&#x3D;&quot;featured&quot; class&#x3D;&quot;body&quot;&gt;
+	&lt;h1&gt;查找&lt;&#x2F;h1&gt;
+	&lt;form action&#x3D;&quot;search.html&quot;&gt;
+		&lt;div class&#x3D;&quot;tipue_search_group&quot;&gt;
+			&lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;q&quot; id&#x3D;&quot;tipue_search_input&quot;&gt;
+		&lt;&#x2F;div&gt;
+	&lt;&#x2F;form&gt;
+		&lt;div&gt;
+			&lt;div id&#x3D;&quot;tipue_search_content&quot;&gt;&lt;&#x2F;div&gt;
+		&lt;&#x2F;div&gt;
+&lt;&#x2F;aside&gt;&lt;!-- &#x2F;#featured --&gt;
+&#123;% endblock content %&#125;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<p>以下内容用于指定css和js文件的所在位置，其中tipuesearch_content.js是Tipue Search根据博客内容自动生成的文件。</p>
+<pre class="line-numbers language-none"><code class="language-none">&lt;link rel&#x3D;&quot;stylesheet&quot; type&#x3D;&quot;text&#x2F;css&quot; href&#x3D;&quot;&#x2F;theme&#x2F;css&#x2F;main.css&quot;&gt;
+&lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;jquery-3.6.0.min.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script src&#x3D;&quot;&#x2F;tipuesearch_content.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch_set.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch.min.js&quot;&gt;&lt;&#x2F;script&gt;
+&lt;script src&#x3D;&quot;&#x2F;theme&#x2F;js&#x2F;tipuesearch.js&quot;&gt;&lt;&#x2F;script&gt;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+<h2 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h2><p>在搜索框输入搜索关键词的时候，<strong>关键词必须要用引号包含</strong>，否则无法搜索到任何内容。</p>
+<h2 id="下载文件"><a href="#下载文件" class="headerlink" title="下载文件"></a>下载文件</h2><p>以下文件中包含了所有的文件，包括Tipue_Search, JS以及Search.html。</p>
+<p>点击下载：<a href="tipue_search.zip">tipue_search.zip</a></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/pelican/" rel="tag"># pelican</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2021/11/01/zhi-neng-jia-ju/wu-lian-wang-zhi-neng-xiao-dian-shi/" rel="prev" title="物联网智能小电视">
+                  <i class="fa fa-chevron-left"></i> 物联网智能小电视
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2021/11/08/bian-cheng/shuang-ji-yun-xing-powershell-jiao-ben/" rel="next" title="如何双击运行PowerShell脚本">
+                  如何双击运行PowerShell脚本 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>
