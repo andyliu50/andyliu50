@@ -29,7 +29,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://andyliu50.github.io/2020/05/27/zhi-neng-jia-ju/ssh-tunnel-jian-jie/1.png">
 <meta property="article:published_time" content="2020-05-27T12:06:16.000Z">
-<meta property="article:modified_time" content="2023-03-08T11:37:24.055Z">
+<meta property="article:modified_time" content="2023-03-09T11:42:28.840Z">
 <meta property="article:author" content="Andy">
 <meta property="article:tag" content="raspberrypi">
 <meta property="article:tag" content="ssh">
@@ -93,7 +93,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">55</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -159,18 +159,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -233,7 +233,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-08 11:37:24" itemprop="dateModified" datetime="2023-03-08T11:37:24+00:00">2023-03-08</time>
+      <time title="修改时间：2023-03-09 11:42:28" itemprop="dateModified" datetime="2023-03-09T11:42:28+00:00">2023-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -285,7 +285,7 @@
 <p>8000:      SSH Client监听TCP服务端口8000</p>
 <p><a target="_blank" rel="noopener" href="http://www.intranet.domain/">www.intranet.domain</a>          远端内网服务器的主机域名</p>
 <p>80      远端内网服务器的服务端口80</p>
-<p><a href="mailto:&#114;&#111;&#111;&#116;&#x40;&#115;&#115;&#104;&#x73;&#x65;&#114;&#118;&#101;&#x72;&#46;&#105;&#110;&#116;&#114;&#97;&#x6e;&#101;&#x74;&#x2e;&#x64;&#111;&#109;&#97;&#105;&#x6e;">&#114;&#111;&#111;&#116;&#x40;&#115;&#115;&#104;&#x73;&#x65;&#114;&#118;&#101;&#x72;&#46;&#105;&#110;&#116;&#114;&#97;&#x6e;&#101;&#x74;&#x2e;&#x64;&#111;&#109;&#97;&#105;&#x6e;</a>   远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
+<p><a href="mailto:&#x72;&#111;&#111;&#116;&#x40;&#115;&#115;&#104;&#x73;&#101;&#x72;&#x76;&#x65;&#114;&#46;&#105;&#x6e;&#116;&#x72;&#x61;&#110;&#x65;&#116;&#x2e;&#100;&#111;&#109;&#x61;&#105;&#110;">&#x72;&#111;&#111;&#116;&#x40;&#115;&#115;&#104;&#x73;&#101;&#x72;&#x76;&#x65;&#114;&#46;&#105;&#x6e;&#116;&#x72;&#x61;&#110;&#x65;&#116;&#x2e;&#100;&#111;&#109;&#x61;&#105;&#110;</a>   远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
 <p>注意：由于SSH Client只是在localhost(127.0.0.1)监听服务端口8000，所以App Client必须和SSH Client在同一台计算机上，才能访问远程应用<a target="_blank" rel="noopener" href="http://www.intranet.domain./">www.intranet.domain。</a></p>
 <p>如果App Client运行在另外一台计算机上，则需要使用以下命令，让SSH Client在IP地址0.0.0.0上监听服务端口8000，这样，SSH Client就可以接收来自于任何计算机的客户端程序访问。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> -L <span class="token number">0.0</span>.0.0:8000:www.intranet.domain:80 root@sshserver.intranet.domain<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -301,7 +301,7 @@
 <p>8000:      SSH Servert监听TCP服务端口8000</p>
 <p><a target="_blank" rel="noopener" href="http://www.intranet.domain/">www.intranet.domain</a>  远端内网服务器的主机域名</p>
 <p>80         远端内网服务器的服务端口80</p>
-<p><a href="mailto:&#114;&#x6f;&#x6f;&#x74;&#x40;&#115;&#115;&#104;&#115;&#101;&#x72;&#118;&#x65;&#x72;&#46;&#105;&#110;&#116;&#x72;&#x61;&#x6e;&#101;&#x74;&#46;&#100;&#x6f;&#x6d;&#x61;&#x69;&#x6e;">&#114;&#x6f;&#x6f;&#x74;&#x40;&#115;&#115;&#104;&#115;&#101;&#x72;&#118;&#x65;&#x72;&#46;&#105;&#110;&#116;&#x72;&#x61;&#x6e;&#101;&#x74;&#46;&#100;&#x6f;&#x6d;&#x61;&#x69;&#x6e;</a>  远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
+<p><a href="mailto:&#114;&#111;&#111;&#116;&#64;&#x73;&#115;&#104;&#x73;&#x65;&#114;&#118;&#101;&#x72;&#x2e;&#105;&#110;&#x74;&#114;&#x61;&#110;&#101;&#116;&#46;&#100;&#111;&#x6d;&#97;&#x69;&#110;">&#114;&#111;&#111;&#116;&#64;&#x73;&#115;&#104;&#x73;&#x65;&#114;&#118;&#101;&#x72;&#x2e;&#105;&#110;&#x74;&#114;&#x61;&#110;&#101;&#116;&#46;&#100;&#111;&#x6d;&#97;&#x69;&#110;</a>  远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
 <p>注意：默认情况下，SSH Server只会绑定IP地址127.0.0.1，如果需要绑定IP地址0.0.0.0，需要修改sshd_config配置文件中的参数<strong>GatewayPorts</strong>。</p>
 <p>以下是关于参数<strong>GatewayPorts</strong>的三种方式：</p>
 <pre class="line-numbers language-none"><code class="language-none">GatewayPorts no<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -356,13 +356,13 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/" rel="prev" title="个人博客 — Hexo多终端同步篇">
-                  <i class="fa fa-chevron-left"></i> 个人博客 — Hexo多终端同步篇
+                <a href="/2020/02/16/zhi-neng-jia-ju/bt-xia-zai-wan-cheng-hou-fa-song-tong-zhi/" rel="prev" title="BT下载完成后发送通知">
+                  <i class="fa fa-chevron-left"></i> BT下载完成后发送通知
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2021/04/15/bian-cheng/powershell-tips/" rel="next" title="PowerShell Tips">
-                  PowerShell Tips <i class="fa fa-chevron-right"></i>
+                <a href="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/" rel="next" title="树莓派没有显示器如何配置启动SSH和VNC服务">
+                  树莓派没有显示器如何配置启动SSH和VNC服务 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

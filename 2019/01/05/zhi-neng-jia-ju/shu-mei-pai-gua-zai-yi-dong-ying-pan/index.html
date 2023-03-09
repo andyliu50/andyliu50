@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"andyliu50.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="查看移动硬盘首先，将移动硬盘通过USB数据线接到树莓派的USB接口。在命令行输入以下命令查看移动硬盘。从输出结果可以看到，移动硬盘有2个分区：sda1和sda2, 磁盘设备为sda。 sudo fdisk -l  Device         Boot  Start      End  Sectors  Size Id Type &#x2F;dev&#x2F;mmcblk0p1        81">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派挂载移动硬盘">
+<meta property="og:url" content="https://andyliu50.github.io/2019/01/05/zhi-neng-jia-ju/shu-mei-pai-gua-zai-yi-dong-ying-pan/index.html">
+<meta property="og:site_name" content="Andy&#39;s Blog">
+<meta property="og:description" content="查看移动硬盘首先，将移动硬盘通过USB数据线接到树莓派的USB接口。在命令行输入以下命令查看移动硬盘。从输出结果可以看到，移动硬盘有2个分区：sda1和sda2, 磁盘设备为sda。 sudo fdisk -l  Device         Boot  Start      End  Sectors  Size Id Type &#x2F;dev&#x2F;mmcblk0p1        81">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-01-05T14:10:36.000Z">
+<meta property="article:modified_time" content="2023-03-09T11:42:28.872Z">
+<meta property="article:author" content="Andy">
+<meta property="article:tag" content="raspberrypi">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://andyliu50.github.io/2019/01/05/zhi-neng-jia-ju/shu-mei-pai-gua-zai-yi-dong-ying-pan/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://andyliu50.github.io/2019/01/05/zhi-neng-jia-ju/shu-mei-pai-gua-zai-yi-dong-ying-pan/","path":"2019/01/05/zhi-neng-jia-ju/shu-mei-pai-gua-zai-yi-dong-ying-pan/","title":"树莓派挂载移动硬盘"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>树莓派挂载移动硬盘 | Andy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Andy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">正念阁</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">55</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9F%A5%E7%9C%8B%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98"><span class="nav-number">1.</span> <span class="nav-text">查看移动硬盘</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98"><span class="nav-number">2.</span> <span class="nav-text">格式化移动硬盘</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A0%BC%E5%BC%8F%E5%8C%96%E7%A3%81%E7%9B%98"><span class="nav-number">2.1.</span> <span class="nav-text">格式化磁盘</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%88%9B%E5%BB%BA%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9Fext4"><span class="nav-number">2.2.</span> <span class="nav-text">创建文件系统ext4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%BA%E5%88%86%E5%8C%BA%E8%AE%BE%E7%BD%AE%E6%A0%87%E7%AD%BE"><span class="nav-number">2.3.</span> <span class="nav-text">为分区设置标签</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8C%82%E8%BD%BD%E7%A7%BB%E5%8A%A8%E7%A1%AC%E7%9B%98"><span class="nav-number">3.</span> <span class="nav-text">挂载移动硬盘</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Andy</p>
+  <div class="site-description" itemprop="description">正念日做自己的主人活在当下</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2019/01/05/zhi-neng-jia-ju/shu-mei-pai-gua-zai-yi-dong-ying-pan/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="树莓派挂载移动硬盘 | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树莓派挂载移动硬盘
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-01-05 14:10:36" itemprop="dateCreated datePublished" datetime="2019-01-05T14:10:36+00:00">2019-01-05</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-09 11:42:28" itemprop="dateModified" datetime="2023-03-09T11:42:28+00:00">2023-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h2 id="查看移动硬盘"><a href="#查看移动硬盘" class="headerlink" title="查看移动硬盘"></a>查看移动硬盘</h2><p>首先，将移动硬盘通过USB数据线接到树莓派的USB接口。在命令行输入以下命令查看移动硬盘。<br>从输出结果可以看到，移动硬盘有2个分区：sda1和sda2, 磁盘设备为sda。</p>
+<pre class="line-numbers language-none"><code class="language-none">sudo fdisk -l<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<pre class="line-numbers language-none"><code class="language-none">Device         Boot  Start      End  Sectors  Size Id Type
+&#x2F;dev&#x2F;mmcblk0p1        8192   122879   114688   56M  c W95 FAT32 (LBA)
+&#x2F;dev&#x2F;mmcblk0p2      122880 31116287 30993408 14.8G 83 Linux
+
+GPT PMBR size mismatch (312581806 !&#x3D; 312581807) will be corrected by w(rite).
+
+Disk &#x2F;dev&#x2F;sda: 149.1 GiB, 160041885696 bytes, 312581808 sectors
+Units: sectors of 1 * 512 &#x3D; 512 bytes
+Sector size (logical&#x2F;physical): 512 bytes &#x2F; 512 bytes
+I&#x2F;O size (minimum&#x2F;optimal): 512 bytes &#x2F; 512 bytes
+Disklabel type: gpt
+Disk identifier: 8001D93D-B7B7-48E7-91B2-1F99037AF238
+
+Device      Start       End   Sectors   Size Type
+&#x2F;dev&#x2F;sda1      40    409639    409600   200M EFI System
+&#x2F;dev&#x2F;sda2  409640 312319623 311909984 148.7G Apple HFS&#x2F;HFS+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="格式化移动硬盘"><a href="#格式化移动硬盘" class="headerlink" title="格式化移动硬盘"></a>格式化移动硬盘</h2><h3 id="格式化磁盘"><a href="#格式化磁盘" class="headerlink" title="格式化磁盘"></a>格式化磁盘</h3><pre class="line-numbers language-none"><code class="language-none">pi@raspberrypi ~ $ sudo fdisk &#x2F;dev&#x2F;sda
+
+Welcome to fdisk (util-linux 2.25.2).
+Changes will remain in memory only, until you decide to write them.
+Be careful before using the write command.
+
+&#x2F;dev&#x2F;sda: device contains a valid &#39;ext4&#39; signature, it&#39;s strongly recommended to wipe the device by command wipefs(8) if this setup is unexpected to avoid possible collisions.
+
+Device does not contain a recognized partition table.
+Created a new DOS disklabel with disk identifier 0x448ea5cd.
+
+Command (m for help): n
+
+Partition type
+   p   primary (0 primary, 0 extended, 4 free)
+   e   extended (container for logical partitions)
+Select (default p): p
+Partition number (1-4, default 1): 
+First sector (2048-312581807, default 2048): 
+Last sector, +sectors or +size&#123;K,M,G,T,P&#125; (2048-312581807, default 312581807): 
+
+Created a new partition 1 of type &#39;Linux&#39; and of size 149.1 GiB.
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+<h3 id="创建文件系统ext4"><a href="#创建文件系统ext4" class="headerlink" title="创建文件系统ext4"></a>创建文件系统ext4</h3><pre class="line-numbers language-none"><code class="language-none">pi@raspberrypi ~ $ sudo mkfs.ext4 &#x2F;dev&#x2F;sda1
+mke2fs 1.43.3 (04-Sep-2016)
+Creating filesystem with 39072470 4k blocks and 9773056 inodes
+Filesystem UUID: 4de0e171-8799-4d96-b4b5-dc8cc1b5302e
+Superblock backups stored on blocks: 
+	32768, 98304, 163840, 229376, 294912, 819200, 884736, 1605632, 2654208, 
+	4096000, 7962624, 11239424, 20480000, 23887872
+
+Allocating group tables: done                            
+Writing inode tables: done                            
+Creating journal (262144 blocks): done
+Writing superblocks and filesystem accounting information: done <span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="为分区设置标签"><a href="#为分区设置标签" class="headerlink" title="为分区设置标签"></a>为分区设置标签</h3><pre class="line-numbers language-none"><code class="language-none">sudo e2label &#x2F;dev&#x2F;sda1 HDD160GB<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="挂载移动硬盘"><a href="#挂载移动硬盘" class="headerlink" title="挂载移动硬盘"></a>挂载移动硬盘</h2><ol>
+<li>创建挂载目录HDD160GB</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">mkdir &#x2F;mnt&#x2F;HDD160GB<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="2">
+<li>编辑&#x2F;etc&#x2F;fstab</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">sudo vi &#x2F;etc&#x2F;fstab<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<ol start="3">
+<li>在&#x2F;etc&#x2F;fstab中添加以下内容, UUID可以在创建文件系统时查看。</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">UUID&#x3D;4de0e171-8799-4d96-b4b5-dc8cc1b5302e       &#x2F;mnt&#x2F;HDD160GB   ext4    defaults        0       0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>重启设备后，可以看到移动硬盘已经挂载成功。</p>
+<pre class="line-numbers language-none"><code class="language-none">pi@raspberrypi ~ $ df -h
+Filesystem      Size  Used Avail Use% Mounted on
+&#x2F;dev&#x2F;root        15G  8.3G  5.7G  60% &#x2F;
+devtmpfs        214M     0  214M   0% &#x2F;dev
+tmpfs           218M     0  218M   0% &#x2F;dev&#x2F;shm
+tmpfs           218M  4.8M  213M   3% &#x2F;run
+tmpfs           5.0M  4.0K  5.0M   1% &#x2F;run&#x2F;lock
+tmpfs           218M     0  218M   0% &#x2F;sys&#x2F;fs&#x2F;cgroup
+&#x2F;dev&#x2F;sda1       146G  2.6G  136G   2% &#x2F;mnt&#x2F;HDD160GB
+&#x2F;dev&#x2F;mmcblk0p1   56M   20M   37M  36% &#x2F;boot
+tmpfs            44M     0   44M   0% &#x2F;run&#x2F;user&#x2F;1000<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/raspberrypi/" rel="tag"># raspberrypi</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/" rel="prev" title="个人博客 — Hexo多终端同步篇">
+                  <i class="fa fa-chevron-left"></i> 个人博客 — Hexo多终端同步篇
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/01/20/zhi-neng-jia-ju/shu-mei-pai-da-jian-dlna/" rel="next" title="树莓派搭建DLNA">
+                  树莓派搭建DLNA <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

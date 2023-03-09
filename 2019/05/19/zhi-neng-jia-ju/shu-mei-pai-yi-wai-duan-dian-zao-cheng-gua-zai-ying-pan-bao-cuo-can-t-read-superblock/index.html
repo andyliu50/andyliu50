@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.0.0">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha256-Z1K5uhUaJXA7Ll0XrZ/0JhX4lAtZFpT6jkKrEDT0drU=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" integrity="sha256-Vzbj7sDDS/woiFS3uNKo8eIuni59rjyNGtXfstRzStA=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"andyliu50.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="最近，因为意外断电的缘故，当再次开机重新挂载硬盘的时候出现报错无法挂载，mount: &#x2F;dev&#x2F;sda: can’t read superblock 一、tune2fs简介tune2fs是调整和查看ext2&#x2F;ext3文件系统的文件系统参数，Windows下面如果出现意外断电死机情况，下次开机一般都会出现系统自检。Linux系统下面也有文件系统自检，而且是可以通过tun">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派意外断电造成挂载硬盘报错：can’t read superblock">
+<meta property="og:url" content="https://andyliu50.github.io/2019/05/19/zhi-neng-jia-ju/shu-mei-pai-yi-wai-duan-dian-zao-cheng-gua-zai-ying-pan-bao-cuo-can-t-read-superblock/index.html">
+<meta property="og:site_name" content="Andy&#39;s Blog">
+<meta property="og:description" content="最近，因为意外断电的缘故，当再次开机重新挂载硬盘的时候出现报错无法挂载，mount: &#x2F;dev&#x2F;sda: can’t read superblock 一、tune2fs简介tune2fs是调整和查看ext2&#x2F;ext3文件系统的文件系统参数，Windows下面如果出现意外断电死机情况，下次开机一般都会出现系统自检。Linux系统下面也有文件系统自检，而且是可以通过tun">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-05-19T08:57:37.000Z">
+<meta property="article:modified_time" content="2023-03-09T11:42:28.872Z">
+<meta property="article:author" content="Andy">
+<meta property="article:tag" content="raspberrypi">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="https://andyliu50.github.io/2019/05/19/zhi-neng-jia-ju/shu-mei-pai-yi-wai-duan-dian-zao-cheng-gua-zai-ying-pan-bao-cuo-can-t-read-superblock/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://andyliu50.github.io/2019/05/19/zhi-neng-jia-ju/shu-mei-pai-yi-wai-duan-dian-zao-cheng-gua-zai-ying-pan-bao-cuo-can-t-read-superblock/","path":"2019/05/19/zhi-neng-jia-ju/shu-mei-pai-yi-wai-duan-dian-zao-cheng-gua-zai-ying-pan-bao-cuo-can-t-read-superblock/","title":"树莓派意外断电造成挂载硬盘报错：can’t read superblock"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>树莓派意外断电造成挂载硬盘报错：can’t read superblock | Andy's Blog</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Andy's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">正念阁</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="搜索" role="button">
+        <i class="fa fa-search fa-fw fa-lg"></i>
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">55</span></a></li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+</nav>
+
+
+
+  <div class="search-pop-overlay">
+    <div class="popup search-popup"><div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocapitalize="off" maxlength="80"
+           placeholder="搜索..." spellcheck="false"
+           type="search" class="search-input">
+  </div>
+  <span class="popup-btn-close" role="button">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div class="search-result-container no-result">
+  <div class="search-result-icon">
+    <i class="fa fa-spinner fa-pulse fa-5x"></i>
+  </div>
+</div>
+
+    </div>
+  </div>
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%B8%80%E3%80%81tune2fs%E7%AE%80%E4%BB%8B"><span class="nav-number">1.</span> <span class="nav-text">一、tune2fs简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BA%8C%E3%80%81fsck%E5%91%BD%E4%BB%A4"><span class="nav-number">2.</span> <span class="nav-text">二、fsck命令</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Andy"
+      src="/images/avatar.png">
+  <p class="site-author-name" itemprop="name">Andy</p>
+  <div class="site-description" itemprop="description">正念日做自己的主人活在当下</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">55</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2019/05/19/zhi-neng-jia-ju/shu-mei-pai-yi-wai-duan-dian-zao-cheng-gua-zai-ying-pan-bao-cuo-can-t-read-superblock/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="树莓派意外断电造成挂载硬盘报错：can’t read superblock | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          树莓派意外断电造成挂载硬盘报错：can’t read superblock
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2019-05-19 08:57:37" itemprop="dateCreated datePublished" datetime="2019-05-19T08:57:37+00:00">2019-05-19</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-09 11:42:28" itemprop="dateModified" datetime="2023-03-09T11:42:28+00:00">2023-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>最近，因为意外断电的缘故，当再次开机重新挂载硬盘的时候出现报错无法挂载，<u><strong>mount: &#x2F;dev&#x2F;sda: can’t read superblock</strong></u></p>
+<h2 id="一、tune2fs简介"><a href="#一、tune2fs简介" class="headerlink" title="一、tune2fs简介"></a>一、tune2fs简介</h2><p>tune2fs是调整和查看ext2&#x2F;ext3文件系统的文件系统参数，Windows下面如果出现意外断电死机情况，下次开机一般都会出现系统自检。Linux系统下面也有文件系统自检，而且是可以通过tune2fs命令，自行定义自检周期及方式。</p>
+<p><strong>找到Blocks per group后面的数字，我这是32768</strong></p>
+<pre class="line-numbers language-none"><code class="language-none">tune2fs -l &#x2F;dev&#x2F;sda1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<blockquote>
+<p>pi@raspberrypi:~ $ sudo tune2fs -l &#x2F;dev&#x2F;sda1<br>tune2fs 1.43.4 (31-Jan-2017)<br>Filesystem volume name:   HDD160GB<br>Last mounted on:          &#x2F;mnt&#x2F;HDD160GB<br>Filesystem UUID:          4de0e171-8799-4d96-b4b5-dc8cc1b5302e<br>Filesystem magic number:  0xEF53<br>Filesystem revision #:    1 (dynamic)<br>Filesystem features:      has_journal ext_attr resize_inode dir_index filetype needs_recovery extent 64bit flex_bg sparse_super large_file huge_file dir_nlink extra_isize metadata_csum<br>Filesystem flags:         unsigned_directory_hash<br>Default mount options:    user_xattr acl<br>Filesystem state:         clean<br>Errors behavior:          Continue<br>Filesystem OS type:       Linux<br>Inode count:              9773056<br>Block count:              39072470<br>Reserved block count:     1953623<br>Free blocks:              10899774<br>Free inodes:              9772811<br>First block:              0<br>Block size:               4096<br>Fragment size:            4096<br>Group descriptor size:    64<br>Reserved GDT blocks:      1024<br><u><strong>Blocks per group:         32768</strong></u><br>Fragments per group:      32768<br>Inodes per group:         8192<br>Inode blocks per group:   512<br>Flex block group size:    16<br>Filesystem created:       Sat Jan  5 12:03:02 2019<br>Last mount time:          Sat May 18 12:52:32 2019<br>Last write time:          Sat May 18 12:52:32 2019<br>Mount count:              1<br>Maximum mount count:      -1<br>Last checked:             Sat May 18 11:40:19 2019<br>Check interval:           0 (<none>)<br>Lifetime writes:          1032 MB<br>Reserved blocks uid:      0 (user root)<br>Reserved blocks gid:      0 (group root)<br>First inode:              11<br>Inode size:              256<br>Required extra isize:     32<br>Desired extra isize:      32<br>Journal inode:            8<br>Default directory hash:   half_md4<br>Directory Hash Seed:      80d6dc25-a820-4596-952a-3f8cb2ad24fe<br>Journal backup:           inode blocks<br>Checksum type:            crc32c<br>Checksum:                 0x169cbdf9</p>
+</blockquote>
+<h2 id="二、fsck命令"><a href="#二、fsck命令" class="headerlink" title="二、fsck命令"></a>二、fsck命令</h2><p>在出现系统故障之后，总是在文件系统上运行 fsck 命令。矫正的动作也许会导致某些数据的丢失。对于每一个一致性的矫正，缺省的操作就是等待操作员输入 yes 或 no。如果对于已经受到影响的文件系统您没有写的许可，那么无论您的实际响应是什么，fsck 命令缺省的动作都是 no。<br>注：<br>对于一个已经安装好了的文件系统，fsck 命令不会做出矫正。<br>fsck 命令出于某些原因可以在一个已经安装好了的文件系统中运行，但不是进行修复。但是当文件系统安装完毕之后，也许会返回不准确的错误消息。<br>fsck 命令检查并以交互方式修复不连贯的文件系统。在安装文件系统之前，应该运行此命令。您必须能够读设备文件，在此设备上驻留着文件系统（例如 &#x2F;dev&#x2F;hd0 设备）。通常，文件系统是连贯的，fsck 命令仅仅是报告文件系统中文件的数量、被使用的块和空闲的块。如果文件系统是不连贯的，fsck 命令显示关于那些找到的不连贯性的信息并且提示您修复它们的许可。</p>
+<p>fsck 命令在修复中是有保留的并且会尽力避免那些可能导致有效数据丢失的动作。在特定的情况下，fsck 命令会建议破坏已经损坏的文件。如果您不允许 fsck 命令进行必要的修复，那么或许会产生一个不连贯的文件系统。安装一个不连贯的文件系统也许会导致系统的崩溃。</p>
+<p>如果 JFS2 文件系统有快照，fsck 命令将试图保留这些快照。如果此操作失败，那么无法保证快照包含来自捕捉到的文件系统的全部先前就存在的映像。fsck 命令将删除快照和快照逻辑卷。如果 fsck 命令对文件系统进行了修改，那么内部快照将被删除。</p>
+<pre class="line-numbers language-none"><code class="language-none">fsck.ext4 -b 32768 &#x2F;dev&#x2F;sda1<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/raspberrypi/" rel="tag"># raspberrypi</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2019/01/20/zhi-neng-jia-ju/shu-mei-pai-da-jian-bt-xia-zai-fu-wu-qi/" rel="prev" title="树莓派搭建BT下载服务器">
+                  <i class="fa fa-chevron-left"></i> 树莓派搭建BT下载服务器
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2019/06/02/zhi-neng-jia-ju/shu-mei-pai-samba-fu-wu-wu-fa-zheng-chang-qi-dong/" rel="next" title="树莓派Samba服务无法正常启动">
+                  树莓派Samba服务无法正常启动 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Andy</span>
+</div>
+<div class="busuanzi-count">
+    <span class="post-meta-item" id="busuanzi_container_site_uv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="back-to-top" role="button" aria-label="返回顶部">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js" integrity="sha256-yt2kYMy0w8AbtF89WXb2P1rfjcP/HTHLT7097U8Y5b8=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/hexo-generator-searchdb/1.4.1/search.js" integrity="sha256-1kfA5uHPf65M5cphT2dvymhkuyHPQp5A53EGZOnOLmc=" crossorigin="anonymous"></script>
+<script src="/js/third-party/search/local-search.js"></script>
+
+
+
+  <script src="/js/third-party/fancybox.js"></script>
+
+
+  
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+</body>
+</html>

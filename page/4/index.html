@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">19</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">7</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">44</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">21</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">8</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">55</span></a></li>
       <li class="menu-item menu-item-search">
         <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
         </a>
@@ -152,18 +152,18 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">44</span>
+          <span class="site-state-item-count">55</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
           <a href="/categories/">
-        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-count">8</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">19</span>
+        <span class="site-state-item-count">21</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
@@ -180,6 +180,110 @@
     </div>
 
     <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/09/24/zhi-neng-jia-ju/ji-zhu-xiao-tie-shi/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2021/09/24/zhi-neng-jia-ju/ji-zhu-xiao-tie-shi/" class="post-title-link" itemprop="url">技术小贴士</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2021-09-24 20:35:00" itemprop="dateCreated datePublished" datetime="2021-09-24T20:35:00+00:00">2021-09-24</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-09 11:42:28" itemprop="dateModified" datetime="2023-03-09T11:42:28+00:00">2023-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="如何让SSH-Tunnel保持长连接"><a href="#如何让SSH-Tunnel保持长连接" class="headerlink" title="如何让SSH Tunnel保持长连接"></a>如何让SSH Tunnel保持长连接</h2><p>autossh可以用来监控SSH连接，并且当SSH连接中断后，自动重连。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">autossh -f -M <span class="token number">0</span> -NR <span class="token number">0.0</span>.0.0:50022:localhost:22 root@remoteserver -p <span class="token number">12345</span><span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>-f    autossh运行在后台。即使不用-f参数，autossh也会运行在后台，但是，如果用帐号登录，会提示输入密码。  </p>
+<p>-M    如果设置为0，就会关闭autossh监控SSH隧道通断的状态。并且，autossh文档也建议使用OpenSSH自身的KeepAlive监控功能。即在sshd_config中设置以下参数：</p>
+<pre class="line-numbers language-none"><code class="language-none">ClientAliveInterval 30 
+ClientAliveCountMax 3
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>另外，如何才能让系统自动重启后，让autossh自动连接。运行命令crontab -e，添加计划任务：</p>
+<pre class="line-numbers language-sh" data-language="sh"><code class="language-sh">@reboot autossh -f -M 0 -NR 0.0.0.0:123456:localhost:22 root@remoteserver -p 65000 &amp;
+@reboot autossh -f -M 0 -NR 0.0.0.0:123456:localhost:22 pi@remoteserver -p 65000 &amp;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+<hr>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/09/24/zhi-neng-jia-ju/ji-zhu-xiao-tie-shi/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
 
     
 
@@ -747,7 +851,7 @@ virtualenv venv
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-08 11:37:24" itemprop="dateModified" datetime="2023-03-08T11:37:24+00:00">2023-03-08</time>
+      <time title="修改时间：2023-03-09 11:42:28" itemprop="dateModified" datetime="2023-03-09T11:42:28+00:00">2023-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -845,7 +949,7 @@ virtualenv venv
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-08 11:37:24" itemprop="dateModified" datetime="2023-03-08T11:37:24+00:00">2023-03-08</time>
+      <time title="修改时间：2023-03-09 11:42:28" itemprop="dateModified" datetime="2023-03-09T11:42:28+00:00">2023-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -922,6 +1026,120 @@ PowerShell.exe -Command &quot;&amp; &#39;%~dp0myscript.ps1&#39;&quot;<span aria-
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.png">
+      <meta itemprop="name" content="Andy">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Andy's Blog">
+      <meta itemprop="description" content="正念日做自己的主人活在当下">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Andy's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/" class="post-title-link" itemprop="url">树莓派没有显示器如何配置启动SSH和VNC服务</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2020-11-08 08:42:39" itemprop="dateCreated datePublished" datetime="2020-11-08T08:42:39+00:00">2020-11-08</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2023-03-09 11:42:28" itemprop="dateModified" datetime="2023-03-09T11:42:28+00:00">2023-03-09</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85/" itemprop="url" rel="index"><span itemprop="name">智能家居</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>最近刚入手一台树莓派4B，但是，由于树莓派从4代开始，改用Micro HDMI作为显示器的输出口，家中没有Micro HDMI - Standard HDMI的连接线，所以，无法连接显示器，完成初始配置。</p>
+<p>于是，想通过SSH和VNC来远程访问树莓派，但是，这两个服务默认都没有自动开启。</p>
+<p>通过在网上搜索别人的经验，发现只需要在SD卡的Boot分区中创建空白的ssh文件，就可以让树莓派开机自动启动SSH服务。</p>
+<h1 id="开启SSH服务"><a href="#开启SSH服务" class="headerlink" title="开启SSH服务"></a>开启SSH服务</h1><ol>
+<li>将烧录好Raspbian系统的SD卡插入电脑。</li>
+<li>在boot分区中，用记事本创建一个新文件，文件名为ssh，注意需要将后缀.txt删除。</li>
+</ol>
+<p><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/427.png"></p>
+<ol start="3">
+<li>把SD卡插入树莓派，通电启动后，SSH服务会自动开启。</li>
+</ol>
+<h1 id="开启VNC服务"><a href="#开启VNC服务" class="headerlink" title="开启VNC服务"></a>开启VNC服务</h1><ol>
+<li>通过SSH，远程访问树莓派。</li>
+<li>输入<strong>sudo raspi-config</strong>, 打开树莓派配置工具。</li>
+<li>选择<strong>Interface Options</strong>。</li>
+</ol>
+<p><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/428.png"></p>
+<ol start="4">
+<li>选择<strong>P3 VNC</strong>。</li>
+</ol>
+<p><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/429.png"></p>
+<ol start="5">
+<li>选择<strong>Yes</strong>，开启VNC服务。</li>
+</ol>
+<p><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/430.png"></p>
+<p>注意：默认情况下，由于树莓派的分辨率为720x480，因此，VNC连上后，无法正常显示桌面。</p>
+<p><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/431.png"></p>
+<p>解决方法：调整分辨率为1920x1080以后，VNC才能正常显示。</p>
+<p>输入<strong>sudo raspi-config</strong>, 打开树莓派配置工具。</p>
+<p><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/432.png"><br><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/433.png"><br><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/434.png"></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
     <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2020/05/27/zhi-neng-jia-ju/ssh-tunnel-jian-jie/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -958,7 +1176,7 @@ PowerShell.exe -Command &quot;&amp; &#39;%~dp0myscript.ps1&#39;&quot;<span aria-
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-08 11:37:24" itemprop="dateModified" datetime="2023-03-08T11:37:24+00:00">2023-03-08</time>
+      <time title="修改时间：2023-03-09 11:42:28" itemprop="dateModified" datetime="2023-03-09T11:42:28+00:00">2023-03-09</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -1010,208 +1228,8 @@ PowerShell.exe -Command &quot;&amp; &#39;%~dp0myscript.ps1&#39;&quot;<span aria-
 
 
 
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Andy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Blog">
-      <meta itemprop="description" content="正念日做自己的主人活在当下">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/" class="post-title-link" itemprop="url">个人博客 — Hexo多终端同步篇</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2019-01-01 01:45:38" itemprop="dateCreated datePublished" datetime="2019-01-01T01:45:38+00:00">2019-01-01</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-03 01:33:03" itemprop="dateModified" datetime="2023-03-03T01:33:03+00:00">2023-03-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <p>如果需要在多台终端设备上发布博客，那么就需要将Hexo源代码发布到GitHub，并且在多台终端设备之间同步。</p>
-<h1 id="配置远程仓库"><a href="#配置远程仓库" class="headerlink" title="配置远程仓库"></a>配置远程仓库</h1><ol>
-<li><p>在GitHub上创建一个新的分支，例如，分支名称为Hexo<br><img src="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/21.png"></p>
-</li>
-<li><p>将Hexo分支设置成默认分支<br><img src="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/22.png"></p>
-</li>
-</ol>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2019/01/01/blog/ge-ren-bo-ke-hexo-duo-zhong-duan-tong-bu-pian/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2018/11/09/blog/ge-ren-bo-ke-hexo-biao-qian-he-fen-lei-pian/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Andy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Blog">
-      <meta itemprop="description" content="正念日做自己的主人活在当下">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2018/11/09/blog/ge-ren-bo-ke-hexo-biao-qian-he-fen-lei-pian/" class="post-title-link" itemprop="url">个人博客 — Hexo标签和分类篇</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2018-11-09 05:16:18" itemprop="dateCreated datePublished" datetime="2018-11-09T05:16:18+00:00">2018-11-09</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-03-03 01:33:03" itemprop="dateModified" datetime="2023-03-03T01:33:03+00:00">2023-03-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Blog/" itemprop="url" rel="index"><span itemprop="name">Blog</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><h2 id="新建标签页面"><a href="#新建标签页面" class="headerlink" title="新建标签页面"></a>新建标签页面</h2><ol>
-<li>在站点目录下，打开Git Bash命令窗口</li>
-<li>输入以下命令，新建标签页面，该命令将在.\source\tags目录下创建文件index.md  <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">hexo new page tags<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre></li>
-</ol>
-<h2 id="设置页面类型"><a href="#设置页面类型" class="headerlink" title="设置页面类型"></a>设置页面类型</h2><ol>
-<li>访问目录.\source\tags，并用记事本打开文件index.md</li>
-<li>添加 type: “tags”, 将页面类型设置为tags<pre class="line-numbers language-none"><code class="language-none">---
-title: 标签
-date: 2018-11-08 12:02:31
-type: &quot;tags&quot;
----<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2018/11/09/blog/ge-ren-bo-ke-hexo-biao-qian-he-fen-lei-pian/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
   <nav class="pagination">
-    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" title="上一页" aria-label="上一页" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><a class="page-number" href="/page/6/">6</a><a class="extend next" rel="next" title="下一页" aria-label="下一页" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 </div>
