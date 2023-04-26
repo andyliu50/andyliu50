@@ -1,0 +1,20 @@
+{
+  "deafultDarkMode": false,
+  "darkReaderSettings": {
+    "brightness": 150,
+    "contrast": 85,
+    "sepia": 0
+  },
+  "debugLogging": false,
+  "customDefaultPath": "http://192.168.1.65/ebooks/",
+  "epubSettings": {
+    "readingMode": "pagination",
+    "fontSize": 120
+  },
+  "annotationMarkdownSettings": {
+    "annotationModeByDefault": true,
+    "includePrefix": true,
+    "highlightHighlightedText": true,
+    "includePostfix": true
+  }
+}

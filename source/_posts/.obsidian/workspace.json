@@ -1,0 +1,216 @@
+{
+  "main": {
+    "id": "8fa95204303a967e",
+    "type": "split",
+    "children": [
+      {
+        "id": "623e389735fe4e23",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "391cf38d90b02e2e",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "智能家居/技术小贴士.md",
+                "mode": "source",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "24d1d7a6992fcc26",
+    "type": "split",
+    "children": [
+      {
+        "id": "123479d80a9bdb0f",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2c9896b81953d447",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "a91cf57a1b89a286",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              }
+            }
+          },
+          {
+            "id": "ee95d3b93e3dc37b",
+            "type": "leaf",
+            "state": {
+              "type": "starred",
+              "state": {}
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 320.5
+  },
+  "right": {
+    "id": "370f1893a271495e",
+    "type": "split",
+    "children": [
+      {
+        "id": "f2e85ac73bd171f6",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "8b26733ee9bb35e8",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "file": "智能家居/技术小贴士.md",
+                "collapseAll": true,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "34414ab2d6ed9eaa",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "file": "智能家居/技术小贴士.md",
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              }
+            }
+          },
+          {
+            "id": "95ace76f9e15318a",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": false
+              }
+            }
+          },
+          {
+            "id": "7cd5a00b645e8217",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "智能家居/技术小贴士.md"
+              }
+            }
+          },
+          {
+            "id": "d7b8253beb190a7d",
+            "type": "leaf",
+            "state": {
+              "type": "advanced-tables-toolbar",
+              "state": {}
+            }
+          },
+          {
+            "id": "88230bd6335a1ab8",
+            "type": "leaf",
+            "state": {
+              "type": "calendar",
+              "state": {}
+            }
+          }
+        ],
+        "currentTab": 3
+      }
+    ],
+    "direction": "horizontal",
+    "width": 431.5,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false,
+      "table-editor-obsidian:Advanced Tables Toolbar": false
+    }
+  },
+  "active": "391cf38d90b02e2e",
+  "lastOpenFiles": [
+    "python/面向对象的编程.md",
+    "稍后阅读/浏览器扩展合集：实用而有趣的浏览器扩展，我们又为你找到了这 8 款 - 少数派.md",
+    "Pasted image 20230425191830.png",
+    "稍后阅读/debian - transmission-daemon UDP Failed to set receive  send buffer - Unix & Linux Stack Exchange.md",
+    "Transmission.md",
+    "FAQ/Obsidian.md",
+    "稍后阅读/How to Install HACS on Home Assistant in 2023 - WunderTech.md",
+    "稍后阅读/docker国内镜像加速 - 知乎.md",
+    "稍后阅读/树莓派 Raspberry Pi (三)：安装RSS TT-RSS  yukaPriL上午茶时间.md",
+    "稍后阅读/零碎的卡片笔记谁最擅长整理输出？flomo、Seeds 和 Writeathon 对比 - 少数派.md",
+    "稍后阅读/2022 年还能用的 RSS 源，微信公众号也有！ - 少数派.md",
+    "FAQ/iOS.md",
+    "FAQ/iOS/307D4F9F-B1EE-4B54-957F-3F1C9D359E0D_1_201_a.jpeg",
+    "FAQ/HomeAssistant/DE544E07-9305-4F41-9E66-A9B4BAE5A3E8_4_5005_c.jpeg",
+    "FAQ/HomeAssistant/E3E41A7D-DBD4-41E6-A044-1F67DCED8330_4_5005_c.jpeg",
+    "FAQ/HomeAssistant",
+    "FAQ/iOS",
+    "Pasted image 20230418171241.png",
+    "Pasted image 20230418171426.png",
+    "Pasted image 20230418171348.png",
+    "Pasted image 20230418171322.png",
+    "FAQ/HomeAssistant.md",
+    "FAQ/Mac.md",
+    "Pasted image 20230418171241.png.sb-c358ffe4-thQBGS",
+    "稍后阅读/New Obsidian Notes from Shortcuts  ThoughtAsylum.md",
+    "Python/列表和元组.md",
+    "稍后阅读/MacStories Starter Pack Introducing Obsidian Shortcut Launcher, A Free Plugin to Trigger Shortcuts from Obsidian - MacStories.md",
+    "RealPython/Python's pathlib Module Taming the File System – Real Python.md",
+    "稍后阅读/共享厨房里的秘密.md",
+    "稍后阅读/ChatGPT 之父承认 GPT-5 并不存在，为什么 OpenAI 总是这么实诚？｜万字详述.md",
+    "稍后阅读/告别十年印象笔记，用 Obsidian 一年最喜欢的 7 个功能 - 少数派.md",
+    "RealPython/Python args and kwargs Demystified – Real Python.md",
+    "RealPython/Python for Loops (Definite Iteration) – Real Python.md",
+    "RealPython/How to Iterate Through a Dictionary in Python – Real Python.md",
+    "RealPython/Dictionaries in Python – Real Python.md",
+    "中医/药方.md",
+    "RealPython/Using Python datetime to Work With Dates and Times – Real Python.md",
+    "中医/医案/尝试用二至丸治疗白发/image202302221900211.png",
+    "中医/医案/尝试用二至丸治疗白发/E03DCBDD-6B51-46B6-B7DD-18C6C3FD86C1_1_201_a.jpeg",
+    "中医/医案/尝试用二至丸治疗白发",
+    "中医/医案",
+    "中医",
+    "FAQ",
+    "Python/列表和元组",
+    "Python",
+    "FAQ/Mac"
+  ]
+}

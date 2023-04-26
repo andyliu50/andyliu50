@@ -1,0 +1,9 @@
+{
+  "accentColor": "",
+  "baseFontSize": 24,
+  "theme": "system",
+  "enabledCssSnippets": [
+    "default_theme_width"
+  ],
+  "translucency": true
+}

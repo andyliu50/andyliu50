@@ -1,0 +1,182 @@
+{
+  "main": {
+    "id": "8fa95204303a967e",
+    "type": "split",
+    "children": [
+      {
+        "id": "68f4280912e86d26",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "b357b8d34d595471",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "中医/药方.md",
+                "mode": "preview",
+                "source": false
+              }
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "9e1da1052057f33a",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "156896faeac48241",
+        "type": "leaf",
+        "state": {
+          "type": "file-explorer",
+          "state": {
+            "sortOrder": "byModifiedTime"
+          }
+        }
+      },
+      {
+        "id": "2dc186dc1582fff1",
+        "type": "leaf",
+        "state": {
+          "type": "search",
+          "state": {
+            "query": "",
+            "matchingCase": false,
+            "explainSearch": false,
+            "collapseAll": false,
+            "extraContext": false,
+            "sortOrder": "alphabetical"
+          }
+        }
+      },
+      {
+        "id": "de5e2a3819bbcb72",
+        "type": "leaf",
+        "state": {
+          "type": "tag",
+          "state": {
+            "sortOrder": "frequency",
+            "useHierarchy": true
+          }
+        }
+      },
+      {
+        "id": "b06e5b93bc37d0dc",
+        "type": "leaf",
+        "state": {
+          "type": "starred",
+          "state": {}
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "right": {
+    "id": "4f753528de7322f6",
+    "type": "mobile-drawer",
+    "children": [
+      {
+        "id": "d51b89ae78f4da73",
+        "type": "leaf",
+        "state": {
+          "type": "backlink",
+          "state": {
+            "file": "中医/药方.md",
+            "collapseAll": true,
+            "extraContext": false,
+            "sortOrder": "alphabetical",
+            "showSearch": true,
+            "searchQuery": "",
+            "backlinkCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "237db14ca83f9d51",
+        "type": "leaf",
+        "state": {
+          "type": "outgoing-link",
+          "state": {
+            "file": "中医/药方.md",
+            "linksCollapsed": false,
+            "unlinkedCollapsed": true
+          }
+        }
+      },
+      {
+        "id": "d42ada6453cb1920",
+        "type": "leaf",
+        "state": {
+          "type": "outline",
+          "state": {
+            "file": "中医/药方.md"
+          }
+        }
+      },
+      {
+        "id": "c96a7b410af4102c",
+        "type": "leaf",
+        "state": {
+          "type": "calendar",
+          "state": {}
+        }
+      }
+    ],
+    "currentTab": 0
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "table-editor-obsidian:Advanced Tables Toolbar": false,
+      "switcher:Open quick switcher": false,
+      "graph:Open graph view": false,
+      "canvas:Create new canvas": false,
+      "daily-notes:Open today's daily note": false,
+      "templates:Insert template": false,
+      "command-palette:Open command palette": false
+    }
+  },
+  "active": "156896faeac48241",
+  "lastOpenFiles": [
+    "RealPython/Python's del Remove References From Scopes and Containers – Real Python.md",
+    "中医/药方.md",
+    "Python/列表和元组.md",
+    "中医/医案/尝试用二至丸治疗白发/91C9F6E9-784C-4640-86D5-491AA2F66858_1_201_a.jpeg",
+    "稍后阅读/告别十年印象笔记，用 Obsidian 一年最喜欢的 7 个功能 - 少数派.md",
+    "中医/医案/尝试用二至丸治疗白发.md",
+    "中医/医案/尝试用二至丸治疗白发/image202302221900211.png",
+    "中医/医案/尝试用二至丸治疗白发/8ED26B4B-76B8-446F-8CF4-D6DF1F55DF4F_1_201_a.jpeg",
+    "中医/医案/尝试用二至丸治疗白发/E03DCBDD-6B51-46B6-B7DD-18C6C3FD86C1_1_201_a.jpeg",
+    "稍后阅读/How to install TT-RSS on a Raspberry Pi  Opensource.com (1).md",
+    "稍后阅读/用 Tiny Tiny RSS 自建 RSS 服务 - neverland.md",
+    "Python/列表和元组/Pasted image 20230330104957.png",
+    "RealPython/Build a Maze Solver in Python Using Graphs – Real Python.md",
+    "RealPython/Lists and Tuples in Python – Real Python.md",
+    "RealPython/Sets in Python – Real Python.md",
+    "RealPython/Basic Data Types in Python – Real Python.md",
+    "RealPython/Python args and kwargs Demystified – Real Python.md",
+    "RealPython/When Should You Use .__repr__() vs .__str__() in Python – Real Python.md",
+    "RealPython/Python Command-Line Arguments – Real Python.md",
+    "RealPython/Defining Your Own Python Function – Real Python.md",
+    "RealPython/Variables in Python – Real Python.md",
+    "RealPython/Operators and Expressions in Python – Real Python.md",
+    "RealPython/Using Python Optional Arguments When Defining Functions – Real Python.md",
+    "Mac FAQ.md",
+    "RealPython/How to Write Beautiful Python Code With PEP 8 – Real Python.md",
+    "RealPython/Documenting Python Code A Complete Guide – Real Python.md",
+    "RealPython/Writing Comments in Python (Guide) – Real Python.md",
+    "Mac FAQ/Pasted image 20230321132807.png",
+    "RealPython/Python Modules and Packages – An Introduction – Real Python.md",
+    "Mac FAQ/Pasted image 20230321132158.png",
+    "Mac FAQ/2023-03-21 13.23.35.png",
+    "RealPython/Python Application Layouts A Reference – Real Python.md",
+    "RealPython/How to Publish an Open-Source Python Package to PyPI – Real Python.md",
+    "稍后阅读/NUC8（豆子峡谷）黑苹果新手指南Q&A - 知乎.md",
+    "images/3C1EC821-5DCC-4853-849C-ADB69AE6B0D4_1_105_c.jpeg",
+    "Obsidian使用指南/Pastedimage20230316105113.png"
+  ]
+}

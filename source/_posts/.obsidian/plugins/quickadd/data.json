@@ -1,0 +1,12 @@
+{
+  "choices": [],
+  "macros": [
+    {
+      "name": "哔哩哔哩视频笔记",
+      "id": "6b54fa79-97ee-4be8-8adb-9878bc38e11e",
+      "commands": [],
+      "runOnStartup": false
+    }
+  ],
+  "inputPrompt": "single-line"
+}
