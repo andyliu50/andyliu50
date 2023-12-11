@@ -3283,38 +3283,6 @@ Jack <span class="token keyword">is</span> <span class="token number">3</span> y
       </tags>
   </entry>
   <entry>
-    <title>尝试用二至丸治疗白发</title>
-    <url>/2023/02/22/zhong-yi/chang-shi-yong-er-zhi-wan-zhi-liao-bai-fa/</url>
-    <content><![CDATA[<p>最近几年，可能是因为工作压力太大的缘故，加上经常熬夜，不断透支自己的精力，头上的白发越来越多。总想着能通过什么方法减少白发的生成，但是又不知道从何入手。</p>
-<img src="/2023/02/22/zhong-yi/chang-shi-yong-er-zhi-wan-zhi-liao-bai-fa/image202302221900211.png" class="" width="500">
-
-<span id="more"></span>
-
-<p>最近，在阅读罗大伦写的<a href="https://book.douban.com/subject/30257558/">《中医祖传的那点儿东西1》</a>时，正好看到书中提到了一个治疗白发的方子：<strong>二至丸</strong>。该方由<strong>女贞子</strong>和<strong>墨旱莲</strong>两种药材组成。据作者介绍，他年轻的时候由于学习压力比较大，导致白发很多。因此，他给自己开了二至丸的方子，服用一年后，白发少了很多。</p>
-<blockquote><p>等到毕业了，终于有了时间，就在家里给自己开方子，用的是二至丸，女贞子30克、墨旱莲30克，每天熬水当茶喝（三碗水熬剩两碗），这个二至丸中的女贞子是冬至日采，墨旱莲是夏至日采，传统认为这个时候药物的药性是最好的，所以叫二至丸，有滋阴的作用。我则进一步分析这个药有交通阴阳的作用，很平和，只要是因虚损导致的白发都可以服用，不必计较阴虚阳虚。我大约服用了一年，结果头发变黑了很多，理发师再也不劝我了，而且还向我咨询怎么弄的，他也想试试。  </p>
-<footer><strong>罗大伦</strong><cite>《中医祖传的那点儿东西1》</cite></footer></blockquote>
-
-<p>​          </p>
-<p><strong>墨旱莲</strong></p>
-<p>又被称为旱莲草，味甘、酸，性寒，归肝、肾经。主要功效为滋阴益肾，凉血止血。脾胃虚寒，大便泄泻者不宜服用。</p>
-<img src="/2023/02/22/zhong-yi/chang-shi-yong-er-zhi-wan-zhi-liao-bai-fa/8ED26B4B-76B8-446F-8CF4-D6DF1F55DF4F_1_201_a.jpeg" class="" width="500">
-
-<p><strong>女贞子</strong></p>
-<p>一种果实，味甘、苦，性凉，归肝、肾经。主要功效为补益肝肾，清热明目。脾胃虚寒及阳虚者忌服。</p>
-<img src="/2023/02/22/zhong-yi/chang-shi-yong-er-zhi-wan-zhi-liao-bai-fa/91C9F6E9-784C-4640-86D5-491AA2F66858_1_201_a.jpeg" class="" width="500">
-
-<p>于是，我决定买来试试，在网上搜索后，发现二至丸的中成药价格差别很大，几十元到上百元不等。价格贵的吃不起，便宜的又担心药效不行。最后，决定自己买药来熬汤喝。网上找了一家店，花了25元，购买了250克女贞子和250克的墨旱莲。估计这些药大约能喝10天，计划坚持喝一个月，看看效果如何。</p>
-<p><strong>熬药方法</strong></p>
-<p>三汤勺女贞子，手抓3-5小把墨旱莲，冷水浸泡30分钟后，放入锅中，倒入三碗冷水，然后开火烧至水沸腾后，开小火煎30分钟。最后熬出两碗汤药，上午和下午各喝一碗。</p>
-<img src="/2023/02/22/zhong-yi/chang-shi-yong-er-zhi-wan-zhi-liao-bai-fa/E03DCBDD-6B51-46B6-B7DD-18C6C3FD86C1_1_201_a.jpeg" class="" width="500">]]></content>
-      <categories>
-        <category>中医</category>
-      </categories>
-      <tags>
-        <tag>医案</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>IFTTT | 一种云端的自动化平台</title>
     <url>/2021/10/25/zhi-neng-jia-ju/shi-me-shi-ifttt/</url>
     <content><![CDATA[<h2 id="IFTTT是什么"><a href="#IFTTT是什么" class="headerlink" title="IFTTT是什么"></a>IFTTT是什么</h2><p>IFTTT的全称是<strong>If this then that</strong>，是一个云端的自动化平台，支持各种SaaS服务的集成。通俗地说，每个SaaS服务相当于是一座“孤岛”，而IFTTT是一座“桥梁”，将这些孤岛连通起来。</p>
@@ -3443,6 +3411,53 @@ Jack <span class="token keyword">is</span> <span class="token number">3</span> y
       </tags>
   </entry>
   <entry>
+    <title>Tkinter相邻两行之间间隔太大</title>
+    <url>/2021/12/31/python/tkinter-xiang-lin-liang-xing-zhi-jian-jian-ge-tai-da/</url>
+    <content><![CDATA[<p><img src="/2021/12/31/python/tkinter-xiang-lin-liang-xing-zhi-jian-jian-ge-tai-da/python.png" alt="Python"> 本文主要介绍使用Tkinter时，如果没有正确配置调整大小的参数(grid_rowconfigure)，就会出现行与行之间距离过远的问题。</p>
+<p>通过运行以下代码，可以在界面的左侧显示一个选择列表框，因为列表框内容设置为空(template_names &#x3D; ‘’)，所以列表框中没有任何可选项。在右侧显示两行文字，第一行文字内容为Incident Office1，第二行文字内容为Incident Office2。但是，第一行和第二行之间的文字距离很远。</p>
+<pre class="line-numbers language-none"><code class="language-none">from tkinter import *
+from tkinter import ttk
+
+root &#x3D; Tk()
+c&#x3D;ttk.Frame(root, padding&#x3D;(5, 5, 12, 12))
+root.grid_columnconfigure(0, weight&#x3D;1)
+root.grid_rowconfigure(0,weight&#x3D;1)
+c.grid(column&#x3D;0, row&#x3D;0, sticky&#x3D;(N,W,E,S))
+c.grid_columnconfigure(0, weight&#x3D;1)
+c.grid_rowconfigure(0, weight&#x3D;1)
+
+template_names &#x3D; &#39;&#39;
+cnames &#x3D; StringVar(value&#x3D;template_names)
+lbox &#x3D; Listbox(c, listvariable&#x3D;cnames,height&#x3D;10, width&#x3D;50)
+
+lbox.grid(column&#x3D;0, row&#x3D;0, rowspan&#x3D;12, sticky&#x3D;(N,S,E,W))
+
+for i in range(1,4):
+    lbl_incident_office &#x3D; ttk.Label(c, text&#x3D;&quot;Incident Office%s&quot; % i )
+    lbl_incident_office.grid(column&#x3D;1, row&#x3D;i-1, sticky&#x3D;NW)
+    print(lbl_incident_office.grid_info())
+
+root.mainloop()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>导致出现以下问题的主要原因是没有正确配置grid中的设置项(grid_rowconfigure)。当前的设置如下，该设置第1行的元素会随着Frame的大小变化扩展空间，但是其它行的元素则保持不变。</p>
+<pre class="line-numbers language-none"><code class="language-none">c.grid_rowconfigure(0, weight&#x3D;1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2021/12/31/python/tkinter-xiang-lin-liang-xing-zhi-jian-jian-ge-tai-da/2021-12-31_132348.jpg" alt="Tkinter"></p>
+<p>通过修改配置，将其设置为第6行的元素随着Frame的大小变化扩展空间，这时候第1-6行之间就会连续排列，第6行和第7行之间间距就会变大。</p>
+<pre class="line-numbers language-none"><code class="language-none">c.grid_rowconfigure(5, weight&#x3D;1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><img src="/2021/12/31/python/tkinter-xiang-lin-liang-xing-zhi-jian-jian-ge-tai-da/2021-12-31_133746.jpg" alt="Tkinter"></p>
+]]></content>
+      <categories>
+        <category>Python</category>
+      </categories>
+      <tags>
+        <tag>tkinter</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>搜索功能Tipue_Search插件</title>
     <url>/2021/11/06/blog/sou-suo-gong-neng-tipue-search-cha-jian/</url>
     <content><![CDATA[<p>本文主要介绍如何为Pelican博客添加搜索功能，详细介绍了Tipue_Search插件的安装和使用过程。由于Tipue Search插件的开发者已经从2018年起不再维护该插件，因此，相关的参考资料比较少。</p>
@@ -3548,50 +3563,241 @@ Jack <span class="token keyword">is</span> <span class="token number">3</span> y
       </tags>
   </entry>
   <entry>
-    <title>Tkinter相邻两行之间间隔太大</title>
-    <url>/2021/12/31/python/tkinter-xiang-lin-liang-xing-zhi-jian-jian-ge-tai-da/</url>
-    <content><![CDATA[<p><img src="/2021/12/31/python/tkinter-xiang-lin-liang-xing-zhi-jian-jian-ge-tai-da/python.png" alt="Python"> 本文主要介绍使用Tkinter时，如果没有正确配置调整大小的参数(grid_rowconfigure)，就会出现行与行之间距离过远的问题。</p>
-<p>通过运行以下代码，可以在界面的左侧显示一个选择列表框，因为列表框内容设置为空(template_names &#x3D; ‘’)，所以列表框中没有任何可选项。在右侧显示两行文字，第一行文字内容为Incident Office1，第二行文字内容为Incident Office2。但是，第一行和第二行之间的文字距离很远。</p>
-<pre class="line-numbers language-none"><code class="language-none">from tkinter import *
-from tkinter import ttk
-
-root &#x3D; Tk()
-c&#x3D;ttk.Frame(root, padding&#x3D;(5, 5, 12, 12))
-root.grid_columnconfigure(0, weight&#x3D;1)
-root.grid_rowconfigure(0,weight&#x3D;1)
-c.grid(column&#x3D;0, row&#x3D;0, sticky&#x3D;(N,W,E,S))
-c.grid_columnconfigure(0, weight&#x3D;1)
-c.grid_rowconfigure(0, weight&#x3D;1)
-
-template_names &#x3D; &#39;&#39;
-cnames &#x3D; StringVar(value&#x3D;template_names)
-lbox &#x3D; Listbox(c, listvariable&#x3D;cnames,height&#x3D;10, width&#x3D;50)
-
-lbox.grid(column&#x3D;0, row&#x3D;0, rowspan&#x3D;12, sticky&#x3D;(N,S,E,W))
-
-for i in range(1,4):
-    lbl_incident_office &#x3D; ttk.Label(c, text&#x3D;&quot;Incident Office%s&quot; % i )
-    lbl_incident_office.grid(column&#x3D;1, row&#x3D;i-1, sticky&#x3D;NW)
-    print(lbl_incident_office.grid_info())
-
-root.mainloop()<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<span id="more"></span>
-
-<p>导致出现以下问题的主要原因是没有正确配置grid中的设置项(grid_rowconfigure)。当前的设置如下，该设置第1行的元素会随着Frame的大小变化扩展空间，但是其它行的元素则保持不变。</p>
-<pre class="line-numbers language-none"><code class="language-none">c.grid_rowconfigure(0, weight&#x3D;1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="/2021/12/31/python/tkinter-xiang-lin-liang-xing-zhi-jian-jian-ge-tai-da/2021-12-31_132348.jpg" alt="Tkinter"></p>
-<p>通过修改配置，将其设置为第6行的元素随着Frame的大小变化扩展空间，这时候第1-6行之间就会连续排列，第6行和第7行之间间距就会变大。</p>
-<pre class="line-numbers language-none"><code class="language-none">c.grid_rowconfigure(5, weight&#x3D;1)<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><img src="/2021/12/31/python/tkinter-xiang-lin-liang-xing-zhi-jian-jian-ge-tai-da/2021-12-31_133746.jpg" alt="Tkinter"></p>
+    <title>常用公共DNS</title>
+    <url>/2018/11/15/za-qi-za-ba/chang-yong-gong-gong-dns/</url>
+    <content><![CDATA[<p><strong>CloudFlare DNS</strong></p>
+<p>1.1.1.1<br>1.0.0.1<br>2606:4700:4700::1111<br>2606:4700:4700::1001</p>
+<p><strong>百度公共DNS</strong></p>
+<p>180.76.76.76<br>2400:da00::6666</p>
+<p><strong>中国互联网络中心</strong></p>
+<p>1.2.4.8<br>210.2.4.8<br>101.226.4.6<br>123.125.81.6</p>
+<p><strong>阿里DNS</strong></p>
+<p>223.5.5.5<br>223.6.6.6</p>
+<p><strong>Google DNS</strong></p>
+<p>8.8.8.8<br>8.8.4.4</p>
+<span id="more"></span>    
+<p><strong>OpenDNS</strong></p>
+<p>208.67.222.222<br>208.67.220.220<br>208.67.222.220<br>208.67.220.222</p>
+<p><strong>OneDNS</strong></p>
+<p>117.50.11.11<br>117.50.22.22</p>
+<p><strong>DNSPod DNS+</strong></p>
+<p>119.29.29.29<br>119.28.28.28<br>182.254.118.118<br>182.254.116.116</p>
 ]]></content>
       <categories>
-        <category>Python</category>
+        <category>杂七杂八</category>
       </categories>
       <tags>
-        <tag>tkinter</tag>
+        <tag>dns</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何使用Git</title>
+    <url>/2021/12/30/bian-cheng/git/</url>
+    <content><![CDATA[<p> <img src="/2021/12/30/bian-cheng/git/git.jpg" alt="Git"> 本文主要介绍如何使用Git，包括Git客户端，Github以及Gitee。</p>
+<h2 id="Git客户端"><a href="#Git客户端" class="headerlink" title="Git客户端"></a>Git客户端</h2><p>下载地址：<a href="https://git-scm.com/">Git (git-scm.com)</a></p>
+<p>文档：<a href="https://git-scm.com/docs">Git - Reference (git-scm.com)</a></p>
+<h2 id="初始设置"><a href="#初始设置" class="headerlink" title="初始设置"></a>初始设置</h2><p>安装完成后，需要先设置一下用户名称和邮箱：</p>
+<pre class="line-numbers language-none"><code class="language-none">git config --global user.name &quot;Your Name&quot;
+git config --global user.email &quot;email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<span id="more"></span>
+<h2 id="创建Git版本库"><a href="#创建Git版本库" class="headerlink" title="创建Git版本库"></a>创建Git版本库</h2><p>使用命令<code>git init</code>，创建一个新的Git版本库，或者重新初始化现有的版本库。创建成功后，会在当前目录创建一个隐藏目录.git。</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git init
+Initialized empty Git repository in C:&#x2F;project&#x2F;.git&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="修改初始化仓库时的默认分支名称-master-gt-main"><a href="#修改初始化仓库时的默认分支名称-master-gt-main" class="headerlink" title="修改初始化仓库时的默认分支名称(master -&gt; main)"></a>修改初始化仓库时的默认分支名称(master -&gt; main)</h2><p>初始化仓库时，Github的默认分支名称已经从master更改为main，但是Git客户端和Gitee的默认分支名称仍然为master。通过以下方式，可以修改Git客户端和Gitee的版本库名称。</p>
+<h3 id="Git客户端-1"><a href="#Git客户端-1" class="headerlink" title="Git客户端"></a>Git客户端</h3><p>使用以下命令，将Git客户端创建的默认分支名称设置为main</p>
+<pre class="line-numbers language-none"><code class="language-none">git config --global init.defaultBranch main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h3 id="Gitee"><a href="#Gitee" class="headerlink" title="Gitee"></a>Gitee</h3><p>在Gitee的后台管理界面，选择<strong>设置</strong>-<strong>仓库首选项</strong>，将master修改为main。</p>
+<p><img src="/2021/12/30/bian-cheng/git/2021-12-30_141954.jpg" alt="Gitee"></p>
+<h2 id="修改本地的分支名称-master-gt-main"><a href="#修改本地的分支名称-master-gt-main" class="headerlink" title="修改本地的分支名称(master -&gt; main)"></a>修改本地的分支名称(master -&gt; main)</h2><p>如果初始化完成后，本地分支的名称为master，可以通过命令<code>git branch -m master main</code>修改为main。</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git branch -m master main
+$ git branch
+* main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p>然后，通过命令<code>git push -u gitee main</code>将本地分支推送到远程分支。并且，将远程分支设置为与main关联。</p>
+<pre class="line-numbers language-none"><code class="language-none">$ git push -u gitee main
+$ git remote set-head gitee main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h2 id="Git客户端配置文件"><a href="#Git客户端配置文件" class="headerlink" title="Git客户端配置文件"></a>Git客户端配置文件</h2><p>Git客户端的配置文件是在用户目录(~)下的<code>.gitconfig</code>文件。</p>
+<p>文件内容如下：</p>
+<pre class="line-numbers language-none"><code class="language-none">:&gt; Get-Content ~\.gitconfig
+[user]
+        email &#x3D; andyliu50@outlook.com
+        name &#x3D; Andy Liu
+[core]
+        autocrlf &#x3D; true
+[init]
+        defaultBranch &#x3D; main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h2 id="Git本地和远程同步"><a href="#Git本地和远程同步" class="headerlink" title="Git本地和远程同步"></a>Git本地和远程同步</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>本地已经完成仓库的初始化，在远程Github或者Gitee上创建相同名称的仓库。然后，在本地运行以下命令：</p>
+<pre class="line-numbers language-none"><code class="language-none">git remote add github git@github.com:andyliu50&#x2F;mytool.git
+git push -u github main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>其中，github是远程仓库在本地的名称，默认一般用origin，由于本地要同时和Github和Gitee同步，为了便于区分，因此将远程仓库设置为github。andyliu50是github的账号名称，mytool是远程仓库的实际名称。</p>
+<p>命令<code>git push</code>将本地分支main推送到远程仓库。</p>
+<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>本地不创建仓库，在远程Github或者Gitee创建仓库，然后，在本地运行以下命令，将远程仓库克隆到本地：</p>
+<pre class="line-numbers language-none"><code class="language-none">git clone git@github.com:andyliu50&#x2F;mytool.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h2 id="创建标签并推送到远程"><a href="#创建标签并推送到远程" class="headerlink" title="创建标签并推送到远程"></a>创建标签并推送到远程</h2><p>用<code>git tag</code>可以创建标签</p>
+<pre class="line-numbers language-none"><code class="language-none">git tag v1.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>可以将一个标签推送到远程库</p>
+<pre class="line-numbers language-none"><code class="language-none">git push github v1.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p>也可以将多个标签推送到远程库</p>
+<pre class="line-numbers language-none"><code class="language-none">git push github --tags<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>git</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>PowerShell Tips</title>
+    <url>/2021/04/15/bian-cheng/powershell-tips/</url>
+    <content><![CDATA[<p>本文主要介绍关于PowerShell中的一些小技巧，以便于需要时查询。</p>
+<h2 id="如何知道脚本文件所在路径"><a href="#如何知道脚本文件所在路径" class="headerlink" title="如何知道脚本文件所在路径"></a>如何知道脚本文件所在路径</h2><p>有时候为了能访问与脚本在相同目录的文件，需要知道脚本的路径位置。通过变量$MyInvocation可以获取脚本的路径和名称。</p>
+<p>$MyInvocation是一种自动变量（Automatic Variables），自动变量一种用于存储PowerShell状态的特殊变量，由PowerShell创建和维护。关于自动变量的详细介绍，可以通过命令<code>Help about_Automatic_Variables</code>查看。</p>
+<pre class="line-numbers language-none"><code class="language-none">$ScriptPath &#x3D; $MyInvocation.MyCommand.Path
+$ScriptName &#x3D; $MyInvocation.MyCommand.Name
+$ScriptDir &#x3D; Split-Path $ScriptPath<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><code>$MyInvocation.MyCommand.Path</code>返回的是脚本文件的绝对路径，通过命令<code>Split-Path</code>，可以获取脚本文件所在目录的绝对路径。</p>
+<h2 id="批处理文件中-dpn0"><a href="#批处理文件中-dpn0" class="headerlink" title="批处理文件中%~dpn0"></a>批处理文件中%~dpn0</h2><p>当把批处理文件和其它文件(PowerShell脚本)部署到计算机上后，如果无法知道文件所在的目录，就可以使用%~dpn0。</p>
+<p>在批处理文件中，**%n**是一种特殊变量：</p>
+<p><strong>%0</strong>: 批处理文件的完整路径（包括批处理文件的文件名和后缀）<br><strong>%1</strong>: 批处理文件后面的第一个参数<br><strong>%2</strong>: 批处理文件后面的第二个参数<br>… </p>
+<p>另外，以下参数可以和%0结合使用，用于表达文件路径：</p>
+<p><strong>~d</strong>: 驱动器盘符，例如C:, D:\<br><strong>~p</strong>: 路径（不包含驱动器盘符和批处理文件名）<br><strong>~n</strong>: 批处理文件名</p>
+<p>所以，如果结合起来使用就是：</p>
+<p><strong>%0</strong>: 批处理文件的完整路径（<strong>包含批处理文件的后缀</strong>）<br><strong>%dp0</strong>:  批处理文件所在的目录<br><strong>%dpn0</strong>: 批处理文件的完整路径（<strong>不包含批处理文件的后缀</strong>）</p>
+<p>举例：</p>
+<ol>
+<li>如果在同一个目录下，有两个文件：test.bat, test.ps1，由于这两个文件的文件名相同，后缀不同，因此，可以在test.bat中，使用以下代码，通过运行test.bat文件来执行PS脚本。</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">@ECHO OFF
+PowerShell.exe -Command &quot;&amp; &#39;%~dpn0.ps1&#39;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<ol start="2">
+<li>如果在同一个目录下，有两个文件：test.bat, myscript.ps1，由于这两个文件的文件名不同，因此，在test.bat中，需要使用以下代码。由于~n代表批处理文件的文件名，此处需要删除n，替换成PS脚本的文件名。</li>
+</ol>
+<pre class="line-numbers language-none"><code class="language-none">@ECHO OFF
+PowerShell.exe -Command &quot;&amp; &#39;%~dp0myscript.ps1&#39;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>powershell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>创建计划任务</title>
+    <url>/2021/12/31/bian-cheng/chuang-jian-ji-hua-ren-wu/</url>
+    <content><![CDATA[<p><img src="/2021/12/31/bian-cheng/chuang-jian-ji-hua-ren-wu/powershell.png" alt="PowerShell"><br>本文主要介绍如何用PowerShell命令创建计划任务。</p>
+<p>通过PowerShell创建计划任务稍微有点复杂，需要通过三条命令来分别设置Settings, Action和Trigger，然后再用命令<code>Register-ScheduledTask</code>创建任务。</p>
+<p><strong>New-ScheduledTaskSettingsSet</strong> - 该命令主要用于设置一些参数，例如网络连接可用时才运行任务，使用交流电源时运行任务等。</p>
+<p><strong>New-ScheduledTaskAction</strong> - 该命令设置需要运行的程序和脚本等。</p>
+<p><strong>New-ScheduledTaskTrigger</strong> - 该命令设置触发任务运行的条件，例如启动时，登录时，某个特定时间运行任务。</p>
+<p><strong>Register-ScheduledTask</strong> - 该命令需要利用以上三条命令的结果，创建任务。</p>
+<span id="more"></span>
+<p>以下的命令可以创建一个名为ResetPassword的计划任务，该任务会在系统启动的时候运行，并且只有**当网络连接可用时(-RunOnlyIfNetworkAvailable)<strong>才会运行。该任务以SYSTEM账号运行，并且使用</strong>最高权限运行(-RunLevel Highest)**。</p>
+<pre class="line-numbers language-none"><code class="language-none">$TaskName &#x3D; &#39;ResetPassword&#39;
+$Setting &#x3D; New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable
+$Action &#x3D; New-ScheduledTaskAction -Execute $BatchFile
+$Trigger &#x3D; New-ScheduledTaskTrigger -AtStartup
+Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Settings $Setting -User &#39;SYSTEM&#39; -RunLevel Highest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+
+
+<p>以下的命令可以创建一个名为MonitorInternet的计划任务，该任务创建后，**会在5分钟以后触发运行，并且之后会无限期地每隔五分钟运行一次(-Once -At (Get-Date).Addminutes(5) -RepetitionInterval (New-TimeSpan -Minutes 5))**。并且，该任务设置了条件，即使切换到电池（笔记本电脑），也不要停止运行任务。</p>
+<pre class="line-numbers language-none"><code class="language-none">$TaskName &#x3D; &#39;MonitorInternet&#39;
+$Setting &#x3D; New-ScheduledTaskSettingsSet -DontStopIfGoingOnBatteries
+$Action &#x3D; New-ScheduledTaskAction -Execute $BatchFile
+$Trigger &#x3D; New-ScheduledTaskTrigger -Once -At (Get-Date).Addminutes(5) -RepetitionInterval (New-TimeSpan -Minutes 5)
+Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Settings $Setting -User &#39;SYSTEM&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>powershell</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>如何双击运行PowerShell脚本</title>
+    <url>/2021/11/08/bian-cheng/shuang-ji-yun-xing-powershell-jiao-ben/</url>
+    <content><![CDATA[<p>由于PowerShell脚本双击后，系统默认使用记事本打开脚本，导致脚本无法直接运行。本文主要介绍如何可以通过双击运行的方式，直接运行PowerShell脚本。</p>
+<p>由于Windows系统对PowerShell做了许多安全性的防护措施，导致PowerShell不像以前的批处理文件那样，复制到电脑上就可以直接运行。目前，主要有以下一些原因会导致运行PowerShell出现问题：</p>
+<ul>
+<li><p><strong>默认情况下，PowerShell脚本的.ps1文件与记事本关联。</strong></p>
+<p>Windows系统默认将.ps1文件与记事本关联，因此，如果双击运行脚本，只会打开记事本，并显示脚本的内容，而不会通过PowerShell运行脚本。</p>
+</li>
+<li><p><strong>PowerShell默认阻止运行来自于外部的脚本。</strong></p>
+</li>
+</ul>
+<p>​        默认情况下，PowerShell的ExecutionPolicy阻止运行任何来自于外部的脚本，例如从互        联网下载的脚本，或者来自于网络共享的脚本等。</p>
+<ul>
+<li><strong>有些PowerShell脚本需要管理员权限才能正常运行。</strong></li>
+</ul>
+<p>​        有些命令需要管理员权限才能正常运行，因此需要获取管理员权限并执行脚本。</p>
+<ul>
+<li><strong>有些用户可能有自定义的PowerShell环境</strong>。</li>
+</ul>
+<p>​        有些高级用户，可能会修改系统的PowerShell环境，因此导致脚本运行不成功。</p>
+<span id="more"></span>
+
+<h2 id="双击运行脚本"><a href="#双击运行脚本" class="headerlink" title="双击运行脚本"></a>双击运行脚本</h2><p>虽然双击运行PowerShell脚本，只会打开记事本。但是，我们仍然可以通过.BAT批处理文件来调用PowerShell脚本，从而实现双击运行脚本的目的。</p>
+<p>首先，需要将批处理文件的文件名设置为与PowerShell脚本相同的文件名。例如，PowerShell脚本的文件名为MyScript.ps1，那么批处理文件的文件名为MyScript.bat。然后，将这两个文件放到相同的目录下。</p>
+<p>在批处理文件中，写入以下代码：</p>
+<pre class="line-numbers language-none"><code class="language-none">@ECHO OFF
+PowerShell.exe -Command &quot;&amp; &#39;%~dpn0.ps1&#39;&quot;
+PAUSE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<p><strong>@ECHO OFF：</strong>阻止命令行提示符以及脚本中的命令显示在屏幕上。</p>
+<p><strong>PowerShell.exe -Command “&amp; ‘%~dpn0.ps1’”：</strong>这条命令用于调用PowerShell.exe，从而可以执行脚本文件。**’%~dpn0.ps1’**就是PS脚本文件的完整路径。</p>
+<p>以下是关于**’%~dpn0.ps1’**的详细说明，详细内容，请参考文档：[PowerShell Tips]({filename}PowerShell Tips.md)</p>
+<blockquote>
+<p>当把批处理文件和其它文件(PowerShell脚本)部署到计算机上后，如果无法知道文件所在的目录，就可以使用%~dpn0。</p>
+<p>在批处理文件中，**%n<strong>是一种特殊变量：</strong>%0**: 批处理文件的完整路径（包括批处理文件的文件名和后缀）<br><strong>%1</strong>: 批处理文件后面的第一个参数<br><strong>%2</strong>: 批处理文件后面的第二个参数<br>… </p>
+<p><strong>~d</strong>: 驱动器盘符，例如C:, D:<br><strong>~p</strong>: 路径（不包含驱动器盘符和批处理文件名）<br><strong>~n</strong>: 批处理文件名</p>
+<p>所以，如果结合起来使用就是：</p>
+<p><strong>%0</strong>: 批处理文件的完整路径（<strong>包含批处理文件的后缀</strong>）<br><strong>%dp0</strong>:  批处理文件所在的目录<br><strong>%dpn0</strong>: 批处理文件的完整路径（<strong>不包含批处理文件的后缀</strong>）</p>
+</blockquote>
+<h2 id="ExecutionPolcy"><a href="#ExecutionPolcy" class="headerlink" title="ExecutionPolcy"></a>ExecutionPolcy</h2><p>默认情况下，Windows系统阻止运行PS脚本。但是，通过批处理文件，我们可以临时-ExecutionPolicy的设置，来达到执行脚本的目的。注意：该ExecutionPolicy的设置只对当前的PowerShell会话有效。</p>
+<pre class="line-numbers language-none"><code class="language-none">PowerShell.exe -ExecutionPolicy Bypass -Command &quot;&amp; &#39;%~dpn0.ps1&#39;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="获取管理员权限"><a href="#获取管理员权限" class="headerlink" title="获取管理员权限"></a>获取管理员权限</h2><p>在执行某些PowerShell命令时，必须有管理员权限，才能正常运行。但是，通过批处理文件或者CMD命令，无法触发UAC来提升权限。但是，我们可以通过PowerShell的Start-Process -Verb RunAS命令，来实现提权。</p>
+<p>以下命令开启了两个PowerShell的进程，一个用来运行Start-Process，另外一个由Start-Process生成。注意%~dpn0.ps1用了两个双引号。</p>
+<pre class="line-numbers language-none"><code class="language-none">PowerShell.exe -Command &quot;&amp; &#123;Start-Process PowerShell.exe -ArgumentList &#39;-ExecutionPolicy Bypass -File &quot;&quot;%~dpn0.ps1&quot;&quot;&#39; -Verb RunAs&#125;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+
+
+<h2 id="用户自定义PowerShell配置文件"><a href="#用户自定义PowerShell配置文件" class="headerlink" title="用户自定义PowerShell配置文件"></a>用户自定义PowerShell配置文件</h2><p>有些情况下，用户可能会修改PowerShell配置文件的默认设置，这种情况有可能导致脚本运行失败。为了避免这种情况，我们可以采用-NoProfile参数，这样，执行脚本的时候，就不会去加载用户的配置文件。</p>
+<pre class="line-numbers language-none"><code class="language-none">PowerShell.exe -NoProfile -Command &quot;&amp; &#123;Start-Process PowerShell.exe -ArgumentList &#39;-NoProfile -ExecutionPolicy Bypass -File &quot;&quot;%~dpn0.ps1&quot;&quot;&#39; -Verb RunAs&#125;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<p><strong>[参考资料]</strong> </p>
+<ul>
+<li><p><a href="https://www.howtogeek.com/204088/how-to-use-a-batch-file-to-make-powershell-scripts-easier-to-run/#:~:text=PowerShell.exe">How to Use a Batch File to Make PowerShell Scripts Easier to Run (howtogeek.com)</a></p>
+</li>
+<li><p><a href="https://devblogs.microsoft.com/scripting/check-for-admin-credentials-in-a-powershell-script/">Check for Admin Credentials in a PowerShell Script - Scripting Blog (microsoft.com)</a></p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>编程</category>
+      </categories>
+      <tags>
+        <tag>powershell</tag>
       </tags>
   </entry>
   <entry>
@@ -3706,7 +3912,7 @@ if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
 <p>8000:      SSH Client监听TCP服务端口8000</p>
 <p><a href="http://www.intranet.domain/">www.intranet.domain</a>          远端内网服务器的主机域名</p>
 <p>80      远端内网服务器的服务端口80</p>
-<p><a href="mailto:&#114;&#x6f;&#x6f;&#x74;&#x40;&#115;&#115;&#104;&#x73;&#x65;&#114;&#x76;&#101;&#114;&#46;&#105;&#110;&#116;&#x72;&#x61;&#110;&#101;&#116;&#46;&#x64;&#x6f;&#x6d;&#x61;&#x69;&#110;">&#114;&#x6f;&#x6f;&#x74;&#x40;&#115;&#115;&#104;&#x73;&#x65;&#114;&#x76;&#101;&#114;&#46;&#105;&#110;&#116;&#x72;&#x61;&#110;&#101;&#116;&#46;&#x64;&#x6f;&#x6d;&#x61;&#x69;&#110;</a>   远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
+<p><a href="mailto:&#114;&#111;&#x6f;&#116;&#x40;&#115;&#115;&#x68;&#x73;&#x65;&#114;&#118;&#x65;&#x72;&#46;&#x69;&#110;&#116;&#x72;&#x61;&#x6e;&#101;&#x74;&#46;&#x64;&#111;&#x6d;&#x61;&#105;&#110;">&#114;&#111;&#x6f;&#116;&#x40;&#115;&#115;&#x68;&#x73;&#x65;&#114;&#118;&#x65;&#x72;&#46;&#x69;&#110;&#116;&#x72;&#x61;&#x6e;&#101;&#x74;&#46;&#x64;&#111;&#x6d;&#x61;&#105;&#110;</a>   远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
 <p>注意：由于SSH Client只是在localhost(127.0.0.1)监听服务端口8000，所以App Client必须和SSH Client在同一台计算机上，才能访问远程应用<a href="http://www.intranet.domain./">www.intranet.domain。</a></p>
 <p>如果App Client运行在另外一台计算机上，则需要使用以下命令，让SSH Client在IP地址0.0.0.0上监听服务端口8000，这样，SSH Client就可以接收来自于任何计算机的客户端程序访问。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">ssh</span> -L <span class="token number">0.0</span>.0.0:8000:www.intranet.domain:80 root@sshserver.intranet.domain<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -3722,7 +3928,7 @@ if __name__ &#x3D;&#x3D; &#39;__main__&#39;:
 <p>8000:      SSH Servert监听TCP服务端口8000</p>
 <p><a href="http://www.intranet.domain/">www.intranet.domain</a>  远端内网服务器的主机域名</p>
 <p>80         远端内网服务器的服务端口80</p>
-<p><a href="mailto:&#114;&#111;&#x6f;&#116;&#64;&#x73;&#115;&#x68;&#115;&#101;&#114;&#118;&#101;&#114;&#46;&#105;&#110;&#x74;&#114;&#x61;&#110;&#x65;&#x74;&#46;&#x64;&#x6f;&#109;&#97;&#x69;&#110;">&#114;&#111;&#x6f;&#116;&#64;&#x73;&#115;&#x68;&#115;&#101;&#114;&#118;&#101;&#114;&#46;&#105;&#110;&#x74;&#114;&#x61;&#110;&#x65;&#x74;&#46;&#x64;&#x6f;&#109;&#97;&#x69;&#110;</a>  远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
+<p><a href="mailto:&#114;&#x6f;&#111;&#x74;&#64;&#115;&#115;&#x68;&#115;&#x65;&#114;&#118;&#x65;&#114;&#x2e;&#x69;&#x6e;&#x74;&#114;&#x61;&#110;&#101;&#x74;&#46;&#100;&#111;&#x6d;&#x61;&#x69;&#110;">&#114;&#x6f;&#111;&#x74;&#64;&#115;&#115;&#x68;&#115;&#x65;&#114;&#118;&#x65;&#114;&#x2e;&#x69;&#x6e;&#x74;&#114;&#x61;&#110;&#101;&#x74;&#46;&#100;&#111;&#x6d;&#x61;&#x69;&#110;</a>  远端SSH服务器的登录账号(root)和地址(sshserver.intranet.domain)</p>
 <p>注意：默认情况下，SSH Server只会绑定IP地址127.0.0.1，如果需要绑定IP地址0.0.0.0，需要修改sshd_config配置文件中的参数<strong>GatewayPorts</strong>。</p>
 <p>以下是关于参数<strong>GatewayPorts</strong>的三种方式：</p>
 <pre class="line-numbers language-none"><code class="language-none">GatewayPorts no<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
@@ -4147,29 +4353,6 @@ tmpfs            44M     0   44M   0% &#x2F;run&#x2F;user&#x2F;1000<span aria-hi
       </tags>
   </entry>
   <entry>
-    <title>树莓派搭建BT下载服务器</title>
-    <url>/2019/01/20/zhi-neng-jia-ju/shu-mei-pai-da-jian-bt-xia-zai-fu-wu-qi/</url>
-    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre class="line-numbers language-none"><code class="language-none">sudo apt-get install transmission-daemon<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>修改配置文件：&#x2F;etc&#x2F;transmission-daemon&#x2F;settings.json </p>
-<pre class="line-numbers language-none"><code class="language-none">&quot;download-dir&quot;: &quot;&#x2F;mnt&#x2F;HDD160GB&#x2F;Video&quot;,  #配置下载目录，下载后的文件将存放在该目录下
-&quot;rpc-username&quot;: &quot;transmission&quot;,        #登录BT Web界面的用户名
-&quot;rpc-password&quot;: &quot;transmission&quot;,        #设置密码，保存配置文件后，密码自动变成密文
-<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<h1 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h1><pre class="line-numbers language-none"><code class="language-none">sudo service transmission-daemon reload
-sudo service transmission-daemon restart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h1 id="访问方式"><a href="#访问方式" class="headerlink" title="访问方式"></a>访问方式</h1><p>通过浏览器访问地址：<a href="http://192.168.1.3:9091/">http://192.168.1.3:9091/</a> ，用户名和密码：transmission&#x2F;transmission</p>
-]]></content>
-      <categories>
-        <category>智能家居</category>
-      </categories>
-      <tags>
-        <tag>raspberrypi</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>树莓派搭建DLNA</title>
     <url>/2019/01/20/zhi-neng-jia-ju/shu-mei-pai-da-jian-dlna/</url>
     <content><![CDATA[<h1 id="安装mimidlna"><a href="#安装mimidlna" class="headerlink" title="安装mimidlna"></a>安装mimidlna</h1><p>在命令行输入以下命令：</p>
@@ -4245,6 +4428,29 @@ log_dir&#x3D;&#x2F;samba&#x2F;DLNA&#x2F;log<span aria-hidden="true" class="line-
 <p>解决方法：调整分辨率为1920x1080以后，VNC才能正常显示。</p>
 <p>输入<strong>sudo raspi-config</strong>, 打开树莓派配置工具。</p>
 <p><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/432.png"><br><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/433.png"><br><img src="/2020/11/08/zhi-neng-jia-ju/shu-mei-pai-mei-you-xian-shi-qi-ru-he-pei-zhi-qi-dong-ssh-he-vnc-fu-wu/434.png"></p>
+]]></content>
+      <categories>
+        <category>智能家居</category>
+      </categories>
+      <tags>
+        <tag>raspberrypi</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>树莓派搭建BT下载服务器</title>
+    <url>/2019/01/20/zhi-neng-jia-ju/shu-mei-pai-da-jian-bt-xia-zai-fu-wu-qi/</url>
+    <content><![CDATA[<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><pre class="line-numbers language-none"><code class="language-none">sudo apt-get install transmission-daemon<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>修改配置文件：&#x2F;etc&#x2F;transmission-daemon&#x2F;settings.json </p>
+<pre class="line-numbers language-none"><code class="language-none">&quot;download-dir&quot;: &quot;&#x2F;mnt&#x2F;HDD160GB&#x2F;Video&quot;,  #配置下载目录，下载后的文件将存放在该目录下
+&quot;rpc-username&quot;: &quot;transmission&quot;,        #登录BT Web界面的用户名
+&quot;rpc-password&quot;: &quot;transmission&quot;,        #设置密码，保存配置文件后，密码自动变成密文
+<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
+
+<h1 id="重启服务"><a href="#重启服务" class="headerlink" title="重启服务"></a>重启服务</h1><pre class="line-numbers language-none"><code class="language-none">sudo service transmission-daemon reload
+sudo service transmission-daemon restart<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<h1 id="访问方式"><a href="#访问方式" class="headerlink" title="访问方式"></a>访问方式</h1><p>通过浏览器访问地址：<a href="http://192.168.1.3:9091/">http://192.168.1.3:9091/</a> ，用户名和密码：transmission&#x2F;transmission</p>
 ]]></content>
       <categories>
         <category>智能家居</category>
@@ -4558,244 +4764,6 @@ Done.<span aria-hidden="true" class="line-numbers-rows"><span></span><span></spa
       </categories>
       <tags>
         <tag>macos</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>常用公共DNS</title>
-    <url>/2018/11/15/za-qi-za-ba/chang-yong-gong-gong-dns/</url>
-    <content><![CDATA[<p><strong>CloudFlare DNS</strong></p>
-<p>1.1.1.1<br>1.0.0.1<br>2606:4700:4700::1111<br>2606:4700:4700::1001</p>
-<p><strong>百度公共DNS</strong></p>
-<p>180.76.76.76<br>2400:da00::6666</p>
-<p><strong>中国互联网络中心</strong></p>
-<p>1.2.4.8<br>210.2.4.8<br>101.226.4.6<br>123.125.81.6</p>
-<p><strong>阿里DNS</strong></p>
-<p>223.5.5.5<br>223.6.6.6</p>
-<p><strong>Google DNS</strong></p>
-<p>8.8.8.8<br>8.8.4.4</p>
-<span id="more"></span>    
-<p><strong>OpenDNS</strong></p>
-<p>208.67.222.222<br>208.67.220.220<br>208.67.222.220<br>208.67.220.222</p>
-<p><strong>OneDNS</strong></p>
-<p>117.50.11.11<br>117.50.22.22</p>
-<p><strong>DNSPod DNS+</strong></p>
-<p>119.29.29.29<br>119.28.28.28<br>182.254.118.118<br>182.254.116.116</p>
-]]></content>
-      <categories>
-        <category>杂七杂八</category>
-      </categories>
-      <tags>
-        <tag>dns</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何使用Git</title>
-    <url>/2021/12/30/bian-cheng/git/</url>
-    <content><![CDATA[<p> <img src="/2021/12/30/bian-cheng/git/git.jpg" alt="Git"> 本文主要介绍如何使用Git，包括Git客户端，Github以及Gitee。</p>
-<h2 id="Git客户端"><a href="#Git客户端" class="headerlink" title="Git客户端"></a>Git客户端</h2><p>下载地址：<a href="https://git-scm.com/">Git (git-scm.com)</a></p>
-<p>文档：<a href="https://git-scm.com/docs">Git - Reference (git-scm.com)</a></p>
-<h2 id="初始设置"><a href="#初始设置" class="headerlink" title="初始设置"></a>初始设置</h2><p>安装完成后，需要先设置一下用户名称和邮箱：</p>
-<pre class="line-numbers language-none"><code class="language-none">git config --global user.name &quot;Your Name&quot;
-git config --global user.email &quot;email@example.com&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<span id="more"></span>
-<h2 id="创建Git版本库"><a href="#创建Git版本库" class="headerlink" title="创建Git版本库"></a>创建Git版本库</h2><p>使用命令<code>git init</code>，创建一个新的Git版本库，或者重新初始化现有的版本库。创建成功后，会在当前目录创建一个隐藏目录.git。</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git init
-Initialized empty Git repository in C:&#x2F;project&#x2F;.git&#x2F;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h2 id="修改初始化仓库时的默认分支名称-master-gt-main"><a href="#修改初始化仓库时的默认分支名称-master-gt-main" class="headerlink" title="修改初始化仓库时的默认分支名称(master -&gt; main)"></a>修改初始化仓库时的默认分支名称(master -&gt; main)</h2><p>初始化仓库时，Github的默认分支名称已经从master更改为main，但是Git客户端和Gitee的默认分支名称仍然为master。通过以下方式，可以修改Git客户端和Gitee的版本库名称。</p>
-<h3 id="Git客户端-1"><a href="#Git客户端-1" class="headerlink" title="Git客户端"></a>Git客户端</h3><p>使用以下命令，将Git客户端创建的默认分支名称设置为main</p>
-<pre class="line-numbers language-none"><code class="language-none">git config --global init.defaultBranch main<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h3 id="Gitee"><a href="#Gitee" class="headerlink" title="Gitee"></a>Gitee</h3><p>在Gitee的后台管理界面，选择<strong>设置</strong>-<strong>仓库首选项</strong>，将master修改为main。</p>
-<p><img src="/2021/12/30/bian-cheng/git/2021-12-30_141954.jpg" alt="Gitee"></p>
-<h2 id="修改本地的分支名称-master-gt-main"><a href="#修改本地的分支名称-master-gt-main" class="headerlink" title="修改本地的分支名称(master -&gt; main)"></a>修改本地的分支名称(master -&gt; main)</h2><p>如果初始化完成后，本地分支的名称为master，可以通过命令<code>git branch -m master main</code>修改为main。</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git branch -m master main
-$ git branch
-* main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p>然后，通过命令<code>git push -u gitee main</code>将本地分支推送到远程分支。并且，将远程分支设置为与main关联。</p>
-<pre class="line-numbers language-none"><code class="language-none">$ git push -u gitee main
-$ git remote set-head gitee main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<h2 id="Git客户端配置文件"><a href="#Git客户端配置文件" class="headerlink" title="Git客户端配置文件"></a>Git客户端配置文件</h2><p>Git客户端的配置文件是在用户目录(~)下的<code>.gitconfig</code>文件。</p>
-<p>文件内容如下：</p>
-<pre class="line-numbers language-none"><code class="language-none">:&gt; Get-Content ~\.gitconfig
-[user]
-        email &#x3D; andyliu50@outlook.com
-        name &#x3D; Andy Liu
-[core]
-        autocrlf &#x3D; true
-[init]
-        defaultBranch &#x3D; main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-<h2 id="Git本地和远程同步"><a href="#Git本地和远程同步" class="headerlink" title="Git本地和远程同步"></a>Git本地和远程同步</h2><h3 id="方法一"><a href="#方法一" class="headerlink" title="方法一"></a>方法一</h3><p>本地已经完成仓库的初始化，在远程Github或者Gitee上创建相同名称的仓库。然后，在本地运行以下命令：</p>
-<pre class="line-numbers language-none"><code class="language-none">git remote add github git@github.com:andyliu50&#x2F;mytool.git
-git push -u github main<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<p>其中，github是远程仓库在本地的名称，默认一般用origin，由于本地要同时和Github和Gitee同步，为了便于区分，因此将远程仓库设置为github。andyliu50是github的账号名称，mytool是远程仓库的实际名称。</p>
-<p>命令<code>git push</code>将本地分支main推送到远程仓库。</p>
-<h3 id="方法二"><a href="#方法二" class="headerlink" title="方法二"></a>方法二</h3><p>本地不创建仓库，在远程Github或者Gitee创建仓库，然后，在本地运行以下命令，将远程仓库克隆到本地：</p>
-<pre class="line-numbers language-none"><code class="language-none">git clone git@github.com:andyliu50&#x2F;mytool.git<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<h2 id="创建标签并推送到远程"><a href="#创建标签并推送到远程" class="headerlink" title="创建标签并推送到远程"></a>创建标签并推送到远程</h2><p>用<code>git tag</code>可以创建标签</p>
-<pre class="line-numbers language-none"><code class="language-none">git tag v1.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>可以将一个标签推送到远程库</p>
-<pre class="line-numbers language-none"><code class="language-none">git push github v1.0<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p>也可以将多个标签推送到远程库</p>
-<pre class="line-numbers language-none"><code class="language-none">git push github --tags<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>git</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>PowerShell Tips</title>
-    <url>/2021/04/15/bian-cheng/powershell-tips/</url>
-    <content><![CDATA[<p>本文主要介绍关于PowerShell中的一些小技巧，以便于需要时查询。</p>
-<h2 id="如何知道脚本文件所在路径"><a href="#如何知道脚本文件所在路径" class="headerlink" title="如何知道脚本文件所在路径"></a>如何知道脚本文件所在路径</h2><p>有时候为了能访问与脚本在相同目录的文件，需要知道脚本的路径位置。通过变量$MyInvocation可以获取脚本的路径和名称。</p>
-<p>$MyInvocation是一种自动变量（Automatic Variables），自动变量一种用于存储PowerShell状态的特殊变量，由PowerShell创建和维护。关于自动变量的详细介绍，可以通过命令<code>Help about_Automatic_Variables</code>查看。</p>
-<pre class="line-numbers language-none"><code class="language-none">$ScriptPath &#x3D; $MyInvocation.MyCommand.Path
-$ScriptName &#x3D; $MyInvocation.MyCommand.Name
-$ScriptDir &#x3D; Split-Path $ScriptPath<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><code>$MyInvocation.MyCommand.Path</code>返回的是脚本文件的绝对路径，通过命令<code>Split-Path</code>，可以获取脚本文件所在目录的绝对路径。</p>
-<h2 id="批处理文件中-dpn0"><a href="#批处理文件中-dpn0" class="headerlink" title="批处理文件中%~dpn0"></a>批处理文件中%~dpn0</h2><p>当把批处理文件和其它文件(PowerShell脚本)部署到计算机上后，如果无法知道文件所在的目录，就可以使用%~dpn0。</p>
-<p>在批处理文件中，**%n**是一种特殊变量：</p>
-<p><strong>%0</strong>: 批处理文件的完整路径（包括批处理文件的文件名和后缀）<br><strong>%1</strong>: 批处理文件后面的第一个参数<br><strong>%2</strong>: 批处理文件后面的第二个参数<br>… </p>
-<p>另外，以下参数可以和%0结合使用，用于表达文件路径：</p>
-<p><strong>~d</strong>: 驱动器盘符，例如C:, D:\<br><strong>~p</strong>: 路径（不包含驱动器盘符和批处理文件名）<br><strong>~n</strong>: 批处理文件名</p>
-<p>所以，如果结合起来使用就是：</p>
-<p><strong>%0</strong>: 批处理文件的完整路径（<strong>包含批处理文件的后缀</strong>）<br><strong>%dp0</strong>:  批处理文件所在的目录<br><strong>%dpn0</strong>: 批处理文件的完整路径（<strong>不包含批处理文件的后缀</strong>）</p>
-<p>举例：</p>
-<ol>
-<li>如果在同一个目录下，有两个文件：test.bat, test.ps1，由于这两个文件的文件名相同，后缀不同，因此，可以在test.bat中，使用以下代码，通过运行test.bat文件来执行PS脚本。</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">@ECHO OFF
-PowerShell.exe -Command &quot;&amp; &#39;%~dpn0.ps1&#39;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-<ol start="2">
-<li>如果在同一个目录下，有两个文件：test.bat, myscript.ps1，由于这两个文件的文件名不同，因此，在test.bat中，需要使用以下代码。由于~n代表批处理文件的文件名，此处需要删除n，替换成PS脚本的文件名。</li>
-</ol>
-<pre class="line-numbers language-none"><code class="language-none">@ECHO OFF
-PowerShell.exe -Command &quot;&amp; &#39;%~dp0myscript.ps1&#39;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
-
-
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>powershell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>创建计划任务</title>
-    <url>/2021/12/31/bian-cheng/chuang-jian-ji-hua-ren-wu/</url>
-    <content><![CDATA[<p><img src="/2021/12/31/bian-cheng/chuang-jian-ji-hua-ren-wu/powershell.png" alt="PowerShell"><br>本文主要介绍如何用PowerShell命令创建计划任务。</p>
-<p>通过PowerShell创建计划任务稍微有点复杂，需要通过三条命令来分别设置Settings, Action和Trigger，然后再用命令<code>Register-ScheduledTask</code>创建任务。</p>
-<p><strong>New-ScheduledTaskSettingsSet</strong> - 该命令主要用于设置一些参数，例如网络连接可用时才运行任务，使用交流电源时运行任务等。</p>
-<p><strong>New-ScheduledTaskAction</strong> - 该命令设置需要运行的程序和脚本等。</p>
-<p><strong>New-ScheduledTaskTrigger</strong> - 该命令设置触发任务运行的条件，例如启动时，登录时，某个特定时间运行任务。</p>
-<p><strong>Register-ScheduledTask</strong> - 该命令需要利用以上三条命令的结果，创建任务。</p>
-<span id="more"></span>
-<p>以下的命令可以创建一个名为ResetPassword的计划任务，该任务会在系统启动的时候运行，并且只有**当网络连接可用时(-RunOnlyIfNetworkAvailable)<strong>才会运行。该任务以SYSTEM账号运行，并且使用</strong>最高权限运行(-RunLevel Highest)**。</p>
-<pre class="line-numbers language-none"><code class="language-none">$TaskName &#x3D; &#39;ResetPassword&#39;
-$Setting &#x3D; New-ScheduledTaskSettingsSet -RunOnlyIfNetworkAvailable
-$Action &#x3D; New-ScheduledTaskAction -Execute $BatchFile
-$Trigger &#x3D; New-ScheduledTaskTrigger -AtStartup
-Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Settings $Setting -User &#39;SYSTEM&#39; -RunLevel Highest<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-
-
-<p>以下的命令可以创建一个名为MonitorInternet的计划任务，该任务创建后，**会在5分钟以后触发运行，并且之后会无限期地每隔五分钟运行一次(-Once -At (Get-Date).Addminutes(5) -RepetitionInterval (New-TimeSpan -Minutes 5))**。并且，该任务设置了条件，即使切换到电池（笔记本电脑），也不要停止运行任务。</p>
-<pre class="line-numbers language-none"><code class="language-none">$TaskName &#x3D; &#39;MonitorInternet&#39;
-$Setting &#x3D; New-ScheduledTaskSettingsSet -DontStopIfGoingOnBatteries
-$Action &#x3D; New-ScheduledTaskAction -Execute $BatchFile
-$Trigger &#x3D; New-ScheduledTaskTrigger -Once -At (Get-Date).Addminutes(5) -RepetitionInterval (New-TimeSpan -Minutes 5)
-Register-ScheduledTask -TaskName $TaskName -Action $Action -Trigger $Trigger -Settings $Setting -User &#39;SYSTEM&#39;<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span></span></code></pre>
-
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>powershell</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>如何双击运行PowerShell脚本</title>
-    <url>/2021/11/08/bian-cheng/shuang-ji-yun-xing-powershell-jiao-ben/</url>
-    <content><![CDATA[<p>由于PowerShell脚本双击后，系统默认使用记事本打开脚本，导致脚本无法直接运行。本文主要介绍如何可以通过双击运行的方式，直接运行PowerShell脚本。</p>
-<p>由于Windows系统对PowerShell做了许多安全性的防护措施，导致PowerShell不像以前的批处理文件那样，复制到电脑上就可以直接运行。目前，主要有以下一些原因会导致运行PowerShell出现问题：</p>
-<ul>
-<li><p><strong>默认情况下，PowerShell脚本的.ps1文件与记事本关联。</strong></p>
-<p>Windows系统默认将.ps1文件与记事本关联，因此，如果双击运行脚本，只会打开记事本，并显示脚本的内容，而不会通过PowerShell运行脚本。</p>
-</li>
-<li><p><strong>PowerShell默认阻止运行来自于外部的脚本。</strong></p>
-</li>
-</ul>
-<p>​        默认情况下，PowerShell的ExecutionPolicy阻止运行任何来自于外部的脚本，例如从互        联网下载的脚本，或者来自于网络共享的脚本等。</p>
-<ul>
-<li><strong>有些PowerShell脚本需要管理员权限才能正常运行。</strong></li>
-</ul>
-<p>​        有些命令需要管理员权限才能正常运行，因此需要获取管理员权限并执行脚本。</p>
-<ul>
-<li><strong>有些用户可能有自定义的PowerShell环境</strong>。</li>
-</ul>
-<p>​        有些高级用户，可能会修改系统的PowerShell环境，因此导致脚本运行不成功。</p>
-<span id="more"></span>
-
-<h2 id="双击运行脚本"><a href="#双击运行脚本" class="headerlink" title="双击运行脚本"></a>双击运行脚本</h2><p>虽然双击运行PowerShell脚本，只会打开记事本。但是，我们仍然可以通过.BAT批处理文件来调用PowerShell脚本，从而实现双击运行脚本的目的。</p>
-<p>首先，需要将批处理文件的文件名设置为与PowerShell脚本相同的文件名。例如，PowerShell脚本的文件名为MyScript.ps1，那么批处理文件的文件名为MyScript.bat。然后，将这两个文件放到相同的目录下。</p>
-<p>在批处理文件中，写入以下代码：</p>
-<pre class="line-numbers language-none"><code class="language-none">@ECHO OFF
-PowerShell.exe -Command &quot;&amp; &#39;%~dpn0.ps1&#39;&quot;
-PAUSE<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span></span></code></pre>
-
-<p><strong>@ECHO OFF：</strong>阻止命令行提示符以及脚本中的命令显示在屏幕上。</p>
-<p><strong>PowerShell.exe -Command “&amp; ‘%~dpn0.ps1’”：</strong>这条命令用于调用PowerShell.exe，从而可以执行脚本文件。**’%~dpn0.ps1’**就是PS脚本文件的完整路径。</p>
-<p>以下是关于**’%~dpn0.ps1’**的详细说明，详细内容，请参考文档：[PowerShell Tips]({filename}PowerShell Tips.md)</p>
-<blockquote>
-<p>当把批处理文件和其它文件(PowerShell脚本)部署到计算机上后，如果无法知道文件所在的目录，就可以使用%~dpn0。</p>
-<p>在批处理文件中，**%n<strong>是一种特殊变量：</strong>%0**: 批处理文件的完整路径（包括批处理文件的文件名和后缀）<br><strong>%1</strong>: 批处理文件后面的第一个参数<br><strong>%2</strong>: 批处理文件后面的第二个参数<br>… </p>
-<p><strong>~d</strong>: 驱动器盘符，例如C:, D:<br><strong>~p</strong>: 路径（不包含驱动器盘符和批处理文件名）<br><strong>~n</strong>: 批处理文件名</p>
-<p>所以，如果结合起来使用就是：</p>
-<p><strong>%0</strong>: 批处理文件的完整路径（<strong>包含批处理文件的后缀</strong>）<br><strong>%dp0</strong>:  批处理文件所在的目录<br><strong>%dpn0</strong>: 批处理文件的完整路径（<strong>不包含批处理文件的后缀</strong>）</p>
-</blockquote>
-<h2 id="ExecutionPolcy"><a href="#ExecutionPolcy" class="headerlink" title="ExecutionPolcy"></a>ExecutionPolcy</h2><p>默认情况下，Windows系统阻止运行PS脚本。但是，通过批处理文件，我们可以临时-ExecutionPolicy的设置，来达到执行脚本的目的。注意：该ExecutionPolicy的设置只对当前的PowerShell会话有效。</p>
-<pre class="line-numbers language-none"><code class="language-none">PowerShell.exe -ExecutionPolicy Bypass -Command &quot;&amp; &#39;%~dpn0.ps1&#39;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h2 id="获取管理员权限"><a href="#获取管理员权限" class="headerlink" title="获取管理员权限"></a>获取管理员权限</h2><p>在执行某些PowerShell命令时，必须有管理员权限，才能正常运行。但是，通过批处理文件或者CMD命令，无法触发UAC来提升权限。但是，我们可以通过PowerShell的Start-Process -Verb RunAS命令，来实现提权。</p>
-<p>以下命令开启了两个PowerShell的进程，一个用来运行Start-Process，另外一个由Start-Process生成。注意%~dpn0.ps1用了两个双引号。</p>
-<pre class="line-numbers language-none"><code class="language-none">PowerShell.exe -Command &quot;&amp; &#123;Start-Process PowerShell.exe -ArgumentList &#39;-ExecutionPolicy Bypass -File &quot;&quot;%~dpn0.ps1&quot;&quot;&#39; -Verb RunAs&#125;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-
-
-<h2 id="用户自定义PowerShell配置文件"><a href="#用户自定义PowerShell配置文件" class="headerlink" title="用户自定义PowerShell配置文件"></a>用户自定义PowerShell配置文件</h2><p>有些情况下，用户可能会修改PowerShell配置文件的默认设置，这种情况有可能导致脚本运行失败。为了避免这种情况，我们可以采用-NoProfile参数，这样，执行脚本的时候，就不会去加载用户的配置文件。</p>
-<pre class="line-numbers language-none"><code class="language-none">PowerShell.exe -NoProfile -Command &quot;&amp; &#123;Start-Process PowerShell.exe -ArgumentList &#39;-NoProfile -ExecutionPolicy Bypass -File &quot;&quot;%~dpn0.ps1&quot;&quot;&#39; -Verb RunAs&#125;&quot;<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-
-<p><strong>[参考资料]</strong> </p>
-<ul>
-<li><p><a href="https://www.howtogeek.com/204088/how-to-use-a-batch-file-to-make-powershell-scripts-easier-to-run/#:~:text=PowerShell.exe">How to Use a Batch File to Make PowerShell Scripts Easier to Run (howtogeek.com)</a></p>
-</li>
-<li><p><a href="https://devblogs.microsoft.com/scripting/check-for-admin-credentials-in-a-powershell-script/">Check for Admin Credentials in a PowerShell Script - Scripting Blog (microsoft.com)</a></p>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>编程</category>
-      </categories>
-      <tags>
-        <tag>powershell</tag>
       </tags>
   </entry>
 </search>
