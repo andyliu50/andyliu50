@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "智能家居/技术小贴士.md",
+                "file": "blog/个人博客-Hexo多终端同步篇.md",
                 "mode": "source",
                 "source": false
               }
@@ -64,6 +64,14 @@
               "type": "starred",
               "state": {}
             }
+          },
+          {
+            "id": "b45b08aa1bfb6a21",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {}
+            }
           }
         ]
       }
@@ -85,7 +93,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "智能家居/技术小贴士.md",
+                "file": "blog/个人博客-Hexo多终端同步篇.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -102,7 +110,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "智能家居/技术小贴士.md",
+                "file": "blog/个人博客-Hexo多终端同步篇.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               }
@@ -125,7 +133,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "智能家居/技术小贴士.md"
+                "file": "blog/个人博客-Hexo多终端同步篇.md"
               }
             }
           },
@@ -166,6 +174,11 @@
   },
   "active": "391cf38d90b02e2e",
   "lastOpenFiles": [
+    "blog/个人博客-Hexo安装篇.md",
+    "blog/个人博客-GitHub-Pages篇.md",
+    "手机/Windows和iOS备忘录.md",
+    "智能家居/技术小贴士.md",
+    "中医/尝试用二至丸治疗白发.md",
     "python/面向对象的编程.md",
     "稍后阅读/浏览器扩展合集：实用而有趣的浏览器扩展，我们又为你找到了这 8 款 - 少数派.md",
     "Pasted image 20230425191830.png",
@@ -198,11 +211,6 @@
     "稍后阅读/ChatGPT 之父承认 GPT-5 并不存在，为什么 OpenAI 总是这么实诚？｜万字详述.md",
     "稍后阅读/告别十年印象笔记，用 Obsidian 一年最喜欢的 7 个功能 - 少数派.md",
     "RealPython/Python args and kwargs Demystified – Real Python.md",
-    "RealPython/Python for Loops (Definite Iteration) – Real Python.md",
-    "RealPython/How to Iterate Through a Dictionary in Python – Real Python.md",
-    "RealPython/Dictionaries in Python – Real Python.md",
-    "中医/药方.md",
-    "RealPython/Using Python datetime to Work With Dates and Times – Real Python.md",
     "中医/医案/尝试用二至丸治疗白发/image202302221900211.png",
     "中医/医案/尝试用二至丸治疗白发/E03DCBDD-6B51-46B6-B7DD-18C6C3FD86C1_1_201_a.jpeg",
     "中医/医案/尝试用二至丸治疗白发",
