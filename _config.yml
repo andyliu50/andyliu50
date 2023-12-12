@@ -107,7 +107,7 @@ theme: next
 deploy:
   - type: git
     repo: pi@pi:/home/pi/myapps/git_repository/myblog.git
-    branch: pi-pages
+    branch: main
   # - type: git
   #   repo: git@github.com:andyliu50/andyliu50.github.io.git
   #   branch: master
