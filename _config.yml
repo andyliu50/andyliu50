@@ -105,6 +105,9 @@ theme: next
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
+  - type: git
+    repo: pi@pi:/home/pi/myapps/git_repository/myblog.git
+    branch: pi-pages
   # - type: git
   #   repo: git@github.com:andyliu50/andyliu50.github.io.git
   #   branch: master
