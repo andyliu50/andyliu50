@@ -365,4 +365,145 @@ Jack <span class="token keyword">is</span> <span class="token number">3</span> y
         <tag>python-intermediate</tag>
       </tags>
   </entry>
+  <entry>
+    <title>安装Home Assistant</title>
+    <url>/2021/10/17/an-zhuang-home-assistant/</url>
+    <content><![CDATA[<h2 id="通过Docker的方式安装Home-Assistant"><a href="#通过Docker的方式安装Home-Assistant" class="headerlink" title="通过Docker的方式安装Home Assistant"></a>通过Docker的方式安装Home Assistant</h2><h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>1 更新树莓派的系统。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
+<span class="token function">sudo</span> <span class="token function">apt-get</span> upgrade<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p>2 下载Docker安装脚本，然后执行脚本安装Docker。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">curl</span> -fsSL https://get.docker.com -o get-docker.sh
+<span class="token function">sudo</span> <span class="token function">sh</span> get-docker.sh --mirror Aliyun<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
+
+<p><strong>需要注意的是，由于国内访问Docker官方的安装源很慢，因此可以添加参数<code>--mirror Aliyun</code>，将安装源更改为阿里云镜像，从而提高安装速度。</strong></p>
+<p>3 默认情况下，只有拥有管理员权限的账号才可以运行docker，如果登录的账号是普通用户，需要通过sudo来运行docker。或者，也可以将普通用户账号添加到docker用户组，这样该用户就可以直接运行docker的命令。</p>
+<p>以下命令可以将用户<code>pi</code>添加到docker用户组中。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">usermod</span> -aG <span class="token function">docker</span> pi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
+
+<span id="more"></span>
+
+<p>4 使用命令<code>docker version</code>和<code>docker info</code>查看Docker的版本信息和运行状态。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">docker</span> version
+
+Client:
+ Version:           <span class="token number">20.10</span>.5+dfsg1
+ API version:       <span class="token number">1.41</span>
+ Go version:        go1.15.15
+ Git commit:        55c4c88
+ Built:             Mon May <span class="token number">30</span> <span class="token number">18</span>:34:49 <span class="token number">2022</span>
+ OS/Arch:           linux/arm64
+ Context:           default
+ Experimental:      <span class="token boolean">true</span>
+
+Server:
+ Engine:
+  Version:          <span class="token number">20.10</span>.5+dfsg1
+  API version:      <span class="token number">1.41</span> <span class="token punctuation">(</span>minimum version <span class="token number">1.12</span><span class="token punctuation">)</span>
+  Go version:       go1.15.15
+  Git commit:       363e9a8
+  Built:            Mon May <span class="token number">30</span> <span class="token number">18</span>:34:49 <span class="token number">2022</span>
+  OS/Arch:          linux/arm64
+  Experimental:     <span class="token boolean">false</span>
+ containerd:
+  Version:          <span class="token number">1.4</span>.13~ds1
+  GitCommit:        <span class="token number">1.4</span>.13~ds1-1~deb11u4
+ runc:
+  Version:          <span class="token number">1.0</span>.0~rc93+ds1
+  GitCommit:        <span class="token number">1.0</span>.0~rc93+ds1-5+deb11u2
+ docker-init:
+  Version:          <span class="token number">0.19</span>.0
+  GitCommit:
+
+<span class="token function">docker</span> info<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">docker</span> info
+
+Client:
+ Context:    default
+ Debug Mode: <span class="token boolean">false</span>
+ Plugins:
+  buildx: Docker Buildx <span class="token punctuation">(</span>Docker Inc., v0.10.4<span class="token punctuation">)</span>
+  compose: Docker Compose <span class="token punctuation">(</span>Docker Inc., v2.17.3<span class="token punctuation">)</span>
+
+Server:
+ Containers: <span class="token number">1</span>
+  Running: <span class="token number">1</span>
+  Paused: <span class="token number">0</span>
+  Stopped: <span class="token number">0</span>
+ Images: <span class="token number">1</span>
+ Server Version: <span class="token number">20.10</span>.5+dfsg1
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: <span class="token boolean">true</span>
+  Native Overlay Diff: <span class="token boolean">true</span>
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: <span class="token number">2</span>
+ Plugins:
+  Volume: <span class="token builtin class-name">local</span>
+  Network: bridge <span class="token function">host</span> ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file <span class="token builtin class-name">local</span> logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: <span class="token number">1.4</span>.13~ds1-1~deb11u4
+ runc version: <span class="token number">1.0</span>.0~rc93+ds1-5+deb11u2
+ init version:
+ Security Options:
+  seccomp
+   Profile: default
+  cgroupns
+ Kernel Version: <span class="token number">6.1</span>.21-v8+
+ Operating System: Debian GNU/Linux <span class="token number">11</span> <span class="token punctuation">(</span>bullseye<span class="token punctuation">)</span>
+ OSType: linux
+ Architecture: aarch64
+ CPUs: <span class="token number">4</span>
+ Total Memory: <span class="token number">7</span>.629GiB
+ Name: pi4-8g
+ ID: AT4S:WDKG:SCHA:D56T:SRNU:TJJB:ZEMH:YR67:6GRF:KLVC:B6MI:SVIE
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: <span class="token boolean">false</span>
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: <span class="token boolean">false</span>
+ Insecure Registries:
+  <span class="token number">127.0</span>.0.0/8
+ Registry Mirrors:
+  https://docker.mirrors.ustc.edu.cn/
+ Live Restore Enabled: <span class="token boolean">false</span>
+
+WARNING: No memory limit support
+WARNING: No swap limit support
+WARNING: Support <span class="token keyword">for</span> cgroup v2 is experimental<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="安装Home-Assistant"><a href="#安装Home-Assistant" class="headerlink" title="安装Home Assistant"></a>安装Home Assistant</h3><h3 id="Raspberry-pi-3"><a href="#Raspberry-pi-3" class="headerlink" title="Raspberry pi 3"></a>Raspberry pi 3</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
+  --name homeassistant <span class="token punctuation">\</span>
+  --privileged <span class="token punctuation">\</span>
+  --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">TZ</span><span class="token operator">=</span>MY_TIME_ZONE <span class="token punctuation">\</span>
+  -v /PATH_TO_YOUR_CONFIG:/config <span class="token punctuation">\</span>
+  --network<span class="token operator">=</span>host <span class="token punctuation">\</span>
+  ghcr.io/home-assistant/raspberrypi3-homeassistant:stable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Raspberry-pi-4"><a href="#Raspberry-pi-4" class="headerlink" title="Raspberry pi 4"></a>Raspberry pi 4</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
+  --name homeassistant <span class="token punctuation">\</span>
+  --privileged <span class="token punctuation">\</span>
+  --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">TZ</span><span class="token operator">=</span>MY_TIME_ZONE <span class="token punctuation">\</span>
+  -v /PATH_TO_YOUR_CONFIG:/config <span class="token punctuation">\</span>
+  --network<span class="token operator">=</span>host <span class="token punctuation">\</span>
+  ghcr.io/home-assistant/raspberrypi4-homeassistant:stable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以上安装命令中，一定要将<code>/PATH_TO_YOUR_CONFIG</code>修改成指定的安装路径，例如<code>/home/pi/homeassistant</code>，如果忘记修改，配置文件就会保存到<code>/PATH_TO_YOUR_CONFIG</code>目录。</p>
+<p>安装成功后，打开浏览器访问<code>http://&lt;host&gt;:8123</code>，登录Home Assistant的Web界面。</p>
+]]></content>
+      <categories>
+        <category>Home_Assistant</category>
+      </categories>
+      <tags>
+        <tag>home_assistant</tag>
+      </tags>
+  </entry>
 </search>

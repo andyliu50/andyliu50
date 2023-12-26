@@ -20,25 +20,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"andyliu50.github.io","root":"/","images":"/images","scheme":"Gemini","darkmode":false,"version":"8.14.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="正念日做自己的主人活在当下">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Andy&#39;s Tech">
-<meta property="og:url" content="https://andyliu50.github.io/index.html">
+    <meta name="description" content="通过Docker的方式安装Home Assistant安装Docker1 更新树莓派的系统。 sudo apt-get update sudo apt-get upgrade  2 下载Docker安装脚本，然后执行脚本安装Docker。 curl -fsSL https:&#x2F;&#x2F;get.docker.com -o get-docker.sh sudo sh get-docker.sh --mirro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="安装Home Assistant">
+<meta property="og:url" content="https://andyliu50.github.io/2021/10/17/an-zhuang-home-assistant/index.html">
 <meta property="og:site_name" content="Andy&#39;s Tech">
-<meta property="og:description" content="正念日做自己的主人活在当下">
+<meta property="og:description" content="通过Docker的方式安装Home Assistant安装Docker1 更新树莓派的系统。 sudo apt-get update sudo apt-get upgrade  2 下载Docker安装脚本，然后执行脚本安装Docker。 curl -fsSL https:&#x2F;&#x2F;get.docker.com -o get-docker.sh sudo sh get-docker.sh --mirro">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-10-17T15:02:00.000Z">
+<meta property="article:modified_time" content="2023-12-26T09:35:00.000Z">
 <meta property="article:author" content="Andy">
+<meta property="article:tag" content="home_assistant">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://andyliu50.github.io/">
+<link rel="canonical" href="https://andyliu50.github.io/2021/10/17/an-zhuang-home-assistant/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://andyliu50.github.io/2021/10/17/an-zhuang-home-assistant/","path":"2021/10/17/an-zhuang-home-assistant/","title":"安装Home Assistant"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Andy's Tech - 正念阁</title>
+<title>安装Home Assistant | Andy's Tech</title>
   
 
 
@@ -71,7 +74,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">Andy's Tech</h1>
+      <p class="site-title">Andy's Tech</p>
       <i class="logo-line"></i>
     </a>
       <p class="site-subtitle" itemprop="description">正念阁</p>
@@ -125,7 +128,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -138,6 +141,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%9A%E8%BF%87Docker%E7%9A%84%E6%96%B9%E5%BC%8F%E5%AE%89%E8%A3%85Home-Assistant"><span class="nav-number">1.</span> <span class="nav-text">通过Docker的方式安装Home Assistant</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Docker"><span class="nav-number">1.1.</span> <span class="nav-text">安装Docker</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%89%E8%A3%85Home-Assistant"><span class="nav-number">1.2.</span> <span class="nav-text">安装Home Assistant</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Raspberry-pi-3"><span class="nav-number">1.3.</span> <span class="nav-text">Raspberry pi 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Raspberry-pi-4"><span class="nav-number">1.4.</span> <span class="nav-text">Raspberry pi 4</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -179,113 +183,17 @@
 
     </div>
 
-    <div class="main-inner index posts-expand">
+    <div class="main-inner post posts-expand">
 
-    
+
+  
 
 
 <div class="post-block">
   
   
 
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2022/02/20/mian-xiang-dui-xiang-de-bian-cheng/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.png">
-      <meta itemprop="name" content="Andy">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Andy's Tech">
-      <meta itemprop="description" content="正念日做自己的主人活在当下">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Tech">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/02/20/mian-xiang-dui-xiang-de-bian-cheng/" class="post-title-link" itemprop="url">面向对象的编程</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-02-20 07:49:45" itemprop="dateCreated datePublished" datetime="2022-02-20T07:49:45+00:00">2022-02-20</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-12-11 01:23:26" itemprop="dateModified" datetime="2023-12-11T01:23:26+00:00">2023-12-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          <h1 id="面向对象的编程"><a href="#面向对象的编程" class="headerlink" title="面向对象的编程"></a>面向对象的编程</h1><blockquote>
-<p>注：本文翻译自<a target="_blank" rel="noopener" href="https://realpython.com/python3-object-oriented-programming/">Object-Oriented Programming (OOP) in Python 3 – Real Python</a>。</p>
-</blockquote>
-<p><strong>面向对象的编程</strong>（<strong>Object-oriented programming</strong> ）是一种构建程序的方式，这种方式将相关的属性和行为绑定到个别的对象上。通过本文，你将了解到关于面向对象编程的基础知识。</p>
-<p>理论上来说，对象就好像是一个系统的组件。如果将一个程序想象成一家工厂的各种装配线。在装配线上的每一个环境，系统的部件都会对原材料进行加工处理，最后，原材料被加工成一个产品。</p>
-<p>一个对象包含数据（就像是装配线上需要处理的原材料）和行为（装配线上的组件执行的操作）。</p>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2022/02/20/mian-xiang-dui-xiang-de-bian-cheng/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="https://andyliu50.github.io/2021/10/17/an-zhuang-home-assistant/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -299,13 +207,13 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | Andy's Tech">
+      <meta itemprop="name" content="安装Home Assistant | Andy's Tech">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2021/10/17/an-zhuang-home-assistant/" class="post-title-link" itemprop="url">安装Home Assistant</a>
-        </h2>
+        <h1 class="post-title" itemprop="name headline">
+          安装Home Assistant
+        </h1>
 
         <div class="post-meta-container">
           <div class="post-meta">
@@ -335,6 +243,13 @@
     </span>
 
   
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
 </div>
 
         </div>
@@ -344,7 +259,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="通过Docker的方式安装Home-Assistant"><a href="#通过Docker的方式安装Home-Assistant" class="headerlink" title="通过Docker的方式安装Home Assistant"></a>通过Docker的方式安装Home Assistant</h2><h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>1 更新树莓派的系统。</p>
+        <h2 id="通过Docker的方式安装Home-Assistant"><a href="#通过Docker的方式安装Home-Assistant" class="headerlink" title="通过Docker的方式安装Home Assistant"></a>通过Docker的方式安装Home Assistant</h2><h3 id="安装Docker"><a href="#安装Docker" class="headerlink" title="安装Docker"></a>安装Docker</h3><p>1 更新树莓派的系统。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">apt-get</span> update
 <span class="token function">sudo</span> <span class="token function">apt-get</span> upgrade<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span></span></code></pre>
 
@@ -356,15 +271,125 @@
 <p>3 默认情况下，只有拥有管理员权限的账号才可以运行docker，如果登录的账号是普通用户，需要通过sudo来运行docker。或者，也可以将普通用户账号添加到docker用户组，这样该用户就可以直接运行docker的命令。</p>
 <p>以下命令可以将用户<code>pi</code>添加到docker用户组中。</p>
 <pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">sudo</span> <span class="token function">usermod</span> -aG <span class="token function">docker</span> pi<span aria-hidden="true" class="line-numbers-rows"><span></span></span></code></pre>
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2021/10/17/an-zhuang-home-assistant/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
+
+<span id="more"></span>
+
+<p>4 使用命令<code>docker version</code>和<code>docker info</code>查看Docker的版本信息和运行状态。</p>
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">docker</span> version
+
+Client:
+ Version:           <span class="token number">20.10</span>.5+dfsg1
+ API version:       <span class="token number">1.41</span>
+ Go version:        go1.15.15
+ Git commit:        55c4c88
+ Built:             Mon May <span class="token number">30</span> <span class="token number">18</span>:34:49 <span class="token number">2022</span>
+ OS/Arch:           linux/arm64
+ Context:           default
+ Experimental:      <span class="token boolean">true</span>
+
+Server:
+ Engine:
+  Version:          <span class="token number">20.10</span>.5+dfsg1
+  API version:      <span class="token number">1.41</span> <span class="token punctuation">(</span>minimum version <span class="token number">1.12</span><span class="token punctuation">)</span>
+  Go version:       go1.15.15
+  Git commit:       363e9a8
+  Built:            Mon May <span class="token number">30</span> <span class="token number">18</span>:34:49 <span class="token number">2022</span>
+  OS/Arch:          linux/arm64
+  Experimental:     <span class="token boolean">false</span>
+ containerd:
+  Version:          <span class="token number">1.4</span>.13~ds1
+  GitCommit:        <span class="token number">1.4</span>.13~ds1-1~deb11u4
+ runc:
+  Version:          <span class="token number">1.0</span>.0~rc93+ds1
+  GitCommit:        <span class="token number">1.0</span>.0~rc93+ds1-5+deb11u2
+ docker-init:
+  Version:          <span class="token number">0.19</span>.0
+  GitCommit:
+
+<span class="token function">docker</span> info<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<pre class="line-numbers language-bash" data-language="bash"><code class="language-bash">$ <span class="token function">docker</span> info
+
+Client:
+ Context:    default
+ Debug Mode: <span class="token boolean">false</span>
+ Plugins:
+  buildx: Docker Buildx <span class="token punctuation">(</span>Docker Inc., v0.10.4<span class="token punctuation">)</span>
+  compose: Docker Compose <span class="token punctuation">(</span>Docker Inc., v2.17.3<span class="token punctuation">)</span>
+
+Server:
+ Containers: <span class="token number">1</span>
+  Running: <span class="token number">1</span>
+  Paused: <span class="token number">0</span>
+  Stopped: <span class="token number">0</span>
+ Images: <span class="token number">1</span>
+ Server Version: <span class="token number">20.10</span>.5+dfsg1
+ Storage Driver: overlay2
+  Backing Filesystem: extfs
+  Supports d_type: <span class="token boolean">true</span>
+  Native Overlay Diff: <span class="token boolean">true</span>
+ Logging Driver: json-file
+ Cgroup Driver: systemd
+ Cgroup Version: <span class="token number">2</span>
+ Plugins:
+  Volume: <span class="token builtin class-name">local</span>
+  Network: bridge <span class="token function">host</span> ipvlan macvlan null overlay
+  Log: awslogs fluentd gcplogs gelf journald json-file <span class="token builtin class-name">local</span> logentries splunk syslog
+ Swarm: inactive
+ Runtimes: io.containerd.runc.v2 io.containerd.runtime.v1.linux runc
+ Default Runtime: runc
+ Init Binary: docker-init
+ containerd version: <span class="token number">1.4</span>.13~ds1-1~deb11u4
+ runc version: <span class="token number">1.0</span>.0~rc93+ds1-5+deb11u2
+ init version:
+ Security Options:
+  seccomp
+   Profile: default
+  cgroupns
+ Kernel Version: <span class="token number">6.1</span>.21-v8+
+ Operating System: Debian GNU/Linux <span class="token number">11</span> <span class="token punctuation">(</span>bullseye<span class="token punctuation">)</span>
+ OSType: linux
+ Architecture: aarch64
+ CPUs: <span class="token number">4</span>
+ Total Memory: <span class="token number">7</span>.629GiB
+ Name: pi4-8g
+ ID: AT4S:WDKG:SCHA:D56T:SRNU:TJJB:ZEMH:YR67:6GRF:KLVC:B6MI:SVIE
+ Docker Root Dir: /var/lib/docker
+ Debug Mode: <span class="token boolean">false</span>
+ Registry: https://index.docker.io/v1/
+ Labels:
+ Experimental: <span class="token boolean">false</span>
+ Insecure Registries:
+  <span class="token number">127.0</span>.0.0/8
+ Registry Mirrors:
+  https://docker.mirrors.ustc.edu.cn/
+ Live Restore Enabled: <span class="token boolean">false</span>
+
+WARNING: No memory limit support
+WARNING: No swap limit support
+WARNING: Support <span class="token keyword">for</span> cgroup v2 is experimental<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="安装Home-Assistant"><a href="#安装Home-Assistant" class="headerlink" title="安装Home Assistant"></a>安装Home Assistant</h3><h3 id="Raspberry-pi-3"><a href="#Raspberry-pi-3" class="headerlink" title="Raspberry pi 3"></a>Raspberry pi 3</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
+  --name homeassistant <span class="token punctuation">\</span>
+  --privileged <span class="token punctuation">\</span>
+  --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">TZ</span><span class="token operator">=</span>MY_TIME_ZONE <span class="token punctuation">\</span>
+  -v /PATH_TO_YOUR_CONFIG:/config <span class="token punctuation">\</span>
+  --network<span class="token operator">=</span>host <span class="token punctuation">\</span>
+  ghcr.io/home-assistant/raspberrypi3-homeassistant:stable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<h3 id="Raspberry-pi-4"><a href="#Raspberry-pi-4" class="headerlink" title="Raspberry pi 4"></a>Raspberry pi 4</h3><pre class="line-numbers language-bash" data-language="bash"><code class="language-bash"><span class="token function">docker</span> run -d <span class="token punctuation">\</span>
+  --name homeassistant <span class="token punctuation">\</span>
+  --privileged <span class="token punctuation">\</span>
+  --restart<span class="token operator">=</span>unless-stopped <span class="token punctuation">\</span>
+  -e <span class="token assign-left variable">TZ</span><span class="token operator">=</span>MY_TIME_ZONE <span class="token punctuation">\</span>
+  -v /PATH_TO_YOUR_CONFIG:/config <span class="token punctuation">\</span>
+  --network<span class="token operator">=</span>host <span class="token punctuation">\</span>
+  ghcr.io/home-assistant/raspberrypi4-homeassistant:stable<span aria-hidden="true" class="line-numbers-rows"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></span></code></pre>
+
+<p>以上安装命令中，一定要将<code>/PATH_TO_YOUR_CONFIG</code>修改成指定的安装路径，例如<code>/home/pi/homeassistant</code>，如果忘记修改，配置文件就会保存到<code>/PATH_TO_YOUR_CONFIG</code>目录。</p>
+<p>安装成功后，打开浏览器访问<code>http://&lt;host&gt;:8123</code>，登录Home Assistant的Web界面。</p>
+
     </div>
 
     
@@ -372,11 +397,25 @@
     
 
     <footer class="post-footer">
-        <div class="post-eof"></div>
-      
+          <div class="post-tags">
+              <a href="/tags/home-assistant/" rel="tag"># home_assistant</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/02/20/mian-xiang-dui-xiang-de-bian-cheng/" rel="next" title="面向对象的编程">
+                  面向对象的编程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
 </div>
+
 
 
 
