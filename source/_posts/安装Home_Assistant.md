@@ -27,6 +27,8 @@ sudo sh get-docker.sh --mirror Aliyun
 
 **需要注意的是，由于国内访问Docker官方的安装源很慢，因此可以添加参数`--mirror Aliyun`，将安装源更改为阿里云镜像，从而提高安装速度。**
 
+<!-- more -->
+
 3 默认情况下，只有拥有管理员权限的账号才可以运行docker，如果登录的账号是普通用户，需要通过sudo来运行docker。或者，也可以将普通用户账号添加到docker用户组，这样该用户就可以直接运行docker的命令。
 
 以下命令可以将用户`pi`添加到docker用户组中。
@@ -35,7 +37,6 @@ sudo sh get-docker.sh --mirror Aliyun
 sudo usermod -aG docker pi
 ```
 
-<!-- more -->
 
 4 使用命令`docker version`和`docker info`查看Docker的版本信息和运行状态。
 
