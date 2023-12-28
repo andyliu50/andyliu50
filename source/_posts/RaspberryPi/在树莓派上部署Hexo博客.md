@@ -1,5 +1,5 @@
 ---
-title: 在树莓派上部署博客
+title: 在树莓派上部署Hexo博客
 date: 2023-12-28 08:37:00
 tags:
   - "#raspberrypi"
@@ -25,6 +25,7 @@ sudo apt-get update
 sudo apt-get install nginx
 ```
 
+<!-- more -->
 查看nginx服务器的版本，确认已安装成功。
 
 ```bash
