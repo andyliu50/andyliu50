@@ -3,7 +3,7 @@
 <%- partial('_partial/head') %>
 <body class="max-width mx-auto px3 <%- theme.direction -%>">
     <% if (is_post()) { %>
-      <%- partial('_partial/head') %>
+      <%- partial('_partial/header') %>
     <% } %>
     <div class="content index py4 <%= is_home() ? 'h-card' : '' %>">
         <% if (!is_post()) { %>
