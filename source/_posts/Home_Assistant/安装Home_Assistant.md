@@ -1,5 +1,5 @@
 ---
-title: 安装Home Assistant
+title: Home Assistant安装
 date: 2021-10-17 15:02:00
 tags:
   - home_assistant
