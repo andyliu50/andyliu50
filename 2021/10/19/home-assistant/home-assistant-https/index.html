@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="默认情况下，Home Assistant安装完成后，使用HTTP访问。如果在内网使用，HTTP相对还比较安全。但是，为了能让手机在外网访问HA网关，需要将其发布到外网（Internet）。因此，首先必须要配置HTTPS，确保数据传输的安全性。 为了节约成本，可以使用自签的SSL证书。或者，也可以选用官方推荐的免费TLS&#x2F;SSL证书服务：Let’s Encrypt和Duck DNS int">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Home Assistant配置HTTPS">
+<meta property="og:url" content="https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/index.html">
+<meta property="og:site_name" content="Andy&#39;s Tech">
+<meta property="og:description" content="默认情况下，Home Assistant安装完成后，使用HTTP访问。如果在内网使用，HTTP相对还比较安全。但是，为了能让手机在外网访问HA网关，需要将其发布到外网（Internet）。因此，首先必须要配置HTTPS，确保数据传输的安全性。 为了节约成本，可以使用自签的SSL证书。或者，也可以选用官方推荐的免费TLS&#x2F;SSL证书服务：Let’s Encrypt和Duck DNS int">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/20211019_001515000_iOS.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/20211019_001547000_iOS.png">
+<meta property="og:image" content="https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/20211019_001714000_iOS.png">
+<meta property="article:published_time" content="2021-10-19T07:02:00.000Z">
+<meta property="article:modified_time" content="2024-02-01T06:12:23.569Z">
+<meta property="article:author" content="Andy">
+<meta property="article:tag" content="home_assistant">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/20211019_001515000_iOS.png">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Home Assistant配置HTTPS</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="上一篇" href="/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/"><i class="fa-solid fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2021/10/17/home-assistant/an-zhuang-home-assistant/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&text=Home Assistant配置HTTPS"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&is_video=false&description=Home Assistant配置HTTPS"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Home Assistant配置HTTPS&body=Check out this article: https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&name=Home Assistant配置HTTPS&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&t=Home Assistant配置HTTPS"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E8%87%AA%E7%AD%BE%E7%9A%84%E8%AF%81%E4%B9%A6"><span class="toc-number">1.</span> <span class="toc-text">制作自签的证书</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">1.1.</span> <span class="toc-text">制作根证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6"><span class="toc-number">1.2.</span> <span class="toc-text">制作服务器证书</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEHome-Assistant"><span class="toc-number">2.</span> <span class="toc-text">配置Home Assistant</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86Home-Assistant%E5%8F%91%E5%B8%83%E5%88%B0%E5%85%AC%E7%BD%91"><span class="toc-number">3.</span> <span class="toc-text">将Home Assistant发布到公网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">4.</span> <span class="toc-text">iOS如何安装根证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">5.</span> <span class="toc-text">Android如何安装根证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">6.</span> <span class="toc-text">Mac如何安装根证书</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        <header id="header">
+  <a class="u-url u-uid" href="/">
+  
+    
+      <img id="logo" alt class="u-logo" src="/images/logo.png" />
+    
+  
+    <div id="title">
+      <h1 class="p-name">Andy&#39;s Tech</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="目录"><i class="fa-solid fa-bars fa-2x"></i></a>
+      </li>
+      <!--
+     --><li><a href="/">首页</a></li><!--
+   --><!--
+     --><li><a href="/about/">关于</a></li><!--
+   --><!--
+     --><li><a href="/tags/">标签</a></li><!--
+   --><!--
+     --><li><a href="/archives/">归档</a></li><!--
+   --><!--
+     --><li><a href="/search/">搜索</a></li><!--
+   -->
+    </ul>
+  </div>
+</header>
+
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        Home Assistant配置HTTPS
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Andy</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-10-19T07:02:00.000Z" class="dt-published" itemprop="datePublished">2021-10-19</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Home-Assistant/">Home_Assistant</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/home-assistant/" rel="tag">home_assistant</a>
+    </div>
+
+
+    </div>
+    
+
+  </header>
+  <div class="content e-content" itemprop="articleBody">
+    <p>默认情况下，Home Assistant安装完成后，使用HTTP访问。如果在内网使用，HTTP相对还比较安全。但是，为了能让手机在外网访问HA网关，需要将其发布到外网（Internet）。因此，首先必须要配置HTTPS，确保数据传输的安全性。</p>
+<p>为了节约成本，可以使用自签的SSL证书。或者，也可以选用官方推荐的免费TLS&#x2F;SSL证书服务：<a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/ecosystem/certificates/lets_encrypt/">Let’s Encrypt</a>和<a target="_blank" rel="noopener" href="https://www.home-assistant.io/integrations/duckdns/">Duck DNS integrating Let’s Encrypt</a>。</p>
+<h2 id="制作自签的证书"><a href="#制作自签的证书" class="headerlink" title="制作自签的证书"></a>制作自签的证书</h2><p>证书的制作过程都是在树莓派上使用<code>openssl</code>完成。</p>
+<p>首先创建目录<code>certs</code>，并进入该目录：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">mkdir certs</span><br><span class="line">cd certs</span><br></pre></td></tr></table></figure>
+
+<h3 id="制作根证书"><a href="#制作根证书" class="headerlink" title="制作根证书"></a>制作根证书</h3><p>首先，需要创建根证书密钥，该密钥用于为证书签名。安全起见，该密钥不能泄露给其他人：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl genrsa -des3 -out rootCA.key 4096</span><br></pre></td></tr></table></figure>
+
+<p><strong>该命令生成的Key默认使用密码保护，如果要取消密码保护，只需要移除选项-des3。</strong></p>
+<p>然后用根证书密钥制作根证书：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 3650 -out rootCA.pem</span><br></pre></td></tr></table></figure>
+
+<p>如果需要使用苹果设备**macOS vs 10.15 &#x2F; iOS 13 (or above)**，请使用以下命令制作根证书，区别是根证书的有效期只有 825 天：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl req -x509 -new -nodes -key rootCA.key -sha256 -days 825 -out rootCA.pem</span><br></pre></td></tr></table></figure>
+
+<h3 id="制作服务器证书"><a href="#制作服务器证书" class="headerlink" title="制作服务器证书"></a>制作服务器证书</h3><p>请根据以下步骤，制作Home Assistant服务器的证书。</p>
+<p>创建<code>rootCA.csr.cnf</code>文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch rootCA.csr.cnf</span><br><span class="line">vi rootCA.csr.cnf</span><br></pre></td></tr></table></figure>
+
+<p>将以下内容复制-粘贴到文件<code>rootCA.csr.cnf</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># rootCA.csr.cnf</span><br><span class="line">[req]</span><br><span class="line">default_bits = 2048</span><br><span class="line">prompt = no</span><br><span class="line">default_md = sha256</span><br><span class="line">distinguished_name = dn</span><br><span class="line">             </span><br><span class="line">[dn]</span><br><span class="line">C=CN</span><br><span class="line">ST=Shanghai</span><br><span class="line">L=Shanghai</span><br><span class="line">O=HA</span><br><span class="line">OU=HAU</span><br><span class="line">emailAddress=admin@ha.com</span><br><span class="line">CN = ivpn.asuscomm.com   </span><br></pre></td></tr></table></figure>
+
+<p>创建<code>v3.ext</code>文件</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">touch v3.ext</span><br><span class="line">vi v3.ext</span><br></pre></td></tr></table></figure>
+
+<p>将以下内容复制-粘贴到文件<code>v3.ext</code>：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># v3.ext</span><br><span class="line">authorityKeyIdentifier=keyid,issuer</span><br><span class="line">basicConstraints=CA:FALSE</span><br><span class="line">keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment</span><br><span class="line">subjectAltName = @alt_names</span><br><span class="line">extendedKeyUsage=serverAuth</span><br><span class="line">                </span><br><span class="line">[alt_names]</span><br><span class="line">DNS.1 = ivpn.asuscomm.com</span><br><span class="line">IP.1 = 192.168.1.65</span><br></pre></td></tr></table></figure>
+
+<p>创建证书密钥<code>hassio.csr</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl req -new -sha256 -nodes -out hassio.csr -newkey rsa:2048 -keyout hassio.key -config &lt;( <span class="built_in">cat</span> rootCA.csr.cnf )</span><br></pre></td></tr></table></figure>
+
+<p>如果在Windows平台上运行该命令，需要注意-config参数后面rootCA.csr.cnf文件的路径地址。请参考以下例子：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl req -new -sha256 -nodes -out hassio.csr -newkey rsa:2048 -keyout hassio.key -config <span class="string">&quot;C:\Program Files\Git\usr\bin\rootCA.csr.cnf&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>创建证书<code>hassio.csr</code>:</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> hassio.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out hassio.crt -days 3650 -sha256 -extfile v3.ext</span><br></pre></td></tr></table></figure>
+
+<p>如果需要使用苹果设备**macOS vs 10.15 &#x2F; iOS 13 (or above)**，请使用以下命令：</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">openssl x509 -req -<span class="keyword">in</span> hassio.csr -CA rootCA.pem -CAkey rootCA.key -CAcreateserial -out hassio.crt -days 825 -sha256 -extfile v3.ext</span><br></pre></td></tr></table></figure>
+
+<h2 id="配置Home-Assistant"><a href="#配置Home-Assistant" class="headerlink" title="配置Home Assistant"></a>配置Home Assistant</h2><p>将服务器证书和私钥重新命名为.pem格式：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rename hassio.crt fullchain.pem</span><br><span class="line">rename hassio.key privkey.pem</span><br></pre></td></tr></table></figure>
+
+<p>将证书复制到<code>/PATH_TO_YOUR_CONFIG/ssl</code>目录：</p>
+<p><strong>这里需要注意的是，由于采用了Docker方式安装HA，没有权限访问&#x2F;etc目录，所以，只能将证书复制到&#x2F;PATH_TO_YOUR_CONFIG&#x2F;ssl。</strong></p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /PATH_TO_YOUR_CONFIG/ssl</span><br><span class="line"><span class="built_in">cp</span> fullchain.pem /PATH_TO_YOUR_CONFIG/ssl/</span><br><span class="line"><span class="built_in">cp</span> privkey.pem /PATH_TO_YOUR_CONFIG/ssl/</span><br></pre></td></tr></table></figure>
+
+<p>修改配置文件<code>configuration.yaml</code>：</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">http:</span>                                                                       </span><br><span class="line">	<span class="attr">ssl_certificate:</span> <span class="string">./ssl/fullchain.pem</span>                                     </span><br><span class="line">	<span class="attr">ssl_key:</span> <span class="string">./ssl/privkey.pem</span>  </span><br></pre></td></tr></table></figure>
+
+<h2 id="将Home-Assistant发布到公网"><a href="#将Home-Assistant发布到公网" class="headerlink" title="将Home Assistant发布到公网"></a>将Home Assistant发布到公网</h2><p>由于本地网络没有公网IP地址，因此通过SSH Tunnel的方式，将Home Assistant网关映射到远端网络，并发布到公网上。</p>
+<p>在HA网关上运行以下命令，该命令会将本地的8123端口映射到远端树莓派的10000端口。</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">autossh -f -M 0 -NR 0.0.0.0:10000:localhost:8123 pi@ivpn.asuscomm.com -p 30100</span><br></pre></td></tr></table></figure>
+
+<p>然后，创建计划任务，每次HA网关重启后，会自动执行以上命令。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">crontab -e</span><br><span class="line">@reboot autossh -f -M 0 -NR 0.0.0.0:10000:localhost:8123 pi@ivpn.asuscomm.com -p 30100 &amp;</span><br></pre></td></tr></table></figure>
+
+<p>在远端路由器上，选择<strong>外部网络(WAN) - 端口转发 - 自定义设置</strong> ，添加端口转发的条目。</p>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">服务名称：Home-Assistant</span><br><span class="line">通信协议：TCP</span><br><span class="line">外部端口：10000</span><br><span class="line">内部端口：10000</span><br><span class="line">本地IP地址：192.168.100.100</span><br></pre></td></tr></table></figure>
+
+<h2 id="iOS如何安装根证书"><a href="#iOS如何安装根证书" class="headerlink" title="iOS如何安装根证书"></a>iOS如何安装根证书</h2><p>点击<code>rootCA.pem</code>文件，安装根证书。</p>
+<p><img src="/2021/10/19/home-assistant/home-assistant-https/20211019_001515000_iOS.png"></p>
+<p>打开<strong>设置</strong>应用，找到<strong>已下载描述文件</strong>，点击<strong>安装</strong>，安装过程中需要输入手机密码。</p>
+<p><img src="/2021/10/19/home-assistant/home-assistant-https/20211019_001547000_iOS.png"></p>
+<p>安装完成后，需要在<strong>设置 - 通用 - 关于本机 - 证书信任设置</strong>中，启用安装的根证书。</p>
+<p><img src="/2021/10/19/home-assistant/home-assistant-https/20211019_001714000_iOS.png"></p>
+<h2 id="Android如何安装根证书"><a href="#Android如何安装根证书" class="headerlink" title="Android如何安装根证书"></a>Android如何安装根证书</h2><p>重新命名<code>rootCA.pem</code>文件为<code>rootCA.crt</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rename rootCA.pem rootCA.crt</span><br></pre></td></tr></table></figure>
+
+<p>在Android设备上点击安装<code>rootCA.crt</code>文件。</p>
+<h2 id="Mac如何安装根证书"><a href="#Mac如何安装根证书" class="headerlink" title="Mac如何安装根证书"></a>Mac如何安装根证书</h2><p>打开终端工具，输入以下命令：</p>
+<figure class="highlight shell"><table><tr><td class="code"><pre><span class="line">CERT=&quot;/path/to/my/cert/my-root.crt&quot;</span><br><span class="line">sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain $CERT</span><br></pre></td></tr></table></figure>
+
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/tags/">标签</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E8%87%AA%E7%AD%BE%E7%9A%84%E8%AF%81%E4%B9%A6"><span class="toc-number">1.</span> <span class="toc-text">制作自签的证书</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">1.1.</span> <span class="toc-text">制作根证书</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%B6%E4%BD%9C%E6%9C%8D%E5%8A%A1%E5%99%A8%E8%AF%81%E4%B9%A6"><span class="toc-number">1.2.</span> <span class="toc-text">制作服务器证书</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AEHome-Assistant"><span class="toc-number">2.</span> <span class="toc-text">配置Home Assistant</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B0%86Home-Assistant%E5%8F%91%E5%B8%83%E5%88%B0%E5%85%AC%E7%BD%91"><span class="toc-number">3.</span> <span class="toc-text">将Home Assistant发布到公网</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#iOS%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">4.</span> <span class="toc-text">iOS如何安装根证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Android%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">5.</span> <span class="toc-text">Android如何安装根证书</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Mac%E5%A6%82%E4%BD%95%E5%AE%89%E8%A3%85%E6%A0%B9%E8%AF%81%E4%B9%A6"><span class="toc-number">6.</span> <span class="toc-text">Mac如何安装根证书</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&text=Home Assistant配置HTTPS"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&is_video=false&description=Home Assistant配置HTTPS"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Home Assistant配置HTTPS&body=Check out this article: https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&title=Home Assistant配置HTTPS"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&name=Home Assistant配置HTTPS&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://andyliu50.github.io/2021/10/19/home-assistant/home-assistant-https/&t=Home Assistant配置HTTPS"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2024
+    Andy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="本文主要介绍如何将Hexo博客部署在树莓派上，从而实现在本地局域网直接访问博客内容。由于博客的源码保存在本地PC，并已经同步到Github。因此，只需将Hexo生成的网页文件发布到树莓派的Nginx服务器。 安装nginx首先在树莓派上安装nginx服务器，用于发布博客网站。 获取并更新软件列表。 1sudo apt-get update  安装 nginx服务器。 1sudo apt-get i">
+    <meta name="description" content="本文主要介绍如何将Hexo博客部署在树莓派上，从而实现在本地局域网直接访问博客内容。由于博客的源码保存在本地PC，并已经同步到Github。因此，只需将Hexo生成的网页文件发布到树莓派的Nginx服务器。 安装nginx首先在树莓派上安装nginx服务器，用于发布博客网站。 获取并更新软件列表。 sudo apt-get update  安装 nginx服务器。 sudo apt-get ins">
 <meta property="og:type" content="article">
 <meta property="og:title" content="在树莓派上部署Hexo博客">
 <meta property="og:url" content="https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/index.html">
 <meta property="og:site_name" content="Andy&#39;s Tech">
-<meta property="og:description" content="本文主要介绍如何将Hexo博客部署在树莓派上，从而实现在本地局域网直接访问博客内容。由于博客的源码保存在本地PC，并已经同步到Github。因此，只需将Hexo生成的网页文件发布到树莓派的Nginx服务器。 安装nginx首先在树莓派上安装nginx服务器，用于发布博客网站。 获取并更新软件列表。 1sudo apt-get update  安装 nginx服务器。 1sudo apt-get i">
+<meta property="og:description" content="本文主要介绍如何将Hexo博客部署在树莓派上，从而实现在本地局域网直接访问博客内容。由于博客的源码保存在本地PC，并已经同步到Github。因此，只需将Hexo生成的网页文件发布到树莓派的Nginx服务器。 安装nginx首先在树莓派上安装nginx服务器，用于发布博客网站。 获取并更新软件列表。 sudo apt-get update  安装 nginx服务器。 sudo apt-get ins">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-12-28T00:37:00.000Z">
 <meta property="article:modified_time" content="2023-12-28T04:42:13.294Z">
@@ -60,6 +60,75 @@
 <meta name="generator" content="Hexo 6.3.0"></head>
 
 <body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2021/10/19/home-assistant/home-assistant-https/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&text=在树莓派上部署Hexo博客"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&title=在树莓派上部署Hexo博客"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&is_video=false&description=在树莓派上部署Hexo博客"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=在树莓派上部署Hexo博客&body=Check out this article: https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&title=在树莓派上部署Hexo博客"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&title=在树莓派上部署Hexo博客"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&title=在树莓派上部署Hexo博客"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&title=在树莓派上部署Hexo博客"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&name=在树莓派上部署Hexo博客&description=&lt;p&gt;本文主要介绍如何将Hexo博客部署在树莓派上，从而实现在本地局域网直接访问博客内容。由于博客的源码保存在本地PC，并已经同步到Github。因此，只需将Hexo生成的网页文件发布到树莓派的Nginx服务器。&lt;/p&gt;
+&lt;h2 id=&#34;安装nginx&#34;&gt;&lt;a href=&#34;#安装nginx&#34; class=&#34;headerlink&#34; title=&#34;安装nginx&#34;&gt;&lt;/a&gt;安装nginx&lt;/h2&gt;&lt;p&gt;首先在树莓派上安装nginx服务器，用于发布博客网站。&lt;/p&gt;
+&lt;p&gt;获取并更新软件列表。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+
+&lt;p&gt;安装 nginx服务器。&lt;/p&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&t=在树莓派上部署Hexo博客"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85nginx"><span class="toc-number">1.</span> <span class="toc-text">安装nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85-git"><span class="toc-number">2.</span> <span class="toc-text">安装 git</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9C%E7%A8%8BGit%E4%BB%93%E5%BA%93"><span class="toc-number">3.</span> <span class="toc-text">远程Git仓库</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AESSH%E5%85%AC%E9%92%A5%E7%99%BB%E5%BD%95"><span class="toc-number">4.</span> <span class="toc-text">配置SSH公钥登录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0Hexo"><span class="toc-number">5.</span> <span class="toc-text">配置本地Hexo</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
     <div class="content index py4 ">
         <header id="header">
   <a class="u-url u-uid" href="/">
@@ -82,9 +151,11 @@
    --><!--
      --><li><a href="/about/">关于</a></li><!--
    --><!--
+     --><li><a href="/tags/">标签</a></li><!--
+   --><!--
      --><li><a href="/archives/">归档</a></li><!--
    --><!--
-     --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+     --><li><a href="/search/">搜索</a></li><!--
    -->
     </ul>
   </div>
@@ -134,63 +205,63 @@
     <p>本文主要介绍如何将Hexo博客部署在树莓派上，从而实现在本地局域网直接访问博客内容。由于博客的源码保存在本地PC，并已经同步到Github。因此，只需将Hexo生成的网页文件发布到树莓派的Nginx服务器。</p>
 <h2 id="安装nginx"><a href="#安装nginx" class="headerlink" title="安装nginx"></a>安装nginx</h2><p>首先在树莓派上安装nginx服务器，用于发布博客网站。</p>
 <p>获取并更新软件列表。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get update</span><br></pre></td></tr></table></figure>
 
 <p>安装 nginx服务器。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install nginx</span><br></pre></td></tr></table></figure>
 
 <span id="more"></span>
 <p>查看nginx服务器的版本，确认已安装成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ nginx -v</span><br><span class="line">nginx version: nginx/1.18.0</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ nginx -v</span><br><span class="line">nginx version: nginx/1.18.0</span><br></pre></td></tr></table></figure>
 
 <p>配置nginx服务器随机启动。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl enable nginx.service</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">sudo systemctl enable nginx.service</span><br></pre></td></tr></table></figure>
 
 <p>创建一个新的文件夹<code>/var/www/hexo</code>，用于存放博客的网页文件，并将该文件夹作为nginx服务器的根目录。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /var/www/hexo</span><br><span class="line">sudo <span class="built_in">chown</span> -R <span class="variable">$USER</span>:<span class="variable">$USER</span> /var/www/hexo</span><br><span class="line">sudo <span class="built_in">chmod</span> -R 755 /var/www/hexo</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /var/www/hexo</span><br><span class="line">sudo <span class="built_in">chown</span> -R <span class="variable">$USER</span>:<span class="variable">$USER</span> /var/www/hexo</span><br><span class="line">sudo <span class="built_in">chmod</span> -R 755 /var/www/hexo</span><br></pre></td></tr></table></figure>
 
 <p>打开nginx的配置文件，将根目录设置为<code>/var/www/hexo</code>。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/nginx/sites-available/default</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo vi /etc/nginx/sites-available/default</span><br></pre></td></tr></table></figure>
 
 <p>将配置文件中默认的根目录<code>root /var/www/html</code>用#号注释掉，并在下方添加新的根目录为<code>root /var/www/hexo</code>。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"># Default server configuration</span><br><span class="line">#</span><br><span class="line">server &#123;</span><br><span class="line">	listen 80 default_server;</span><br><span class="line">	listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">	# SSL configuration</span><br><span class="line">	#</span><br><span class="line">	# listen 443 ssl default_server;</span><br><span class="line">	# listen [::]:443 ssl default_server;</span><br><span class="line">	#</span><br><span class="line">	# Note: You should disable gzip for SSL traffic.</span><br><span class="line">	# See: https://bugs.debian.org/773332</span><br><span class="line">	#</span><br><span class="line">	# Read up on ssl_ciphers to ensure a secure configuration.</span><br><span class="line">	# See: https://bugs.debian.org/765782</span><br><span class="line">	#</span><br><span class="line">	# Self signed certs generated by the ssl-cert package</span><br><span class="line">	# Don&#x27;t use them in a production server!</span><br><span class="line">	#</span><br><span class="line">	# include snippets/snakeoil.conf;</span><br><span class="line"></span><br><span class="line">	#root /var/www/html;</span><br><span class="line">	root /var/www/hexo;</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line"># Default server configuration</span><br><span class="line">#</span><br><span class="line">server &#123;</span><br><span class="line">	listen 80 default_server;</span><br><span class="line">	listen [::]:80 default_server;</span><br><span class="line"></span><br><span class="line">	# SSL configuration</span><br><span class="line">	#</span><br><span class="line">	# listen 443 ssl default_server;</span><br><span class="line">	# listen [::]:443 ssl default_server;</span><br><span class="line">	#</span><br><span class="line">	# Note: You should disable gzip for SSL traffic.</span><br><span class="line">	# See: https://bugs.debian.org/773332</span><br><span class="line">	#</span><br><span class="line">	# Read up on ssl_ciphers to ensure a secure configuration.</span><br><span class="line">	# See: https://bugs.debian.org/765782</span><br><span class="line">	#</span><br><span class="line">	# Self signed certs generated by the ssl-cert package</span><br><span class="line">	# Don&#x27;t use them in a production server!</span><br><span class="line">	#</span><br><span class="line">	# include snippets/snakeoil.conf;</span><br><span class="line"></span><br><span class="line">	#root /var/www/html;</span><br><span class="line">	root /var/www/hexo;</span><br></pre></td></tr></table></figure>
 
 <p>配置完成后，重启 nginx服务器。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo service nginx restart</span><br></pre></td></tr></table></figure>
 
 <h2 id="安装-git"><a href="#安装-git" class="headerlink" title="安装 git"></a>安装 git</h2><p>查看树莓派上是否已安装git，如果没有安装，可以执行以下命令。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">sudo apt-get install git</span><br></pre></td></tr></table></figure>
 
 <p>安装完成后，查看版本，确认已安装成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.30.2</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ git --version</span><br><span class="line">git version 2.30.2</span><br></pre></td></tr></table></figure>
 
 <h2 id="远程Git仓库"><a href="#远程Git仓库" class="headerlink" title="远程Git仓库"></a>远程Git仓库</h2><p>在树莓派上建立一个远程仓库，这样本地PC就可以将网页文件提交到该仓库。</p>
 <p>创建一个新的文件夹，并在该文件夹下面建立一个新的Git仓库。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/pi/myapps/git_repository</span><br><span class="line"><span class="built_in">cd</span> /home/pi/myapps/git_repository</span><br><span class="line">git init --bare myblog.git</span><br></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> /home/pi/myapps/git_repository</span><br><span class="line"><span class="built_in">cd</span> /home/pi/myapps/git_repository</span><br><span class="line">git init --bare myblog.git</span><br></pre></td></tr></table></figure>
 
 <p><strong>git init</strong> - 创建一个空的Git仓库或者重新初始化现有的仓库。<br><strong>–bare</strong> - 创建一个全新的Git仓库。<br><strong>myblog.git</strong> - 仓库的名称为myblog，并添加后缀.git。</p>
 <p>然后在仓库 <code>myblog.git</code> 下创建一个钩子，将网页文件传送到nginx服务器的根目录下，即 <code>/var/www/hexo</code>下面：</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#在仓库下创建一个新的钩子文件</span><br><span class="line">sudo vi /home/pi/myblog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">#在仓库下创建一个新的钩子文件</span><br><span class="line">sudo vi /home/pi/myblog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
 
 <p>在文件中添加以下命令，然后保存文件。该命令中的<code>--work-tree</code>参数可以将目录<code>/var/www/hexo</code>映射到仓库中，本地提交的网页文件会自动存储到<code>/var/www/hexo</code>目录下。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">git --work-tree=/var/www/hexo --git-dir=/home/pi/myapps/git_repository/myblog.git checkout -f</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">git --work-tree=/var/www/hexo --git-dir=/home/pi/myapps/git_repository/myblog.git checkout -f</span><br></pre></td></tr></table></figure>
 
 <p>为文件<code>post-receive</code>添加可执行权限。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo chmod +x /var/repo/web_blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">sudo chmod +x /var/repo/web_blog.git/hooks/post-receive</span><br></pre></td></tr></table></figure>
 
 <h2 id="配置SSH公钥登录"><a href="#配置SSH公钥登录" class="headerlink" title="配置SSH公钥登录"></a>配置SSH公钥登录</h2><p>在本地 PC上生成公钥文件<code>id_rsa.pub</code>。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -P &#x27;&#x27;</span><br><span class="line">		</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/user/.ssh/id_rsa):</span><br><span class="line">Your identification has been saved in /user/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /user/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">3f:35:7c:d2:33:65:d6:69:7f:34:92:31:38:1d:c1:94 user@bogon</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">|            =B==B|</span><br><span class="line">|           o E*o=|</span><br><span class="line">|            ... o|</span><br><span class="line">|         . . .  .|</span><br><span class="line">|        S + o    |</span><br><span class="line">|         o o     |</span><br><span class="line">|          +      |</span><br><span class="line">|         . .     |</span><br><span class="line">|                 |</span><br><span class="line">+————————+</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">$ ssh-keygen -t rsa -P &#x27;&#x27;</span><br><span class="line">		</span><br><span class="line">Generating public/private rsa key pair.</span><br><span class="line">Enter file in which to save the key (/user/.ssh/id_rsa):</span><br><span class="line">Your identification has been saved in /user/.ssh/id_rsa.</span><br><span class="line">Your public key has been saved in /user/.ssh/id_rsa.pub.</span><br><span class="line">The key fingerprint is:</span><br><span class="line">3f:35:7c:d2:33:65:d6:69:7f:34:92:31:38:1d:c1:94 user@bogon</span><br><span class="line">The key&#x27;s randomart image is:</span><br><span class="line">+--[ RSA 2048]----+</span><br><span class="line">|            =B==B|</span><br><span class="line">|           o E*o=|</span><br><span class="line">|            ... o|</span><br><span class="line">|         . . .  .|</span><br><span class="line">|        S + o    |</span><br><span class="line">|         o o     |</span><br><span class="line">|          +      |</span><br><span class="line">|         . .     |</span><br><span class="line">|                 |</span><br><span class="line">+————————+</span><br></pre></td></tr></table></figure>
 
 <p>本地PC的公钥上传到树莓派。</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub pi@pi</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">ssh-copy-id -i ~/.ssh/id_rsa.pub pi@pi</span><br></pre></td></tr></table></figure>
 
 <p>以上命令会将本地PC的公钥写入到树莓派的<code>~/.ssh/authorized_keys</code>文件中。如果树莓派上不存在文件<code>authorized_keys</code>，<code>ssh-copy-id</code>会新建文件。</p>
 <h2 id="配置本地Hexo"><a href="#配置本地Hexo" class="headerlink" title="配置本地Hexo"></a>配置本地Hexo</h2><p>打开Hexo的配置文件<code>_config.yml</code>，设置部署博客的方式。</p>
 <p>type: git<br>repo: pi@pi:&#x2F;home&#x2F;pi&#x2F;myapps&#x2F;git_repository&#x2F;myblog<br>branch: main</p>
-<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  - type: git</span><br><span class="line">    repo: pi@pi:/home/pi/myapps/git_repository/myblog</span><br><span class="line">    branch: main</span><br></pre></td></tr></table></figure>
+<figure class="highlight text"><table><tr><td class="code"><pre><span class="line">deploy:</span><br><span class="line">  - type: git</span><br><span class="line">    repo: pi@pi:/home/pi/myapps/git_repository/myblog</span><br><span class="line">    branch: main</span><br></pre></td></tr></table></figure>
 
 <p>在本地PC执行命令<code>hexo g -d</code>后，本地生成的网页文件会自动部署到树莓派上。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">hexo g -d</span><br></pre></td></tr></table></figure>
   </div>
 </article>
 
@@ -207,9 +278,11 @@
         
           <li><a href="/about/">关于</a></li>
         
+          <li><a href="/tags/">标签</a></li>
+        
           <li><a href="/archives/">归档</a></li>
         
-          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li>
+          <li><a href="/search/">搜索</a></li>
         
       </ul>
     </div>
@@ -235,10 +308,10 @@
   <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&name=在树莓派上部署Hexo博客&description=&lt;p&gt;本文主要介绍如何将Hexo博客部署在树莓派上，从而实现在本地局域网直接访问博客内容。由于博客的源码保存在本地PC，并已经同步到Github。因此，只需将Hexo生成的网页文件发布到树莓派的Nginx服务器。&lt;/p&gt;
 &lt;h2 id=&#34;安装nginx&#34;&gt;&lt;a href=&#34;#安装nginx&#34; class=&#34;headerlink&#34; title=&#34;安装nginx&#34;&gt;&lt;/a&gt;安装nginx&lt;/h2&gt;&lt;p&gt;首先在树莓派上安装nginx服务器，用于发布博客网站。&lt;/p&gt;
 &lt;p&gt;获取并更新软件列表。&lt;/p&gt;
-&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get update&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 
 &lt;p&gt;安装 nginx服务器。&lt;/p&gt;
-&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+&lt;figure class=&#34;highlight bash&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;sudo apt-get install nginx&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
   <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://andyliu50.github.io/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/&t=在树莓派上部署Hexo博客"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
@@ -273,9 +346,11 @@
      --><!--
        --><li><a href="/about/">关于</a></li><!--
      --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
        --><li><a href="/archives/">归档</a></li><!--
      --><!--
-       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">项目</a></li><!--
+       --><li><a href="/search/">搜索</a></li><!--
      -->
       </ul>
     </nav>

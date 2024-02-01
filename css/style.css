@@ -620,8 +620,6 @@ body {
   border-radius: 5px;
   background-size: 50px 50px;
   background-repeat: no-repeat;
-  filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
 }
 #header #nav {
   color: #00a1ea;
@@ -662,10 +660,6 @@ body {
 }
 #header #nav ul li:last-child a {
   margin-right: 0;
-}
-#header:hover #logo {
-  filter: none;
-  -webkit-filter: none;
 }
 @media screen and (max-width: 480px) {
   #header #title {
@@ -836,7 +830,7 @@ body {
   padding-right: 2rem;
   max-width: 20em;
   max-height: calc(95vh - 7rem);
-  text-align: right;
+  text-align: left;
 }
 #header-post #toc a:hover {
   color: #d480aa;
@@ -1064,7 +1058,7 @@ body {
 }
 .post-list .post-item .meta {
   display: block;
-  margin-right: 16px;
+  margin-right: 30px;
   min-width: 100px;
   color: #666;
   font-size: 18px;
@@ -1242,7 +1236,7 @@ article .content .caption {
 }
 #archive .post-list .post-item .meta {
   display: block;
-  margin-right: 16px;
+  margin-right: 30px;
   min-width: 100px;
   color: #666;
   font-size: 18px;
