@@ -16,8 +16,9 @@ direction: ltr
 nav:
   home: /
   about: /about/
+  tag: /tags/
   articles: /archives/
-  projects: http://github.com/probberechts
+  # projects: http://github.com/probberechts
 
 
 # Links to your social media accounts.
@@ -50,7 +51,7 @@ social_links:
 
 # Customize the overview with displaying a tagcloud on the index page.
 # Options: https://hexo.io/docs/helpers.html#tagcloud
-tags_overview: true
+tags_overview: false
 
 # Customize the overview with the most recent blog posts on the index page.
 # Options:
