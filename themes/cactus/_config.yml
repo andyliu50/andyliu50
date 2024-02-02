@@ -17,6 +17,7 @@ nav:
   home: /
   about: /about/
   tag: /tags/
+  category: /categories/
   articles: /archives/
   search: /search/
   # projects: http://github.com/probberechts
