@@ -1,11 +1,11 @@
 ---
-title: Home Assistant安装
+title: 安装Home Assistant
 date: 2021-10-17 15:02:00
 tags:
   - home_assistant
 categories:
   - Home_Assistant
-updated: 2023-12-26 09:35:00
+updated: 2024-9-02 09:35:00
 ---
 
 ## 通过Docker的方式安装Home Assistant
@@ -140,6 +140,14 @@ WARNING: Support for cgroup v2 is experimental
 
 ### 安装Home Assistant
 
+### 先决条件
+
+- Docker至少是19.03.9或者以上版本
+- `libseccomp`的版本至少是 2.4.2或者以上
+
+> **提示**
+> 通过Docker方式安装Home Assistant，不支持[add-ons]([Home Assistant Add-ons - Home Assistant (home-assistant.io)](https://www.home-assistant.io/addons))（通过安装第三方的应用程序来扩展Home Assistant的功能），并且无法从管理界面中更新Home Assistant的版本。
+
 ### Raspberry pi 3
 
 ```bash
@@ -162,11 +170,49 @@ docker run -d \
   --restart=unless-stopped \
   -e TZ=MY_TIME_ZONE \
   -v /PATH_TO_YOUR_CONFIG:/config \
+  -v /run/dbus:/run/dbus:ro \
   --network=host \
   ghcr.io/home-assistant/raspberrypi4-homeassistant:stable
 ```
 
 以上安装命令中，一定要将`/PATH_TO_YOUR_CONFIG`修改成指定的安装路径，例如`/home/pi/homeassistant`，如果忘记修改，配置文件就会保存到`/PATH_TO_YOUR_CONFIG`目录。
 
+更改`MY_TIME_ZONE`为本地时区，例如`Asia/Shanghai`。
+
+如果要使用[Bluetooth integration](https://www.home-assistant.io/integrations/bluetooth), 需要设置`D-Bus`，即`-v /run/dbus:/run/dbus:ro`
+
 安装成功后，打开浏览器访问`http://<host>:8123`，登录Home Assistant的Web界面。
 
+## 更新Home Assistant
+
+下载最新版本的Home Assistant，如果命令结果返回"Image is up to date"，则说明目前已经是最新版本。
+
+```bash
+docker pull ghcr.io/home-assistant/home-assistant:stable
+```
+
+停止运行容器中的Home Assistant
+
+```bash
+docker stop homeassistant
+```
+
+删除容器中的Home Assistant，**该操作不会删除原有的配置文件**。
+
+```bash
+docker rm homeassistant
+```
+
+运行最新版本的Home Assistant，将`PATH_TO_YOUR_CONFIG`设置为原配置文件所在的路径，例如`/home/pi/homeassistant`。
+
+```bash
+docker run -d \
+	--name homeassistant \
+	--restart=unless-stopped \ 
+	--privileged \ 
+	-e TZ=MY_TIME_ZONE \ 
+	-v /PATH_TO_YOUR_CONFIG:/config \ 
+	-v /run/dbus:/run/dbus:ro \ 
+	--network=host \ 
+	ghcr.io/home-assistant/home-assistant:stable
+```
