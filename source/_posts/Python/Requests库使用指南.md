@@ -9,8 +9,6 @@ categories:
 
 > 注：本文翻译自[Python’s Requests Library (Guide)](https://realpython.com/python-requests/)。
 
-# Requests库使用指南
-
 在Python中，`requests`库是处理HTTP请求的标准。它使得复杂的HTTP请求变得简单、易用，用户只需要专注于处理与Web服务之间的交互过程，并获取所需的数据。
 
 通过本文，你可以学到许多`requests`库中的有用功能，并且可以根据实际的使用场景，定制和优化这些功能。你还会学到如何有效地使用`requests`库，避免由于网络的原因影响应用的响应速度。
