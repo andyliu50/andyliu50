@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="缘起由于家中的宽带运营商不提供公网IPv4地址，所以一直都没有将Home Assistant发布到公网。最近无意中从网上了解到可以使用IPv6的公网地址，经过测试，确实有效。 考虑到IPv6地址是动态分配的，间隔一段时间就会自动更新为新的IPv6地址，于是就在免费的DDNS服务商Dynv6申请了动态域名。根据Dynv6官方API文档介绍，IPv6不支持用Remote Access API，也就意味">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何使用Home Assistant更新DDNS记录">
+<meta property="og:url" content="https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/index.html">
+<meta property="og:site_name" content="Andy&#39;s Tech">
+<meta property="og:description" content="缘起由于家中的宽带运营商不提供公网IPv4地址，所以一直都没有将Home Assistant发布到公网。最近无意中从网上了解到可以使用IPv6的公网地址，经过测试，确实有效。 考虑到IPv6地址是动态分配的，间隔一段时间就会自动更新为新的IPv6地址，于是就在免费的DDNS服务商Dynv6申请了动态域名。根据Dynv6官方API文档介绍，IPv6不支持用Remote Access API，也就意味">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-09-26T02:05:00.000Z">
+<meta property="article:modified_time" content="2024-09-26T07:12:25.426Z">
+<meta property="article:author" content="Andy">
+<meta property="article:tag" content="home_assistant">
+<meta name="twitter:card" content="summary">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>如何使用Home Assistant更新DDNS记录</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2023/12/28/raspberrypi/zai-shu-mei-pai-shang-bu-shu-hexo-bo-ke/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&text=如何使用Home Assistant更新DDNS记录"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&is_video=false&description=如何使用Home Assistant更新DDNS记录"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何使用Home Assistant更新DDNS记录&body=Check out this article: https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&name=如何使用Home Assistant更新DDNS记录&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&t=如何使用Home Assistant更新DDNS记录"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%98%E8%B5%B7"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E7%BB%86%E8%8A%82"><span class="toc-number">2.1.</span> <span class="toc-text">具体细节</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-Monitor"><span class="toc-number">3.</span> <span class="toc-text">System Monitor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dynv6-Rest-API"><span class="toc-number">4.</span> <span class="toc-text">Dynv6 Rest API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zones"><span class="toc-number">4.1.</span> <span class="toc-text">Zones</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Records"><span class="toc-number">4.2.</span> <span class="toc-text">Records</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-Line"><span class="toc-number">5.</span> <span class="toc-text">Command Line</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nc%E5%B7%A5%E5%85%B7"><span class="toc-number">5.1.</span> <span class="toc-text">nc工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4"><span class="toc-number">5.2.</span> <span class="toc-text">SSH远程命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#configuration-yaml"><span class="toc-number">5.3.</span> <span class="toc-text">configuration.yaml</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RESTful-Command"><span class="toc-number">6.</span> <span class="toc-text">RESTful Command</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text">自动化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#trigger"><span class="toc-number">7.1.</span> <span class="toc-text">trigger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#condition"><span class="toc-number">7.2.</span> <span class="toc-text">condition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#action"><span class="toc-number">7.3.</span> <span class="toc-text">action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#configuration-yaml-1"><span class="toc-number">7.4.</span> <span class="toc-text">configuration.yaml</span></a></li></ol></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        <header id="header">
+  <a class="u-url u-uid" href="/">
+  
+    
+      <img id="logo" alt class="u-logo" src="/images/logo.png" />
+    
+  
+    <div id="title">
+      <h1 class="p-name">Andy&#39;s Tech</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="目录"><i class="fa-solid fa-bars fa-2x"></i></a>
+      </li>
+      <!--
+     --><li><a href="/">首页</a></li><!--
+   --><!--
+     --><li><a href="/about/">关于</a></li><!--
+   --><!--
+     --><li><a href="/tags/">标签</a></li><!--
+   --><!--
+     --><li><a href="/categories/">分类</a></li><!--
+   --><!--
+     --><li><a href="/archives/">归档</a></li><!--
+   --><!--
+     --><li><a href="/search/">搜索</a></li><!--
+   -->
+    </ul>
+  </div>
+</header>
+
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        如何使用Home Assistant更新DDNS记录
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Andy</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-09-26T02:05:00.000Z" class="dt-published" itemprop="datePublished">2024-09-26</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Home-Assistant/">Home_Assistant</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/home-assistant/" rel="tag">home_assistant</a>
+    </div>
+
+
+    </div>
+    
+
+  </header>
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>由于家中的宽带运营商不提供公网IPv4地址，所以一直都没有将Home Assistant发布到公网。最近无意中从网上了解到可以使用IPv6的公网地址，经过测试，确实有效。</p>
+<p>考虑到IPv6地址是动态分配的，间隔一段时间就会自动更新为新的IPv6地址，于是就在免费的DDNS服务商<a target="_blank" rel="noopener" href="https://dynv6.com/">Dynv6</a>申请了动态域名。根据Dynv6官方API文档介绍，IPv6不支持用<code>Remote Access API</code>，也就意味着不支持用<a target="_blank" rel="noopener" href="https://ddclient.net/">ddclient</a>作为客户端，来自动更新DDNS记录。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">### DynDNS API</span><br><span class="line"></span><br><span class="line">We implemented the dyn.com [Remote Access API](https://help.dyn.com/remote-access-api/) that is also known as the _Members NIC Update API_ or _DNS Update API_. It can only be used to update the IPv4 address of a zone.</span><br><span class="line"></span><br><span class="line">To use the endpoint https://dynv6.com/nic/update please set the server in your client to &#x27;dynv6.com&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p>根据<a target="_blank" rel="noopener" href="https://dynv6.github.io/api-spec/">REST API for dynv6</a>文档，自己用Python写了一个脚本，用于自动更新DDNS记录。经过一段时间的使用，基本能满足需求，但是仍然有一些小瑕疵，比如运营商自动分配IPv6地址的过程中，有时候会出现短时间内（5-10分钟）多次分配IP地址的情况，并且网络也会变得很不稳定，这时会导致DDNS更新出现问题。</p>
+<p>最近在使用Home Assistant的过程中，发现了<code>RESTful Command</code>的集成，于是想到为何不干脆使用Home Assistant来完成DDNS记录的更新，这样还省去了单独维护Python脚本的时间成本。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>其实需求很简单，就是当Home Assistant的IPv6地址自动更新为新地址的时候，Home Assistant自动将新地址更新到<code>Dynv6</code>的动态域名记录中。</p>
+<h3 id="具体细节"><a href="#具体细节" class="headerlink" title="具体细节"></a>具体细节</h3><p>为了实现上述需求，需要考虑以下细节：</p>
+<ul>
+<li><p>触发器</p>
+<p>  Home Assistant会实时监控公网IPv6地址的变化，当IP地址发生变化，就会触发Home Assistant更新DDNS记录的动作。</p>
+</li>
+<li><p>触发的先决条件</p>
+<p>  Home Assistant需要实时监控Dynv6 Rest API的网络连接，以确保可以成功更新DDNS记录。如果网络连接异常，即使公网IPv6地址发生改变，也不会触发Home Assistant的更新DDNS记录的动作。</p>
+</li>
+<li><p>动作</p>
+<p>  Home Assistant执行更新DDNS记录的动作。</p>
+</li>
+</ul>
+<h2 id="System-Monitor"><a href="#System-Monitor" class="headerlink" title="System Monitor"></a>System Monitor</h2><p><strong>System Monitor</strong>可以用来监控CPU、内存、硬盘等硬件信息，在这里，主要用来实时获取网口的IPv6地址信息。当IPv6地址发生改变时，就可以触发Home Assistant的自动化操作。</p>
+<p><strong>System Monitor</strong>是Home Assistant的一个集成，或者说是扩展功能，使用之前需要手工添加和配置。</p>
+<p>以下是网口IPv6地址的实体ID，该实体的值是IPv6地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">entity_id: sensor.system_monitor_ipv6_address_eth0</span><br></pre></td></tr></table></figure>
+
+<h2 id="Dynv6-Rest-API"><a href="#Dynv6-Rest-API" class="headerlink" title="Dynv6 Rest API"></a>Dynv6 Rest API</h2><p><a target="_blank" rel="noopener" href="https://dynv6.github.io/api-spec/">REST API for dynv6</a></p>
+<p><strong>Rest API URL</strong><br><a target="_blank" rel="noopener" href="https://dynv6.com/api/v2">https://dynv6.com/api/v2</a></p>
+<p>Dynv6 Rest API主要分为两大类：<strong>Zones</strong>和<strong>Records</strong>。</p>
+<h3 id="Zones"><a href="#Zones" class="headerlink" title="Zones"></a>Zones</h3><p><strong>GET</strong>          Get a list of records<br><strong>POST</strong>       Add a new record<br><strong>GET</strong>          Get details for a record<br><strong>PATCH</strong>     Update an existing record<br><strong>DEL</strong>           Delete a record</p>
+<h3 id="Records"><a href="#Records" class="headerlink" title="Records"></a>Records</h3><p><strong>GET</strong>          Get a list of zones<br><strong>POST</strong>       Register a new zone<br><strong>GET</strong>          Get details for a zone<br><strong>PATCH</strong>     Update an existing zone<br><strong>DEL</strong>           Delete the zone<br><strong>GET</strong>           Get details of a zone by its name</p>
+<p>下载：<a href="openapi.json">openapi.json</a></p>
+<h2 id="Command-Line"><a href="#Command-Line" class="headerlink" title="Command Line"></a>Command Line</h2><p><strong>Command Line</strong>是Home Assistant中的一个集成功能，可以通过命令的方式，定义一种传感器实体。因此，通过该集成，可以定义一个二进制传感器，检测Dynv6 Rest API的网络连接性。</p>
+<h3 id="nc工具"><a href="#nc工具" class="headerlink" title="nc工具"></a>nc工具</h3><p>为了检测Dynv6 Rest API的网络连接性，可以使用命令行工具<code>nc</code>。</p>
+<p>以下命令可以用来检测Home Assistant和Dynv6 Rest API服务之间的网络连接性。如果Home Assistant与Dynv6 Rest API服务的TCP 443端口连接成功，返回“success”，否则返回“fail”。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -6z -w 2 dynv6.com 443 &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo success || echo fail&#x27;&quot;	</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<p>-6        指定nc使用本机的IPv6地址。使用该选项，主要是为了确保IPv6已经更新完成，并能够与Dynv6 API服务之间正常通讯，这也是为了避免前面所提到的，自己写的脚本中的“小瑕疵”。<br>-z         nc只做端口扫描，不传输数据。<br>-w        如果连接不上，2秒后超时。</p>
+<h3 id="SSH远程命令"><a href="#SSH远程命令" class="headerlink" title="SSH远程命令"></a>SSH远程命令</h3><p>另外，由于Home Assistant是通过容器的方式安装，并且容器中<code>nc</code>工具的版本不支持IPv6，所以只能考虑用主机的<code>nc</code>。为了能调用主机的<code>nc</code>，决定使用SSH的方式远程调用命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh -o StrictHostKeychecking=no pi@pi -i /config/.ssh/id_rsa &#x27;nc -6z -w 2 \</span><br><span class="line">			 dynv6.com 443 &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo success || echo fail&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<p>-o StrictHostKeychecking&#x3D;no      登录时不需要验证目标主机的Key<br>-i &#x2F;config&#x2F;.ssh&#x2F;id_rsa                        私钥文件的位置</p>
+<h3 id="configuration-yaml"><a href="#configuration-yaml" class="headerlink" title="configuration.yaml"></a>configuration.yaml</h3><p>以下是Home Assistant的配置文件<code>configuration.yaml</code>中的详细配置信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- binary_sensor:	</span><br><span class="line">	name: &#x27;Dynv6 API&#x27;	</span><br><span class="line">	command: &quot;ssh -o StrictHostKeychecking=no pi@pi -i /config/.ssh/id_rsa &#x27;nc -6z -w 2 \</span><br><span class="line">			 dynv6.com 443 &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo success || echo fail&#x27;&quot;	</span><br><span class="line">	payload_on: success	</span><br><span class="line">	payload_off: fail	</span><br><span class="line">	scan_interval: 60	</span><br><span class="line">	icon: mdi:api	</span><br><span class="line">	unique_id: cmd_dynv6_api	</span><br><span class="line">	device_class: connectivity</span><br></pre></td></tr></table></figure>
+
+<p>以上配置定义了一个二进制传感器，该传感器的名字为“Dynv6 API”，每60秒执行一次网络连接性测试，如果成功则返回“success”，否则返回“fail”。</p>
+<h2 id="RESTful-Command"><a href="#RESTful-Command" class="headerlink" title="RESTful Command"></a>RESTful Command</h2><p><strong>RESTful Command</strong>是Home Assistant中的一个集成功能，通过该集成，可以定义一个对Rest API的操作请求，执行DDNS记录的更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rest_command:</span><br><span class="line">	dynv6_update_zone:</span><br><span class="line">	url: https://dynv6.com/api/v2/zones/&lt;zone_id&gt;</span><br><span class="line">	method: patch</span><br><span class="line">	content_type: application/json</span><br><span class="line">	headers:	</span><br><span class="line">		authorization: &#x27;Bearer &lt;Token&gt;&#x27;</span><br><span class="line">	payload: &#x27;&#123;&quot;ipv6prefix&quot;:&quot;&#123;&#123; states(&quot;sensor.system_monitor_ipv6_address_eth0&quot;) &#125;&#125;&quot;&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>url               zone_id需要替换成与Zone对应的id。<br>method     更新Zone的方法需要用PATCH。<br>authorization        需要用Token。<br>payload:    更新后的IPv6地址，此处是读取传感器<code>sensor.system_monitor_ipv6_address_eth0</code>的值。</p>
+<h2 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h2><p>在Home Assistant中，创建一个名为“DDNS｜自动更新动态域名”的自动化，该自动化可以实现自动更新DDNS记录的需求。</p>
+<h3 id="trigger"><a href="#trigger" class="headerlink" title="trigger"></a>trigger</h3><p>如果传感器<code>sensor.system_monitor_ipv6_address_eth0</code>值发生变化，触发器就会被自动触发。</p>
+<p>to: null 传感器的值发生任何变化都会导致触发器被触发。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">trigger:</span><br><span class="line">  - platform: state</span><br><span class="line">    entity_id:</span><br><span class="line">      - sensor.system_monitor_ipv6_address_eth0</span><br><span class="line">    to: null</span><br><span class="line">    enabled: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="condition"><a href="#condition" class="headerlink" title="condition"></a>condition</h3><p>触发器被触发的先决条件是，二进制传感器<code>binary_sensor.dynv6_api</code>的状态必须是<code>on</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">condition:</span><br><span class="line">  - condition: state</span><br><span class="line">    entity_id: binary_sensor.dynv6_api</span><br><span class="line">    state: &quot;on&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p>当自动化被触发器成功触发后，就会执行操作<code>rest_command.dynv6_update_zone</code>，该操作将执行DDNS记录的更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">action:</span><br><span class="line">  - action: rest_command.dynv6_update_zone</span><br><span class="line">    data: &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="configuration-yaml-1"><a href="#configuration-yaml-1" class="headerlink" title="configuration.yaml"></a>configuration.yaml</h3><p>以下是自动化的详细配置信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alias: DDNS｜自动更新动态域名</span><br><span class="line">description: &quot;&quot;</span><br><span class="line">trigger:</span><br><span class="line">  - platform: state</span><br><span class="line">    entity_id:</span><br><span class="line">      - sensor.system_monitor_ipv6_address_eth0</span><br><span class="line">    to: null</span><br><span class="line">    enabled: true</span><br><span class="line">condition:</span><br><span class="line">  - condition: state</span><br><span class="line">    entity_id: binary_sensor.dynv6_api</span><br><span class="line">    state: &quot;on&quot;</span><br><span class="line">action:</span><br><span class="line">  - action: rest_command.dynv6_update_zone</span><br><span class="line">    data: &#123;&#125;</span><br><span class="line">mode: single</span><br></pre></td></tr></table></figure>
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/tags/">标签</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%98%E8%B5%B7"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E7%BB%86%E8%8A%82"><span class="toc-number">2.1.</span> <span class="toc-text">具体细节</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#System-Monitor"><span class="toc-number">3.</span> <span class="toc-text">System Monitor</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Dynv6-Rest-API"><span class="toc-number">4.</span> <span class="toc-text">Dynv6 Rest API</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Zones"><span class="toc-number">4.1.</span> <span class="toc-text">Zones</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Records"><span class="toc-number">4.2.</span> <span class="toc-text">Records</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-Line"><span class="toc-number">5.</span> <span class="toc-text">Command Line</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#nc%E5%B7%A5%E5%85%B7"><span class="toc-number">5.1.</span> <span class="toc-text">nc工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SSH%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4"><span class="toc-number">5.2.</span> <span class="toc-text">SSH远程命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#configuration-yaml"><span class="toc-number">5.3.</span> <span class="toc-text">configuration.yaml</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#RESTful-Command"><span class="toc-number">6.</span> <span class="toc-text">RESTful Command</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text">自动化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#trigger"><span class="toc-number">7.1.</span> <span class="toc-text">trigger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#condition"><span class="toc-number">7.2.</span> <span class="toc-text">condition</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#action"><span class="toc-number">7.3.</span> <span class="toc-text">action</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#configuration-yaml-1"><span class="toc-number">7.4.</span> <span class="toc-text">configuration.yaml</span></a></li></ol></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&text=如何使用Home Assistant更新DDNS记录"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&is_video=false&description=如何使用Home Assistant更新DDNS记录"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=如何使用Home Assistant更新DDNS记录&body=Check out this article: https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&title=如何使用Home Assistant更新DDNS记录"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&name=如何使用Home Assistant更新DDNS记录&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://andyliu50.github.io/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/&t=如何使用Home Assistant更新DDNS记录"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2024
+    Andy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

@@ -399,4 +399,77 @@
         <tag>requests</tag>
       </tags>
   </entry>
+  <entry>
+    <title>如何使用Home Assistant更新DDNS记录</title>
+    <url>/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/</url>
+    <content><![CDATA[<h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>由于家中的宽带运营商不提供公网IPv4地址，所以一直都没有将Home Assistant发布到公网。最近无意中从网上了解到可以使用IPv6的公网地址，经过测试，确实有效。</p>
+<p>考虑到IPv6地址是动态分配的，间隔一段时间就会自动更新为新的IPv6地址，于是就在免费的DDNS服务商<a href="https://dynv6.com/">Dynv6</a>申请了动态域名。根据Dynv6官方API文档介绍，IPv6不支持用<code>Remote Access API</code>，也就意味着不支持用<a href="https://ddclient.net/">ddclient</a>作为客户端，来自动更新DDNS记录。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">### DynDNS API</span><br><span class="line"></span><br><span class="line">We implemented the dyn.com [Remote Access API](https://help.dyn.com/remote-access-api/) that is also known as the _Members NIC Update API_ or _DNS Update API_. It can only be used to update the IPv4 address of a zone.</span><br><span class="line"></span><br><span class="line">To use the endpoint https://dynv6.com/nic/update please set the server in your client to &#x27;dynv6.com&#x27;.</span><br></pre></td></tr></table></figure>
+
+<p>根据<a href="https://dynv6.github.io/api-spec/">REST API for dynv6</a>文档，自己用Python写了一个脚本，用于自动更新DDNS记录。经过一段时间的使用，基本能满足需求，但是仍然有一些小瑕疵，比如运营商自动分配IPv6地址的过程中，有时候会出现短时间内（5-10分钟）多次分配IP地址的情况，并且网络也会变得很不稳定，这时会导致DDNS更新出现问题。</p>
+<p>最近在使用Home Assistant的过程中，发现了<code>RESTful Command</code>的集成，于是想到为何不干脆使用Home Assistant来完成DDNS记录的更新，这样还省去了单独维护Python脚本的时间成本。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>其实需求很简单，就是当Home Assistant的IPv6地址自动更新为新地址的时候，Home Assistant自动将新地址更新到<code>Dynv6</code>的动态域名记录中。</p>
+<h3 id="具体细节"><a href="#具体细节" class="headerlink" title="具体细节"></a>具体细节</h3><p>为了实现上述需求，需要考虑以下细节：</p>
+<ul>
+<li><p>触发器</p>
+<p>  Home Assistant会实时监控公网IPv6地址的变化，当IP地址发生变化，就会触发Home Assistant更新DDNS记录的动作。</p>
+</li>
+<li><p>触发的先决条件</p>
+<p>  Home Assistant需要实时监控Dynv6 Rest API的网络连接，以确保可以成功更新DDNS记录。如果网络连接异常，即使公网IPv6地址发生改变，也不会触发Home Assistant的更新DDNS记录的动作。</p>
+</li>
+<li><p>动作</p>
+<p>  Home Assistant执行更新DDNS记录的动作。</p>
+</li>
+</ul>
+<h2 id="System-Monitor"><a href="#System-Monitor" class="headerlink" title="System Monitor"></a>System Monitor</h2><p><strong>System Monitor</strong>可以用来监控CPU、内存、硬盘等硬件信息，在这里，主要用来实时获取网口的IPv6地址信息。当IPv6地址发生改变时，就可以触发Home Assistant的自动化操作。</p>
+<p><strong>System Monitor</strong>是Home Assistant的一个集成，或者说是扩展功能，使用之前需要手工添加和配置。</p>
+<p>以下是网口IPv6地址的实体ID，该实体的值是IPv6地址：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">entity_id: sensor.system_monitor_ipv6_address_eth0</span><br></pre></td></tr></table></figure>
+
+<h2 id="Dynv6-Rest-API"><a href="#Dynv6-Rest-API" class="headerlink" title="Dynv6 Rest API"></a>Dynv6 Rest API</h2><p><a href="https://dynv6.github.io/api-spec/">REST API for dynv6</a></p>
+<p><strong>Rest API URL</strong><br><a href="https://dynv6.com/api/v2">https://dynv6.com/api/v2</a></p>
+<p>Dynv6 Rest API主要分为两大类：<strong>Zones</strong>和<strong>Records</strong>。</p>
+<h3 id="Zones"><a href="#Zones" class="headerlink" title="Zones"></a>Zones</h3><p><strong>GET</strong>          Get a list of records<br><strong>POST</strong>       Add a new record<br><strong>GET</strong>          Get details for a record<br><strong>PATCH</strong>     Update an existing record<br><strong>DEL</strong>           Delete a record</p>
+<h3 id="Records"><a href="#Records" class="headerlink" title="Records"></a>Records</h3><p><strong>GET</strong>          Get a list of zones<br><strong>POST</strong>       Register a new zone<br><strong>GET</strong>          Get details for a zone<br><strong>PATCH</strong>     Update an existing zone<br><strong>DEL</strong>           Delete the zone<br><strong>GET</strong>           Get details of a zone by its name</p>
+<p>下载：<a href="openapi.json">openapi.json</a></p>
+<h2 id="Command-Line"><a href="#Command-Line" class="headerlink" title="Command Line"></a>Command Line</h2><p><strong>Command Line</strong>是Home Assistant中的一个集成功能，可以通过命令的方式，定义一种传感器实体。因此，通过该集成，可以定义一个二进制传感器，检测Dynv6 Rest API的网络连接性。</p>
+<h3 id="nc工具"><a href="#nc工具" class="headerlink" title="nc工具"></a>nc工具</h3><p>为了检测Dynv6 Rest API的网络连接性，可以使用命令行工具<code>nc</code>。</p>
+<p>以下命令可以用来检测Home Assistant和Dynv6 Rest API服务之间的网络连接性。如果Home Assistant与Dynv6 Rest API服务的TCP 443端口连接成功，返回“success”，否则返回“fail”。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">nc -6z -w 2 dynv6.com 443 &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo success || echo fail&#x27;&quot;	</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<p>-6        指定nc使用本机的IPv6地址。使用该选项，主要是为了确保IPv6已经更新完成，并能够与Dynv6 API服务之间正常通讯，这也是为了避免前面所提到的，自己写的脚本中的“小瑕疵”。<br>-z         nc只做端口扫描，不传输数据。<br>-w        如果连接不上，2秒后超时。</p>
+<h3 id="SSH远程命令"><a href="#SSH远程命令" class="headerlink" title="SSH远程命令"></a>SSH远程命令</h3><p>另外，由于Home Assistant是通过容器的方式安装，并且容器中<code>nc</code>工具的版本不支持IPv6，所以只能考虑用主机的<code>nc</code>。为了能调用主机的<code>nc</code>，决定使用SSH的方式远程调用命令。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">ssh -o StrictHostKeychecking=no pi@pi -i /config/.ssh/id_rsa &#x27;nc -6z -w 2 \</span><br><span class="line">			 dynv6.com 443 &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo success || echo fail&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>参数说明：</p>
+<p>-o StrictHostKeychecking&#x3D;no      登录时不需要验证目标主机的Key<br>-i &#x2F;config&#x2F;.ssh&#x2F;id_rsa                        私钥文件的位置</p>
+<h3 id="configuration-yaml"><a href="#configuration-yaml" class="headerlink" title="configuration.yaml"></a>configuration.yaml</h3><p>以下是Home Assistant的配置文件<code>configuration.yaml</code>中的详细配置信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">- binary_sensor:	</span><br><span class="line">	name: &#x27;Dynv6 API&#x27;	</span><br><span class="line">	command: &quot;ssh -o StrictHostKeychecking=no pi@pi -i /config/.ssh/id_rsa &#x27;nc -6z -w 2 \</span><br><span class="line">			 dynv6.com 443 &gt; /dev/null 2&gt;&amp;1 &amp;&amp; echo success || echo fail&#x27;&quot;	</span><br><span class="line">	payload_on: success	</span><br><span class="line">	payload_off: fail	</span><br><span class="line">	scan_interval: 60	</span><br><span class="line">	icon: mdi:api	</span><br><span class="line">	unique_id: cmd_dynv6_api	</span><br><span class="line">	device_class: connectivity</span><br></pre></td></tr></table></figure>
+
+<p>以上配置定义了一个二进制传感器，该传感器的名字为“Dynv6 API”，每60秒执行一次网络连接性测试，如果成功则返回“success”，否则返回“fail”。</p>
+<h2 id="RESTful-Command"><a href="#RESTful-Command" class="headerlink" title="RESTful Command"></a>RESTful Command</h2><p><strong>RESTful Command</strong>是Home Assistant中的一个集成功能，通过该集成，可以定义一个对Rest API的操作请求，执行DDNS记录的更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">rest_command:</span><br><span class="line">	dynv6_update_zone:</span><br><span class="line">	url: https://dynv6.com/api/v2/zones/&lt;zone_id&gt;</span><br><span class="line">	method: patch</span><br><span class="line">	content_type: application/json</span><br><span class="line">	headers:	</span><br><span class="line">		authorization: &#x27;Bearer &lt;Token&gt;&#x27;</span><br><span class="line">	payload: &#x27;&#123;&quot;ipv6prefix&quot;:&quot;&#123;&#123; states(&quot;sensor.system_monitor_ipv6_address_eth0&quot;) &#125;&#125;&quot;&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>url               zone_id需要替换成与Zone对应的id。<br>method     更新Zone的方法需要用PATCH。<br>authorization        需要用Token。<br>payload:    更新后的IPv6地址，此处是读取传感器<code>sensor.system_monitor_ipv6_address_eth0</code>的值。</p>
+<h2 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h2><p>在Home Assistant中，创建一个名为“DDNS｜自动更新动态域名”的自动化，该自动化可以实现自动更新DDNS记录的需求。</p>
+<h3 id="trigger"><a href="#trigger" class="headerlink" title="trigger"></a>trigger</h3><p>如果传感器<code>sensor.system_monitor_ipv6_address_eth0</code>值发生变化，触发器就会被自动触发。</p>
+<p>to: null 传感器的值发生任何变化都会导致触发器被触发。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">trigger:</span><br><span class="line">  - platform: state</span><br><span class="line">    entity_id:</span><br><span class="line">      - sensor.system_monitor_ipv6_address_eth0</span><br><span class="line">    to: null</span><br><span class="line">    enabled: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="condition"><a href="#condition" class="headerlink" title="condition"></a>condition</h3><p>触发器被触发的先决条件是，二进制传感器<code>binary_sensor.dynv6_api</code>的状态必须是<code>on</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">condition:</span><br><span class="line">  - condition: state</span><br><span class="line">    entity_id: binary_sensor.dynv6_api</span><br><span class="line">    state: &quot;on&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p>当自动化被触发器成功触发后，就会执行操作<code>rest_command.dynv6_update_zone</code>，该操作将执行DDNS记录的更新。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">action:</span><br><span class="line">  - action: rest_command.dynv6_update_zone</span><br><span class="line">    data: &#123;&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="configuration-yaml-1"><a href="#configuration-yaml-1" class="headerlink" title="configuration.yaml"></a>configuration.yaml</h3><p>以下是自动化的详细配置信息：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">alias: DDNS｜自动更新动态域名</span><br><span class="line">description: &quot;&quot;</span><br><span class="line">trigger:</span><br><span class="line">  - platform: state</span><br><span class="line">    entity_id:</span><br><span class="line">      - sensor.system_monitor_ipv6_address_eth0</span><br><span class="line">    to: null</span><br><span class="line">    enabled: true</span><br><span class="line">condition:</span><br><span class="line">  - condition: state</span><br><span class="line">    entity_id: binary_sensor.dynv6_api</span><br><span class="line">    state: &quot;on&quot;</span><br><span class="line">action:</span><br><span class="line">  - action: rest_command.dynv6_update_zone</span><br><span class="line">    data: &#123;&#125;</span><br><span class="line">mode: single</span><br></pre></td></tr></table></figure>]]></content>
+      <categories>
+        <category>Home_Assistant</category>
+      </categories>
+      <tags>
+        <tag>home_assistant</tag>
+      </tags>
+  </entry>
 </search>
