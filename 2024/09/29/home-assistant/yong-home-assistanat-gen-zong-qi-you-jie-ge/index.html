@@ -1,0 +1,414 @@
+<!DOCTYPE html>
+<html lang=zh>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="缘起虽然新能源汽车越来越普及，但是就目前而言，传统的燃油车仍然是占比最高的车型。因此，每次油价的调整自然会备受车主的关注。 由于平时懒得打开App查看油价，所以每次加油时才会看一眼加油站的标价。因此，其实本人对汽油的价格并不感冒。但是，最近一直在“折腾”Home Assistant，脑海中浮现的想法都是围绕着它展开，于是就想到了用Home Assistant来跟踪油价的变化。 需求首先，汽油的价格">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用Home Assistanat跟踪汽油价格">
+<meta property="og:url" content="https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/index.html">
+<meta property="og:site_name" content="Andy&#39;s Tech">
+<meta property="og:description" content="缘起虽然新能源汽车越来越普及，但是就目前而言，传统的燃油车仍然是占比最高的车型。因此，每次油价的调整自然会备受车主的关注。 由于平时懒得打开App查看油价，所以每次加油时才会看一眼加油站的标价。因此，其实本人对汽油的价格并不感冒。但是，最近一直在“折腾”Home Assistant，脑海中浮现的想法都是围绕着它展开，于是就想到了用Home Assistant来跟踪油价的变化。 需求首先，汽油的价格">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/F8B7D9EE-6145-4C58-AF0D-72244715D40B_1_201_a.jpeg">
+<meta property="og:image" content="https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/Pasted_image_20240929162823.png">
+<meta property="article:published_time" content="2024-09-29T08:48:00.000Z">
+<meta property="article:modified_time" content="2024-09-29T08:56:21.121Z">
+<meta property="article:author" content="Andy">
+<meta property="article:tag" content="home_assistant">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/F8B7D9EE-6145-4C58-AF0D-72244715D40B_1_201_a.jpeg">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>用Home Assistanat跟踪汽油价格</title>
+    <!-- async scripts -->
+    <!-- Google Analytics -->
+
+
+    <!-- Umami Analytics -->
+
+
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="目录"><i class="fa-solid fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="顶部" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fa-solid fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="下一篇" href="/2024/09/26/home-assistant/ru-he-shi-yong-home-assistant-geng-xin-ddns-ji-lu/"><i class="fa-solid fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="返回顶部" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="分享文章" href="#"><i class="fa-solid fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">上一篇</span>
+      <span id="i-next" class="info" style="display:none;">下一篇</span>
+      <span id="i-top" class="info" style="display:none;">返回顶部</span>
+      <span id="i-share" class="info" style="display:none;">分享文章</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&text=用Home Assistanat跟踪汽油价格"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&is_video=false&description=用Home Assistanat跟踪汽油价格"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=用Home Assistanat跟踪汽油价格&body=Check out this article: https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/"><i class="fa-solid fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&name=用Home Assistanat跟踪汽油价格&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&t=用Home Assistanat跟踪汽油价格"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    
+    
+      <div id="toc">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%98%E8%B5%B7"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="toc-number">3.</span> <span class="toc-text">数据源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Beautiful-Soup"><span class="toc-number">4.</span> <span class="toc-text">Beautiful Soup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-Line"><span class="toc-number">5.</span> <span class="toc-text">Command Line</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B2%B9%E4%BB%B7%E6%B6%A8%E8%B7%8C%E5%8F%98%E5%8C%96"><span class="toc-number">6.</span> <span class="toc-text">油价涨跌变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text">自动化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#trigger"><span class="toc-number">7.1.</span> <span class="toc-text">trigger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#action"><span class="toc-number">7.2.</span> <span class="toc-text">action</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7"><span class="toc-number">8.</span> <span class="toc-text">开发者工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%8A%B6%E6%80%81"><span class="toc-number">8.1.</span> <span class="toc-text">设置状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C"><span class="toc-number">8.2.</span> <span class="toc-text">动作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">9.</span> <span class="toc-text">参考资料</span></a></li></ol>
+      </div>
+    
+  </span>
+</div>
+
+    
+    <div class="content index py4 ">
+        <header id="header">
+  <a class="u-url u-uid" href="/">
+  
+    
+      <img id="logo" alt class="u-logo" src="/images/logo.png" />
+    
+  
+    <div id="title">
+      <h1 class="p-name">Andy&#39;s Tech</h1>
+    </div>
+  </a>
+  <div id="nav">
+    <ul>
+      <li class="icon">
+        <a href="#" aria-label="目录"><i class="fa-solid fa-bars fa-2x"></i></a>
+      </li>
+      <!--
+     --><li><a href="/">首页</a></li><!--
+   --><!--
+     --><li><a href="/about/">关于</a></li><!--
+   --><!--
+     --><li><a href="/tags/">标签</a></li><!--
+   --><!--
+     --><li><a href="/categories/">分类</a></li><!--
+   --><!--
+     --><li><a href="/archives/">归档</a></li><!--
+   --><!--
+     --><li><a href="/search/">搜索</a></li><!--
+   -->
+    </ul>
+  </div>
+</header>
+
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle p-name" itemprop="name headline">
+        用Home Assistanat跟踪汽油价格
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author p-author h-card" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span class="p-name" itemprop="name">Andy</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2024-09-29T08:48:00.000Z" class="dt-published" itemprop="datePublished">2024-09-29</time>
+        
+      
+    </div>
+
+
+      
+    <div class="article-category">
+        <i class="fa-solid fa-archive"></i>
+        <a class="category-link" href="/categories/Home-Assistant/">Home_Assistant</a>
+    </div>
+
+
+      
+    <div class="article-tag">
+        <i class="fa-solid fa-tag"></i>
+        <a class="p-category" href="/tags/home-assistant/" rel="tag">home_assistant</a>
+    </div>
+
+
+    </div>
+    
+
+  </header>
+  <div class="content e-content" itemprop="articleBody">
+    <h2 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h2><p>虽然新能源汽车越来越普及，但是就目前而言，传统的燃油车仍然是占比最高的车型。因此，每次油价的调整自然会备受车主的关注。</p>
+<p>由于平时懒得打开App查看油价，所以每次加油时才会看一眼加油站的标价。因此，其实本人对汽油的价格并不感冒。但是，最近一直在“折腾”Home Assistant，脑海中浮现的想法都是围绕着它展开，于是就想到了用Home Assistant来跟踪油价的变化。</p>
+<h2 id="需求"><a href="#需求" class="headerlink" title="需求"></a>需求</h2><p>首先，汽油的价格能够被实时获取，并且获得的数据能够被存储到Home Assistant中。当汽油的价格发生变化时，例如上涨或者下跌，Home Assistant可以发送通知到本人的手机。</p>
+<h2 id="数据源"><a href="#数据源" class="headerlink" title="数据源"></a>数据源</h2><p>在网上查找了一下关于汽油价格的网站，发现以下网站的信息比较全面，并且提供的油价可以精确到区级。</p>
+<p><a target="_blank" rel="noopener" href="http://www.qiyoujiage.com/">http://www.qiyoujiage.com/</a></p>
+<p>下面以上海为例，访问的网址是： <a target="_blank" rel="noopener" href="http://www.qiyoujiage.com/shanghai.shtml">http://www.qiyoujiage.com/shanghai.shtml</a> ，网页的部分源代码如下：</p>
+<p>&lt;dl&gt; &lt;dt&gt; &lt;dd&gt;是HTML中的一套组合标签，可以用于制作网页中的表格。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">&lt;div id=&quot;youjia&quot;&gt;</span><br><span class="line">	&lt;dl&gt;</span><br><span class="line">		&lt;dt&gt;上海92#汽油&lt;/dt&gt;</span><br><span class="line">		&lt;dd&gt;7.34&lt;/dd&gt;</span><br><span class="line">	&lt;/dl&gt;</span><br><span class="line">	&lt;dl&gt;</span><br><span class="line">		&lt;dt&gt;上海95#汽油&lt;/dt&gt;</span><br><span class="line">		&lt;dd&gt;7.81&lt;/dd&gt;</span><br><span class="line">	&lt;/dl&gt;</span><br><span class="line">	&lt;dl&gt;</span><br><span class="line">		&lt;dt&gt;上海98#汽油&lt;/dt&gt;</span><br><span class="line">		&lt;dd&gt;9.71&lt;/dd&gt;</span><br><span class="line">	&lt;/dl&gt;</span><br><span class="line">	&lt;dl&gt;</span><br><span class="line">		&lt;dt&gt;上海0#柴油&lt;/dt&gt;</span><br><span class="line">		&lt;dd&gt;6.99&lt;/dd&gt;</span><br><span class="line">	&lt;/dl&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Beautiful-Soup"><a href="#Beautiful-Soup" class="headerlink" title="Beautiful Soup"></a>Beautiful Soup</h2><p><code>Beautiful Soup</code>是一款非常著名的Python第三方库，可以用来解析HTML文本，且非常简单易用。</p>
+<p>首先，用<code>Requests</code>获取网页的内容，并将返回的结果存储到<code>response</code>变量。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup</span><br><span class="line"><span class="keyword">import</span> json</span><br><span class="line"><span class="keyword">from</span> datetime <span class="keyword">import</span> datetime</span><br><span class="line"></span><br><span class="line">url = <span class="string">&#x27;http://www.qiyoujiage.com/shanghai.shtml&#x27;</span></span><br><span class="line">response = requests.get(url, timeout=(<span class="number">5</span>, <span class="number">10</span>))</span><br></pre></td></tr></table></figure>
+
+<p>用<code>Beautiful Soup</code>来解析网页内容（<code>response.content</code>），先查找所有<code>dl</code>标签，然后用<code>for</code>循环语句迭代每一个<code>dl</code>标签的内容，如果找到关键字<code>92</code>，就结束循环，并返回<code>name</code>和<code>price</code>。</p>
+<p>为了便于Home Assistant处理脚本返回的值，此处最终结果以JSON字符串的格式输出。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">format_string = <span class="string">&#x27;%Y-%m-%d %H:%M:%S&#x27;</span></span><br><span class="line">now = datetime.strftime(datetime.now(), format_string)</span><br><span class="line"></span><br><span class="line">youjia_92 = &#123;&#125;</span><br><span class="line">soup = BeautifulSoup(response.content, <span class="string">&#x27;html.parser&#x27;</span>)</span><br><span class="line"><span class="keyword">for</span> dl <span class="keyword">in</span> soup.find_all(<span class="string">&#x27;dl&#x27;</span>):</span><br><span class="line">	name = dl.find(<span class="string">&#x27;dt&#x27;</span>).text.strip()</span><br><span class="line">	value = <span class="built_in">float</span>(dl.find(<span class="string">&#x27;dd&#x27;</span>).text.strip())</span><br><span class="line">	<span class="keyword">if</span> <span class="string">&#x27;92&#x27;</span> <span class="keyword">in</span> name:</span><br><span class="line">		youjia_92[<span class="string">&#x27;name&#x27;</span>] = name</span><br><span class="line">		youjia_92[<span class="string">&#x27;price&#x27;</span>] = value</span><br><span class="line">		youjia_92[<span class="string">&#x27;last_update&#x27;</span>] = now</span><br><span class="line">		<span class="built_in">print</span>(json.dumps(youjia_92))</span><br><span class="line">		<span class="keyword">break</span></span><br></pre></td></tr></table></figure>
+
+<p>运行以上代码，就会得到下面的结果：</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&#123;<span class="string">&quot;name&quot;</span>: <span class="string">&quot;上海92#汽油&quot;</span>, <span class="string">&quot;price&quot;</span>: <span class="number">7.34</span>, <span class="string">&quot;last_update&quot;</span>: <span class="string">&quot;2024-09-28 12:33:01&quot;</span>&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Command-Line"><a href="#Command-Line" class="headerlink" title="Command Line"></a>Command Line</h2><p>打开并编辑Home Assistant的配置文件<code>configuration.yaml</code>，添加传感器的配置内容。</p>
+<figure class="highlight yaml"><table><tr><td class="code"><pre><span class="line"><span class="attr">command_line:</span></span><br><span class="line">	<span class="bullet">-</span> <span class="attr">sensor:</span></span><br><span class="line">		<span class="attr">name:</span> <span class="string">&quot;上海92#油价&quot;</span></span><br><span class="line">		<span class="attr">command:</span> <span class="string">python3</span> <span class="string">./scripts/oil_price/oil_price.py</span></span><br><span class="line">		<span class="attr">json_attributes:</span></span><br><span class="line">			<span class="bullet">-</span> <span class="string">name</span></span><br><span class="line">			<span class="bullet">-</span> <span class="string">last_update</span></span><br><span class="line">		<span class="attr">value_template:</span> <span class="string">&quot;<span class="template-variable">&#123;&#123; value_json.price &#125;&#125;</span>&quot;</span></span><br><span class="line">		<span class="attr">device_class:</span> <span class="string">monetary</span></span><br><span class="line">		<span class="attr">unit_of_measurement:</span> <span class="string">元</span></span><br><span class="line">		<span class="attr">unique_id:</span> <span class="string">command_oil_price</span></span><br><span class="line">		<span class="attr">scan_interval:</span> <span class="number">7200</span></span><br><span class="line">		<span class="attr">command_timeout:</span> <span class="number">60</span></span><br></pre></td></tr></table></figure>
+
+<p>配置参数说明：</p>
+<p>name                         传感器的名称<br>command                需要执行的命令或者脚本<br>json_attributes       传感器的属性，此处有两个属性：name和last_update<br>value_template      获取命令或者脚本返回的值<br>device_class           实体的类型，Home Assistant会根据设置的类型，在Dashboard中适配相应的图表<br>unit_of_measurement   值的单位<br>scan_interval          执行脚本的时间间隔，默认单位为“秒”<br>command_timeout  命令或者脚本默认15秒后超时，此处设置为60秒</p>
+<p>完成以上配置，并重载命令行配置以后，在Home Assistant中就会新增一个实体，该实体的标识符为<br><code>sensor.shang_hai_92_you_jie</code>。</p>
+<p>该实体的状态属性如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">name: 上海92#汽油</span><br><span class="line">last_update: &quot;2024-09-29 16:19:12&quot;</span><br><span class="line">price_changed: 油价下跌</span><br><span class="line">unit_of_measurement: 元</span><br><span class="line">device_class: monetary</span><br><span class="line">icon: mdi:gas-station</span><br><span class="line">friendly_name: 上海92#油价</span><br></pre></td></tr></table></figure>
+
+<h2 id="油价涨跌变化"><a href="#油价涨跌变化" class="headerlink" title="油价涨跌变化"></a>油价涨跌变化</h2><p>为了能跟踪油价的涨跌变化，并且可以在第一时间接收到关于油价涨跌的信息，需要根据油价在发生变化前后的比较，来判断油价的涨跌。</p>
+<p><strong>弯路：</strong> 根据文档<a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/automation/templating/#state">automation | trigger state</a>，自动化的触发器可以提供触发前后的数据：<code>trigger.from_state</code>和<code>trigger.to_state</code>，但是实际测试过程中，发现如果触发器是基于状态（state）的变化，而不是数值区间（numeric_state）的变化，则无法在消息通知中通过<code>jinja</code>模板来进行数值对比。</p>
+<p>因此，我决定通过执行脚本来反映油价的涨跌情况。那么，如何在脚本中获取油价变化前的数据呢？此时，我想到了用<a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/api/rest/">home assistant rest api</a>。在获取最新油价之前，先从Home Assistant获取当前的油价信息。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> requests.packages.urllib3.exceptions <span class="keyword">import</span> InsecureRequestWarning</span><br><span class="line"></span><br><span class="line">rest_url = <span class="string">&#x27;https://localhost:8123/api/states/&lt;entity_id&gt;&#x27;</span></span><br><span class="line">token = &lt;token <span class="built_in">id</span>&gt;</span><br><span class="line"></span><br><span class="line">headers = &#123;</span><br><span class="line">	<span class="string">&quot;Authorization&quot;</span>: <span class="string">f&quot;Bearer <span class="subst">&#123;token&#125;</span>&quot;</span>,</span><br><span class="line">	<span class="string">&quot;Content-Type&quot;</span>: <span class="string">&quot;application/json&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>请将<code>entity_id</code>换成实体的真实ID标识符。长期有效的Token需要在Home Assistant管理界面的个人配置文件中生成，具体可以参考文档：<a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/authentication/#your-account-profile">Authentication</a></p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">previous_price = <span class="number">0</span></span><br><span class="line"><span class="keyword">try</span>:</span><br><span class="line">	requests.packages.urllib3.disable_warnings(InsecureRequestWarning)</span><br><span class="line">	response_api = requests.get(</span><br><span class="line">		rest_url, headers=headers, verify=<span class="literal">False</span>, timeout=(<span class="number">5</span>, <span class="number">10</span>)</span><br><span class="line">	)</span><br><span class="line">	previous_price = <span class="built_in">float</span>(response_api.json()[<span class="string">&#x27;state&#x27;</span>])</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> err:</span><br><span class="line">	<span class="keyword">pass</span></span><br></pre></td></tr></table></figure>
+
+<p>因为用<code>requests</code>访问API的时候会出现SSL证书错误的告警信息，且访问会失败，所以需要添加参数<code>verify=Fales</code>，这样就不会对SSL证书进行检查。但是，仍然会打印告警信息。因此，还需要用以下方法关闭告警信息。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">from</span> requests.packages.urllib3.exceptions <span class="keyword">import</span> InsecureRequestWarning</span><br><span class="line"></span><br><span class="line">requests.packages.urllib3.disable_warnings(InsecureRequestWarning)</span><br></pre></td></tr></table></figure>
+
+<p>通过以上代码，就获取到了油价变化前的价格<code>previous_price</code>。</p>
+<p>通过跟最新油价的比较，就可以判断油价的上涨和下跌。这样，油价传感器的属性又增加了一项<code>price_changed</code>。</p>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">current_price = youjia_92[<span class="string">&#x27;price&#x27;</span>]</span><br><span class="line"><span class="keyword">if</span> current_price &gt; previous_price:</span><br><span class="line">	youjia_92[<span class="string">&#x27;price_changed&#x27;</span>] = <span class="string">&#x27;油价上涨&#x27;</span></span><br><span class="line"><span class="keyword">elif</span> current_price &lt; previous_price:</span><br><span class="line">	youjia_92[<span class="string">&#x27;price_changed&#x27;</span>] = <span class="string">&#x27;油价下跌&#x27;</span></span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">	youjia_92[<span class="string">&#x27;price_changed&#x27;</span>] = <span class="string">&#x27;N/A&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="自动化"><a href="#自动化" class="headerlink" title="自动化"></a>自动化</h2><h3 id="trigger"><a href="#trigger" class="headerlink" title="trigger"></a>trigger</h3><p>当实体<code>sensor.hui_shan_92_you_jie</code>的属性<code>price_changed</code>值从<code>N/A</code>变化成任何其它状态，自动化都会被触发。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">trigger:</span><br><span class="line">  - platform: state</span><br><span class="line">    entity_id:</span><br><span class="line">      - sensor.shang_hai_92_you_jie</span><br><span class="line">    attribute: price_changed</span><br><span class="line">    from: N/A</span><br></pre></td></tr></table></figure>
+
+<h3 id="action"><a href="#action" class="headerlink" title="action"></a>action</h3><p>自动化触发后，执行通知动作，将通知消息发送到目标手机，消息的标题是实体<code>sensor.shang_hai_92_you_jie</code>的属性值<code>price_changed</code>，消息的正文是自动化触发前的价格<code>&#123;&#123; trigger.to_state.state &#125;&#125;</code>和触发后的价格<code>&#123;&#123; trigger.from_state.state &#125;&#125;</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">action:</span><br><span class="line">  - action: notify.mobile_app_iphone</span><br><span class="line">    metadata: &#123;&#125;</span><br><span class="line">    data:</span><br><span class="line">      message: 当前价格：&#123;&#123; trigger.to_state.state &#125;&#125; 以前价格：&#123;&#123; trigger.from_state.state &#125;&#125;</span><br><span class="line">      title: &quot;&#123;&#123; state_attr(&#x27;sensor.shang_hai_92_you_jie&#x27;, &#x27;price_changed&#x27;) &#125;&#125;&quot;</span><br><span class="line">      data:</span><br><span class="line">        push:</span><br><span class="line">          sound: Doorbell.caf</span><br></pre></td></tr></table></figure>
+
+<p>手机上收到的通知消息见下图：</p>
+<p><img src="/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/F8B7D9EE-6145-4C58-AF0D-72244715D40B_1_201_a.jpeg" alt="通知消息"></p>
+<h2 id="开发者工具"><a href="#开发者工具" class="headerlink" title="开发者工具"></a>开发者工具</h2><p>Home Assistant的开发者工具中有两项功能对于测试很有帮助，分别是：<strong>设置状态</strong>和<strong>动作</strong>。</p>
+<h3 id="设置状态"><a href="#设置状态" class="headerlink" title="设置状态"></a>设置状态</h3><p>设置状态可以改变实体的状态值，例如，可以改变实体<code>sensor.shang_hai_92_you_jie</code>的油价，这样就可以帮助测试自动化的运行结果是否正确。例如，真实油价是7.34，我们就可以将油价改成7.50，然后当传感器再次获取到真实油价的时候，就可以触发自动化的运行。</p>
+<p>打开<strong>开发者工具</strong>，在<strong>状态</strong>中可以<strong>设置状态</strong>的选项。</p>
+<p><img src="/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/Pasted_image_20240929162823.png" alt="开发者工具_设置状态"></p>
+<h3 id="动作"><a href="#动作" class="headerlink" title="动作"></a>动作</h3><p>由于传感器只能根据设定的时间间隔更新数据，没有手动更新的选项。但是，测试时需要立即获取到最新的数据，这时可以用<code>homeassistant.update_entity</code>来实现。</p>
+<p>打开<strong>开发者工具</strong>，进入<strong>动作</strong>页面，进入<strong>YAML模式</strong>，输入以下内容，或者也可以在<strong>用户界面模式</strong>下操作。点击<strong>执行动作</strong>后，就会更新实体<code>sensor.shang_hai_92_you_jie</code>。</p>
+<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">action: homeassistant.update_entity</span><br><span class="line">data:</span><br><span class="line">  entity_id:</span><br><span class="line">    - sensor.shang_hai_92_you_jie</span><br></pre></td></tr></table></figure>
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/configuration/templating/">templating</a><br><a target="_blank" rel="noopener" href="https://jinja.palletsprojects.com/en/latest/templates/">jinja | templates</a><br><a target="_blank" rel="noopener" href="https://community.home-assistant.io/t/memory-of-previous-state/290288">memory of previous state</a><br><a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/automation/templating/#state">automation | trigger state</a><br><a target="_blank" rel="noopener" href="https://community.home-assistant.io/t/manually-refresh-rest-sensor/353208">manually refresh rest sensors</a><br><a target="_blank" rel="noopener" href="https://www.home-assistant.io/docs/scripts/perform-actions/#homeassistant-services">perform actions</a><br><a target="_blank" rel="noopener" href="https://community.home-assistant.io/t/automation-template-value-should-be-a-string-for-dictionary-value-data-value-template-got-none/419519">Automation: template value should be a string for dictionary value @ data[‘value_template’]. Got None</a><br><a target="_blank" rel="noopener" href="https://developers.home-assistant.io/docs/api/rest/">home assistant rest api</a><br><a target="_blank" rel="noopener" href="https://www.slingacademy.com/article/python-requests-module-how-to-disable-warnings/"># Python ‘requests’ Module: How to Disable Warnings</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+        
+          <li><a href="/">首页</a></li>
+        
+          <li><a href="/about/">关于</a></li>
+        
+          <li><a href="/tags/">标签</a></li>
+        
+          <li><a href="/categories/">分类</a></li>
+        
+          <li><a href="/archives/">归档</a></li>
+        
+          <li><a href="/search/">搜索</a></li>
+        
+      </ul>
+    </div>
+
+    
+    
+      <div id="toc-footer" style="display: none">
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BC%98%E8%B5%B7"><span class="toc-number">1.</span> <span class="toc-text">缘起</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%9C%80%E6%B1%82"><span class="toc-number">2.</span> <span class="toc-text">需求</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%BA%90"><span class="toc-number">3.</span> <span class="toc-text">数据源</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Beautiful-Soup"><span class="toc-number">4.</span> <span class="toc-text">Beautiful Soup</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Command-Line"><span class="toc-number">5.</span> <span class="toc-text">Command Line</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B2%B9%E4%BB%B7%E6%B6%A8%E8%B7%8C%E5%8F%98%E5%8C%96"><span class="toc-number">6.</span> <span class="toc-text">油价涨跌变化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%87%AA%E5%8A%A8%E5%8C%96"><span class="toc-number">7.</span> <span class="toc-text">自动化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#trigger"><span class="toc-number">7.1.</span> <span class="toc-text">trigger</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#action"><span class="toc-number">7.2.</span> <span class="toc-text">action</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%BC%80%E5%8F%91%E8%80%85%E5%B7%A5%E5%85%B7"><span class="toc-number">8.</span> <span class="toc-text">开发者工具</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%8A%B6%E6%80%81"><span class="toc-number">8.1.</span> <span class="toc-text">设置状态</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E4%BD%9C"><span class="toc-number">8.2.</span> <span class="toc-text">动作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="toc-number">9.</span> <span class="toc-text">参考资料</span></a></li></ol>
+      </div>
+    
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&text=用Home Assistanat跟踪汽油价格"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&is_video=false&description=用Home Assistanat跟踪汽油价格"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=用Home Assistanat跟踪汽油价格&body=Check out this article: https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/"><i class="fa-solid fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&title=用Home Assistanat跟踪汽油价格"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&name=用Home Assistanat跟踪汽油价格&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://andyliu50.github.io/2024/09/29/home-assistant/yong-home-assistanat-gen-zong-qi-you-jie-ge/&t=用Home Assistanat跟踪汽油价格"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fa-solid fa-bars fa-lg" aria-hidden="true"></i> 菜单</a>
+        
+          <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fa-solid fa-list fa-lg" aria-hidden="true"></i> 目录</a>
+        
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fa-solid fa-share-alt fa-lg" aria-hidden="true"></i> 分享</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fa-solid fa-chevron-up fa-lg" aria-hidden="true"></i> 返回顶部</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2016-2024
+    Andy
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">首页</a></li><!--
+     --><!--
+       --><li><a href="/about/">关于</a></li><!--
+     --><!--
+       --><li><a href="/tags/">标签</a></li><!--
+     --><!--
+       --><li><a href="/categories/">分类</a></li><!--
+     --><!--
+       --><li><a href="/archives/">归档</a></li><!--
+     --><!--
+       --><li><a href="/search/">搜索</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script>
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script>
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"复制到粘贴板！\">";
+    btn += '<i class="fa-regular fa-clone"></i>';
+    btn += '</span>';
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "复制成功！");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
